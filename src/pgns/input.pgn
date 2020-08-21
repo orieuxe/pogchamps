@@ -1,0 +1,68 @@
+
+[Event "Live Chess"]
+[Site "Chess.com"]
+[Date "2020.08.19"]
+[Round "-"]
+[White "hafuchess"]
+[Black "rooters11"]
+[Result "1-0"]
+[WhiteElo "1222"]
+[BlackElo "1250"]
+[TimeControl "600"]
+[EndTime "16:15:28 PDT"]
+[Termination "hafuchess won by checkmate"]
+
+1. e4 c6 2. Nf3 d5 3. exd5 cxd5 4. d4 Bg4 5. Be2 Nc6 6. O-O Qb6 7. c3 Bxf3 8.
+Bxf3 Nf6 9. Qb3 e6 10. Qxb6 axb6 11. Be3 b5 12. Nd2 Bd6 13. Nb3 b6 14. h3 b4 15.
+Rfe1 bxc3 16. bxc3 O-O 17. Be2 Ne4 18. Bb5 Na5 19. Rec1 Nc4 20. Bxc4 dxc4 21.
+Nd2 Nxd2 22. Bxd2 b5 23. Rcb1 Rfb8 24. a4 e5 25. axb5 exd4 26. cxd4 Rxa1 27.
+Rxa1 Rxb5 28. Ra8+ Bf8 29. Bf4 c3 30. Bd6 h6 31. Rxf8+ Kh7 32. Rc8 Rb1+ 33. Kh2
+Rc1 34. Bf4 Rc2 35. d5 Rxf2 36. d6 Rxf4 37. d7 Rd4 38. d8=Q Rxd8 39. Rxd8 f6 40.
+Rc8 Kg6 41. Rxc3 f5 42. Kg3 Kg5 43. Rc4 h5 44. h4+ Kh6 45. Kf4 g6 46. g3 Kg7 47.
+Ke5 Kh6 48. Kf6 Kh7 49. Rc7+ Kh8 50. Rg7 g5 51. Rxg5 f4 52. gxf4 Kh7 53. Rxh5+
+Kg8 54. Ra5 Kf8 55. Ra7 Ke8 56. h5 Kd8 57. h6 Ke8 58. h7 Kf8 59. h8=Q# 1-0
+
+[Event "Live Chess"]
+[Site "Chess.com"]
+[Date "2020.08.19"]
+[Round "-"]
+[White "BELIBOS"]
+[Black "hafuchess"]
+[Result "0-1"]
+[WhiteElo "1285"]
+[BlackElo "1232"]
+[TimeControl "600"]
+[EndTime "16:36:43 PDT"]
+[Termination "hafuchess won by checkmate"]
+
+1. d4 d5 2. c4 Bf5 3. Nc3 e6 4. cxd5 exd5 5. Nf3 Nf6 6. Ne5 Bd6 7. Qb3 Nc6 8.
+Nxd5 Nxd4 9. Nxf6+ Qxf6 10. Qa4+ Nc6 11. Nxc6 bxc6 12. Qxc6+ Ke7 13. a3 Bb4+ 14.
+axb4 Qxc6 15. e3 Rhd8 16. Be2 Be4 17. f3 Bd3 18. Bxd3 Rxd3 19. O-O Rad8 20. b3
+Rd1 21. Ba3 Rxa1 22. Rxa1 Qc3 23. b5+ Ke8 24. Rc1 Qxb3 25. Bc5 Rd1+ 26. Rxd1
+Qxd1+ 27. Kf2 Qc2+ 28. Kg3 Qxc5 29. h4 Qxb5 30. f4 a5 31. Kf3 a4 32. g4 a3 33.
+g5 a2 34. h5 a1=Q 35. h6 gxh6 36. gxh6 Qaf1+ 37. Ke4 Qfd3+ 38. Kf3 Qbd5+ 39. Kg4
+Qxe3 40. Kh4 Qxf4+ 41. Kh3 Qdf3# 0-1
+
+[Event "Live Chess"]
+[Site "Chess.com"]
+[Date "2020.08.19"]
+[Round "-"]
+[White "hafuchess"]
+[Black "ShoberTheDoggo"]
+[Result "1/2-1/2"]
+[WhiteElo "1233"]
+[BlackElo "1253"]
+[TimeControl "600"]
+[EndTime "17:04:08 PDT"]
+[Termination "Game drawn - timeout vs insufficient material"]
+
+1. e4 e5 2. Nf3 Nc6 3. Bc4 Nf6 4. d3 Bb4+ 5. Bd2 Bxd2+ 6. Qxd2 O-O 7. Nc3 d6 8.
+Nd5 Nxd5 9. Bxd5 Bg4 10. h3 Bh5 11. g4 Bg6 12. O-O-O h6 13. h4 h5 14. g5 Ne7 15.
+Bb3 c6 16. Nh2 b5 17. f4 c5 18. f5 c4 19. dxc4 Bxf5 20. exf5 Nxf5 21. Nf3 bxc4
+22. Bxc4 Qb6 23. g6 Rfb8 24. gxf7+ Kf8 25. b3 a5 26. Ng5 Ke7 27. Bd5 Ra7 28.
+Rdf1 g6 29. Nh7 Rc7 30. f8=Q+ Rxf8 31. Nxf8 Kxf8 32. Rf2 Ke8 33. Rxf5 gxf5 34.
+Qh6 f4 35. Qxh5+ Kd7 36. Qf5+ Kd8 37. h5 Qe3+ 38. Kb1 Qc5 39. Be6 Qc6 40. Qf8+
+Qe8 41. Qxe8+ Kxe8 42. h6 Rh7 43. Bf5 Rh8 44. h7 Kf7 45. Kc1 Kf6 46. Bd3 d5 47.
+Kd2 e4 48. Bb5 Kg7 49. Kc3 Rxh7 50. Rxh7+ Kxh7 51. Kd4 Kg6 52. Kxd5 Kf7 53. Kxe4
+Ke7 54. Kxf4 Kd6 55. Ke4 Kc5 56. c4 Kb4 57. Kd4 Ka3 58. c5 Kxa2 59. c6 Kxb3 60.
+c7 Kb4 61. c8=Q Kxb5 62. Qc5+ Ka6 63. Kc4 Kb7 64. Qb5+ Kc7 65. Qxa5+ Kd7 1/2-1/2
