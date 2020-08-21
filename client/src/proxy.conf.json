@@ -1,0 +1,11 @@
+{
+    "/api": {
+        "target": "https://api.chess.com/pub/",
+        "secure": false,
+        "logLevel": "debug",
+        "pathRewrite": {
+          "^/api": ""
+        },
+        "changeOrigin": true
+    }
+}
