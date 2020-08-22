@@ -14,6 +14,7 @@ export class PlayerComponent implements OnInit {
 
   games : Game[]
   player : Player;
+  stats : Stats;
   constructor(private playerService: PlayerService,
               private gameService: GameService,
               private route : ActivatedRoute) { }
@@ -26,6 +27,6 @@ export class PlayerComponent implements OnInit {
           this.gameService.getGamesFrom(p.username).subscribe((g : Game[]) => this.games = g);
           return this.playerService.getStats(p.username);
         }),
-    ).subscribe((s : Stats) => this.player.stats = s);
+    ).subscribe((s : Stats) => this.stats = s);
   }
 }

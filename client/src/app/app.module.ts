@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { PlayerComponent } from './player/player.component';
+import { NgVarDirective } from './ng-var.directive';
 import {HttpClientModule} from '@angular/common/http';
 import {RouterModule} from '@angular/router';
 import {PlayerService} from './player.service';
@@ -34,6 +35,7 @@ const routes = [
   declarations: [
     AppComponent,
     PlayerComponent,
+    NgVarDirective,
     GameComponent,
     ListComponent,
     StandingsComponent,

@@ -3,7 +3,7 @@
   <ng-container matColumnDef="photo">
     <th mat-header-cell *matHeaderCellDef></th>
     <td mat-cell *matCellDef="let player">
-      <img class="avatar" src="assets/{{player.twitch}}.png" alt="404">
+      <img class="avatar" src="assets/player/{{player.twitch}}.png" alt="404">
       <a fxFlexFill [routerLink]="['/player', player.username]" class="mat-row-link"></a>
     </td>
   </ng-container>

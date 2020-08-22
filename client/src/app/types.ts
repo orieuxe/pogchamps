@@ -23,7 +23,6 @@ export interface Move {
 export interface Player {
   twitch: string;
   username: string;
-  stats: Stats;
   group: string;
   points: number;
   winnerbracket: boolean;
