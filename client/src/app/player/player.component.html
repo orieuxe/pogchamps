@@ -1,1 +1,10 @@
-<p>player works!</p>
+<div *ngIf="player">
+  {{player.username}}
+  {{player.twitch}}
+  <div *ngIf="player.stats">
+    current blitz rating : {{player.stats.chess_blitz.last.rating}}
+  </div>
+</div>
+<div *ngIf="games">
+  <app-list [games]="games"></app-list>
+</div>

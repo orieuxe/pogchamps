@@ -1,0 +1,7 @@
+mat-list-item.mat-list-item{
+  height: 200px;
+}
+
+app-small-board{
+  display: flex;
+}

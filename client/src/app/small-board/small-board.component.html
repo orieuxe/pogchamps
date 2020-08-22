@@ -1,0 +1,7 @@
+<a class="game-link" [routerLink]="['/game', game.id]"></a>
+<div id="board-{{game.id}}" style="width:180px"></div>
+<div class="game-infos">
+  <div>{{game.white}} vs {{game.black}}</div>
+  <div>{{game.date}}</div>
+  <div>{{game.termination}}</div>
+</div>

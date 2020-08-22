@@ -28,6 +28,17 @@ class GameController extends AbstractFOSRestController
     }
 
     /**
+     * Get Game.
+     * @Rest\Get("/{id}")
+     *
+     * @return Response
+     */
+    public function getGame(Game $game)
+    {
+      return $this->handleView($this->view($game));
+    }
+
+    /**
      * Get all Games.
      * @Rest\Get("/from/{username}")
      *
