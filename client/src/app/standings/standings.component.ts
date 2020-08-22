@@ -8,7 +8,7 @@ import {PlayerService} from '../player.service';
   styleUrls: ['./standings.component.css']
 })
 export class StandingsComponent implements OnInit {
-  displayedColumns: string[] = ['twitch', 'points'];
+  displayedColumns: string[] = ['photo', 'twitch', 'points'];
   players: Player[];
   @Input() group: string;
 
