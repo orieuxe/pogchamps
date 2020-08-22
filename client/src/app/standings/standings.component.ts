@@ -1,4 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
+import {Player} from '../types';
+import {PlayerService} from '../player.service';
 
 @Component({
   selector: 'app-standings',
@@ -6,10 +8,14 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./standings.component.css']
 })
 export class StandingsComponent implements OnInit {
-  
-  constructor() { }
+  displayedColumns: string[] = ['twitch', 'points'];
+  players: Player[];
+  @Input() group: string;
+
+  constructor(private playerService: PlayerService){}
 
   ngOnInit() {
+    this.playerService.getPlayersFrom(this.group).subscribe((p : Player[]) => this.players = p);
   }
 
 }

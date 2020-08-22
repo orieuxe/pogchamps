@@ -17,6 +17,8 @@ import { SmallBoardComponent } from './small-board/small-board.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import {MatListModule} from '@angular/material/list';
+import {MatTableModule} from '@angular/material/table';
+import {MatGridListModule} from '@angular/material/grid-list';
 
 
 const routes = [
@@ -45,6 +47,8 @@ const routes = [
     HttpClientModule,
     RouterModule.forRoot(routes),
     MatListModule,
+    MatTableModule,
+    MatGridListModule,
     BrowserAnimationsModule
   ],
   providers: [PlayerService, GameService],
