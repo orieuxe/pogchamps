@@ -9,7 +9,9 @@
   </ng-container>
 
   <ng-container matColumnDef="twitch">
-    <th mat-header-cell *matHeaderCellDef></th>
+    <th mat-header-cell *matHeaderCellDef>
+      <a class="group-link" [routerLink]="['/group', group]">Group {{group}}</a>
+    </th>
     <td mat-cell *matCellDef="let player">/{{player.twitch}}</td>
   </ng-container>
 

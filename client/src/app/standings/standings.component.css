@@ -13,10 +13,28 @@ table {
 .mat-row{
     position: relative;
 }
+.mat-row:hover{
+    background-color: lightgrey;
+    opacity: 0.95;
+    transition: 0.2s;
+}
 
 .mat-row-link{
     position: absolute;
-    width: 100%;
+    width: 60%;
     height: 100%;
-    left:0;
+}
+
+.group-link{
+  padding: 1vh 2vh;
+  border: 1px solid lightgrey;
+  text-decoration: none;
+  color: inherit;
+  font-size: 15px;
+}
+
+.group-link:hover{
+  background-color: lightgrey;
+  opacity: 0.95;
+  transition: 0.2s;
 }

@@ -1,0 +1,9 @@
+.logo{
+  display: flex;
+  width: 50%;
+  margin-left: auto;
+  padding-left: 25%;
+  padding-right: 25%;
+  margin-right: auto;
+  background-image: url('../../assets/logo/background.png');
+}
