@@ -20,6 +20,8 @@ export class SmallBoardComponent implements OnInit {
     this.chess = new Chess();
     this.chess.load_pgn(this.game.moves);
 
+    this.game.timecontrol = this.setTimeControl(this.game.timecontrol);
+
     setTimeout(() => {
       this.board = ChessBoard('board-'+this.game.id, {
         position: this.chess.fen(),
@@ -28,6 +30,12 @@ export class SmallBoardComponent implements OnInit {
         showNotation : false
       })
     }, 0);
+  }
+
+  setTimeControl(timecontrol : string){
+    let minSec = timecontrol.split("+").map(Number);
+    minSec[0] = minSec[0]/60;
+    return minSec.join("+")
   }
 
 }

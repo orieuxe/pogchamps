@@ -2,6 +2,12 @@ mat-list-item.mat-list-item{
   height: 200px;
 }
 
+mat-list-item.mat-list-item:hover{
+    background-color: lightgrey;
+    opacity: 0.95;
+    transition: 0.2s;
+}
+
 app-small-board{
   display: flex;
 }
