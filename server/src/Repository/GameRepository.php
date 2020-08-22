@@ -32,16 +32,15 @@ class GameRepository extends ServiceEntityRepository
             ->getResult()
         ;
     }
-
-    /*
-    public function findOneBySomeField($value): ?Game
+    /**
+     * @return Game[] Returns an array of Game objects
+     */
+    public function findBySection($section)
     {
-        return $this->createQueryBuilder('g')
-            ->andWhere('g.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+       $em = $this->getEntityManager();
+       return $em->createQuery('SELECT g FROM App\Entity\Game g WHERE g.white IN (SELECT p.username FROM App\Entity\Player p WHERE p.section = :sect)')
+                   ->setParameter(':sect', $section)
+                   ->getResult();
+
     }
-    */
 }

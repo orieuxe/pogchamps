@@ -25,7 +25,7 @@ export class BoardComponent implements OnInit {
     this.moves = this.chess.history();
     this.chess.reset();
     this.color = "white";
-    
+
     setTimeout(() => {
       this.board = ChessBoard('board-'+this.game.id, {
         position: this.chess.fen(),

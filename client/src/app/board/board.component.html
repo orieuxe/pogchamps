@@ -1,7 +1,6 @@
 <div class="game-infos">
   <b>{{game.white}} ({{game.whiteelo}}) - {{game.black}} ({{game.blackelo}})</b>
-  <span id="result"> {{game.result}} </span>
-  <div id="date"> {{game.date.date | date:'medium':game.date.timezone}} </div>
-  <a href="{{game.site}}" target="_blank"> {{game.site}} </a>
+  <div id="date"> {{game.date | date:'medium'}} </div>
+  <span id="class"> {{game.result}}, {{game.termination}} </span>
 </div>
 <div class="chessboard" id="board-{{game.id}}"></div>

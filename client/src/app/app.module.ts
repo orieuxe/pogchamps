@@ -23,7 +23,7 @@ const routes = [
   {path: '', component : HomeComponent},
   {path: 'player/:username', component : PlayerComponent},
   // {path: 'games/:username', component : ListComponent},
-  {path: 'group/:section', component : GroupComponent},
+  {path: 'group/:group', component : GroupComponent},
   // {path: 'group/:section', component : StandingsComponent},
   {path: 'game/:id', component : GameComponent},
 ]

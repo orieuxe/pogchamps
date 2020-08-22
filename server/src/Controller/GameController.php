@@ -39,7 +39,7 @@ class GameController extends AbstractFOSRestController
     }
 
     /**
-     * Get all Games.
+     * Get all Games from player.
      * @Rest\Get("/from/{username}")
      *
      * @return Response
@@ -48,6 +48,19 @@ class GameController extends AbstractFOSRestController
     {
       $repository = $this->getDoctrine()->getRepository(Game::class);
       $games = $repository->findByUsername($username);
+      return $this->handleView($this->view($games));
+    }
+
+    /**
+     * Get all Games from section.
+     * @Rest\Get("/group/{section}")
+     *
+     * @return Response
+     */
+    public function getSectionGames(string $section)
+    {
+      $repository = $this->getDoctrine()->getRepository(Game::class);
+      $games = $repository->findBySection($section);
       return $this->handleView($this->view($games));
     }
 }

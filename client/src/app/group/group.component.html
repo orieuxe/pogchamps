@@ -1,1 +1,4 @@
-<p>group works!</p>
+<div *ngIf="games">
+  <h3> games from group {{group}} </h3>
+  <app-list [games]="games"></app-list>
+</div>

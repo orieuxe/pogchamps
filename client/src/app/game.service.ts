@@ -16,6 +16,10 @@ export class GameService {
     return this._http.get(`http://localhost:4200/api/game/from/${username}`);
   }
 
+  getGamesByGroup(group : string) {
+    return this._http.get(`http://localhost:4200/api/game/group/${group}`);
+  }
+
   getGame(id : number) {
     return this._http.get(`http://localhost:4200/api/game/${id}`);
   }
