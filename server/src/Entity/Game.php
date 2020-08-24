@@ -80,9 +80,10 @@ class Game implements \JsonSerializable
     private $moves;
 
     /**
-     * @ORM\Column(type="string", length=32)
+     * @ORM\ManyToOne(targetEntity=Duel::class, inversedBy="Games")
+     * @ORM\JoinColumn(nullable=true)
      */
-    private $round;
+    private $duel;
 
     public function jsonSerialize()
     {
@@ -238,14 +239,14 @@ class Game implements \JsonSerializable
         return $this;
     }
 
-    public function getRound(): ?string
+    public function getDuel(): ?Duel
     {
-        return $this->round;
+        return $this->duel;
     }
 
-    public function setRound(string $round): self
+    public function setDuel(?Duel $duel): self
     {
-        $this->round = $round;
+        $this->duel = $duel;
 
         return $this;
     }

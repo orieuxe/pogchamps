@@ -36,7 +36,7 @@ class PlayerController extends AbstractFOSRestController
     public function getUserPlayer(string $section)
     {
       $repository = $this->getDoctrine()->getRepository(Player::class);
-      $players = $repository->findBy(['section' => $section]);
+      $players = $repository->findBy(['section' => $section], ['points' => 'DESC']);
       return $this->handleView($this->view($players));
     }
 
