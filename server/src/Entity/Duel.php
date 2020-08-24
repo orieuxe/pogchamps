@@ -38,9 +38,9 @@ class Duel
     private $games;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="string", nullable=true)
      */
-    private $winner;
+    private $result;
 
     /**
      * @ORM\Column(type="string", length=16)

@@ -1,0 +1,7 @@
+.group {
+  display: flex;
+}
+
+.column {
+  flex: 50%;
+}

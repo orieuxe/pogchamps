@@ -2,7 +2,6 @@ export interface Game {
   id: number;
   site: string;
   date: string;
-  round: string;
   white: string;
   black: string;
   result: string;
@@ -42,4 +41,13 @@ export interface Rating {
   best : any;
   last : any;
   record : any;
+}
+
+export interface Match {
+  id : number;
+  player1 : Player;
+  player2 : Player;
+  date : string;
+  round : string;
+  games : Game[];
 }

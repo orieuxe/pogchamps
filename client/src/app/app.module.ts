@@ -20,6 +20,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatListModule} from '@angular/material/list';
 import {MatTableModule} from '@angular/material/table';
 import {MatGridListModule} from '@angular/material/grid-list';
+import { MatchComponent } from './match/match.component';
 
 
 const routes = [
@@ -42,7 +43,8 @@ const routes = [
     GroupComponent,
     HomeComponent,
     BoardComponent,
-    SmallBoardComponent
+    SmallBoardComponent,
+    MatchComponent
   ],
   imports: [
     BrowserModule,

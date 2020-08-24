@@ -1,4 +1,15 @@
-<div *ngIf="games">
-  <h3> games from group {{group}} </h3>
-  <app-list [games]="games"></app-list>
+<div class="group">
+  <div class="column">
+    <div *ngIf="matchs">
+      <h3> matchs from group {{group}} </h3>
+      <app-match [matchs]="matchs" (clickedMatch)="showGames($event)"></app-match>
+    </div>
+  </div>
+
+  <div class="column">
+    <app-standings [group]="group"></app-standings>
+    <div *ngIf="games">
+      <app-list [games]="games"></app-list>
+    </div>
+  </div>
 </div>

@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {GameService} from '../game.service';
+import {MatchService} from '../match.service';
 import { ActivatedRoute, Router } from "@angular/router";
-import {Game} from '../types';
+import {Game, Match} from '../types';
 
 @Component({
   selector: 'app-group',
@@ -11,13 +12,19 @@ import {Game} from '../types';
 export class GroupComponent implements OnInit {
 
   games : Game[];
+  matchs : Match[];
   group : string;
-  constructor(private gameService: GameService,
+  constructor(private matchService: MatchService,
               private route : ActivatedRoute) { }
 
   ngOnInit() {
     this.group = this.route.snapshot.paramMap.get("group");
-    this.gameService.getGamesByGroup(this.group).subscribe((g : Game[]) => this.games = g);
+    this.matchService.getMatchsFrom(this.group).subscribe((m : Match[]) => this.matchs = m);
+
+  }
+
+  showGames(match : Match){
+    this.games = match.games;
   }
 
 }

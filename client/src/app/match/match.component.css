@@ -1,0 +1,9 @@
+mat-list-item.mat-list-item{
+  height: 15vh;
+}
+
+mat-list-item.mat-list-item:hover{
+    background-color: lightgrey;
+    opacity: 0.95;
+    transition: 0.2s;
+}

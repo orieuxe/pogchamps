@@ -27,6 +27,7 @@ class DuelRepository extends ServiceEntityRepository
        return $this->createQueryBuilder('d')
                    ->join('d.player1', 'p')
                    ->where('p.section = :section')
+                   ->orderBy('d.date', 'ASC')
                    ->setParameter(':section', $section)
                    ->getQuery()
                    ->getResult();
