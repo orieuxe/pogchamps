@@ -62,14 +62,14 @@ class Duel
         return $this->id;
     }
 
-    public function getPlayer(): ?Player
+    public function getPlayer1(): ?Player
     {
-        return $this->Player;
+        return $this->player1;
     }
 
-    public function setPlayer(?Player $Player): self
+    public function setPlayer1(?Player $player1): self
     {
-        $this->Player = $Player;
+        $this->player1 = $player1;
 
         return $this;
     }
@@ -117,12 +117,12 @@ class Duel
         return $this;
     }
 
-    public function getResult(): ?int
+    public function getResult(): ?string
     {
         return $this->result;
     }
 
-    public function setResult(?int $result): self
+    public function setResult(?string $result): self
     {
         $this->result = $result;
 
