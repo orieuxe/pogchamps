@@ -48,6 +48,7 @@ class ResetCommand extends Command
       $players = $repository->findAll();
       foreach ($players as $player) {
         $player->setPoints(0);
+        $player->setPlayed(0);
       }
       $this->em->flush();
 

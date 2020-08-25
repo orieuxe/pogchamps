@@ -42,6 +42,11 @@ class Player
      */
     private $winnerBracket;
 
+    /**
+     * @ORM\Column(type="integer", options={"default" : 0})
+     */
+    private $played;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -95,6 +100,13 @@ class Player
         return $this;
     }
 
+    public function addPoints(int $val): self
+    {
+        $this->points += $val;
+
+        return $this;
+    }
+
     public function getWinnerBracket(): ?bool
     {
         return $this->winnerBracket;
@@ -103,6 +115,25 @@ class Player
     public function setWinnerBracket(bool $winnerBracket): self
     {
         $this->winnerBracket = $winnerBracket;
+
+        return $this;
+    }
+
+    public function getPlayed(): ?int
+    {
+        return $this->played;
+    }
+
+    public function setPlayed(int $played): self
+    {
+        $this->played = $played;
+
+        return $this;
+    }
+
+    public function incPlayed(): self
+    {
+        $this->played += 1;
 
         return $this;
     }

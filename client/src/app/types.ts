@@ -25,6 +25,7 @@ export interface Player {
   username: string;
   group: string;
   points: number;
+  played: number;
   winnerbracket: boolean;
 }
 

@@ -75,13 +75,17 @@ class UpdateCommand extends Command
         $duel->setResult(strval($score1).'-'.strval($score2));
 
         $winner = $score1 > $score2 ? $duel->getPlayer1() : $duel->getPlayer2();
+        $loser = $score1 < $score2 ? $duel->getPlayer1() : $duel->getPlayer2();
+
         if(count($games) > 2){
-          $loser = $score1 < $score2 ? $duel->getPlayer1() : $duel->getPlayer2();
-          $winner->setPoints($winner->getPoints()+2);
-          $loser->setPoints($loser->getPoints()+1);
+          $winner->addPoints(2);
+          $loser->addPoints(1);
         }else {
-          $winner->setPoints($winner->getPoints()+3);
+          $winner->addPoints(3);
         }
+
+        $loser->incPlayed();
+        $winner->incPlayed();
 
         $this->em->flush();
       }
