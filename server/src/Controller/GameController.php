@@ -33,7 +33,7 @@ class GameController extends AbstractFOSRestController
      *
      * @return Response
      */
-    public function getGame(integer $id)
+    public function getGame(int $id)
     {
       $repository = $this->getDoctrine()->getRepository(Game::class);
       $game = $repository->find($id);
