@@ -28,6 +28,22 @@ class UpdateCommand extends Command
 
     }
 
+    private function resultToScore(string $result){
+      switch ($result) {
+        case '1-0':
+          return [1,0];
+          break;
+
+        case '0-1':
+          return [0,1];
+          break;
+
+        default:
+          return [0.5,0.5];
+          break;
+      }
+    }
+
     protected function execute(InputInterface $input, OutputInterface $output)
     {
       $repository = $this->em->getRepository(Game::class);
@@ -45,19 +61,27 @@ class UpdateCommand extends Command
         $games = $duel->getGames();
         if(count($games) <= 0) continue;
 
-        $score1 = 0;
-        $score2 = 0;
+        $score1 = 0.0;
+        $score2 = 0.0;
         foreach ($games as $game){
-          $score = array_map('intval', explode("-", $game->getResult()));
+          $score = $this->resultToScore($game->getResult());
           if($game->getWhite() != $duel->getPlayer1()->getUsername()){
             $score = array_reverse($score);
           }
+
           $score1 += $score[0];
           $score2 += $score[1];
         }
         $duel->setResult(strval($score1).'-'.strval($score2));
+
         $winner = $score1 > $score2 ? $duel->getPlayer1() : $duel->getPlayer2();
-        $winner->setPoints($winner->getPoints()+3);
+        if(count($games) > 2){
+          $loser = $score1 < $score2 ? $duel->getPlayer1() : $duel->getPlayer2();
+          $winner->setPoints($winner->getPoints()+2);
+          $loser->setPoints($loser->getPoints()+1);
+        }else {
+          $winner->setPoints($winner->getPoints()+3);
+        }
 
         $this->em->flush();
       }
