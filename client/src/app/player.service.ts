@@ -6,7 +6,7 @@ import { environment } from '../environments/environment';
   providedIn: 'root'
 })
 export class PlayerService {
-
+  private corsHeaders: HttpHeaders;
   constructor(private _http: HttpClient) {
     this.corsHeaders = new HttpHeaders({
       'Content-Type': 'application/json',
@@ -28,6 +28,6 @@ export class PlayerService {
   }
 
   getPlayersFrom(group : string) {
-    return this._http.get(`${environment.baseUrl}/player/from/${group}`);
+    return this._http.get(`${environment.baseUrl}/player/from/${group}`, {headers : this.corsHeaders});
   }
 }
