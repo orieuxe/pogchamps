@@ -1,7 +1,6 @@
 <div class="parent">
   <div class="column">
     <div *ngIf="matchs">
-      <h3> matchs from group {{group}} </h3>
       <app-match [matchs]="matchs" (clickedMatch)="showGames($event)"></app-match>
     </div>
   </div>
