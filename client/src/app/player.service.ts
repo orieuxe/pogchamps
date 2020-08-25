@@ -22,6 +22,6 @@ export class PlayerService {
   }
 
   getPlayersFrom(group : string) {
-    return this._http.get(`${environment.baseUrl}/api/player/from/${group}`);
+    return this._http.get(`${environment.baseUrl}/player/from/${group}`);
   }
 }
