@@ -1,9 +1,15 @@
-<mat-list>
- <mat-list-item *ngFor="let match of matchs" (click)="onClick(match)">
-   <div class="match-infos">
-     <div>{{match.player1.twitch}} vs {{match.player2.twitch}}</div>
-     <div> {{match.date | date:'short'}} </div>
-     <div>{{match.result}}</div>
-   </div>
- </mat-list-item>
-</mat-list>
+<table cellspacing="0" cellpadding="10">
+  <tr *ngFor="let match of matchs" (click)="onClick(match)">
+    <td>
+      <img class="avatar" src="assets/player/{{match.player1.twitch}}.png" alt="404">
+    </td>
+    <td class="match-infos">
+      <div>{{match.player1.twitch}} vs {{match.player2.twitch}}</div>
+      <div> {{match.date | date:'short'}} </div>
+      <div>{{match.result}}</div>
+    </td>
+    <td>
+      <img class="avatar" src="assets/player/{{match.player2.twitch}}.png" alt="404">
+    </td>
+  </tr>
+</table>

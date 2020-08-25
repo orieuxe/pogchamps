@@ -1,28 +1,38 @@
-<div *ngIf="player" class="player-card">
-  <img class="profile-picture" src="assets/player/{{player.twitch}}.png" alt="">
-  <div *ngIf="stats" class="player-infos" >
-    <div class="username">
-      /{{player.twitch}} ({{player.username}})
-    </div>
+<div class="parent">
+  <div class="column">
+    <div *ngIf="player" class="player-card">
+      <img class="profile-picture" src="assets/player/{{player.twitch}}.png" alt="">
+      <div *ngIf="stats" class="player-infos" >
+        <div class="username">
+          /{{player.twitch}} ({{player.username}})
+        </div>
 
-    <div *ngVar="stats.chess_blitz as blitz">
-      <span class="icon blitz"></span> Blitz {{blitz.last.rating}}
-      <span *ngIf="blitz.best"> Best {{blitz.best.rating}} </span>
-    </div>
-    <div *ngIf="stats.chess_bullet">
-      <div *ngVar="stats.chess_bullet as bullet">
-        <span class="icon bullet"></span> Bullet {{bullet.last.rating}}
-        <span *ngIf="bullet.best"> Best {{bullet.best.rating}} </span>
+        <div *ngVar="stats.chess_blitz as blitz">
+          <span class="icon blitz"></span> Blitz {{blitz.last.rating}}
+          <span *ngIf="blitz.best"> Best {{blitz.best.rating}} </span>
+        </div>
+        <div *ngIf="stats.chess_bullet">
+          <div *ngVar="stats.chess_bullet as bullet">
+            <span class="icon bullet"></span> Bullet {{bullet.last.rating}}
+            <span *ngIf="bullet.best"> Best {{bullet.best.rating}} </span>
+          </div>
+        </div>
+        <div *ngIf="stats.chess_rapid">
+          <div *ngVar="stats.chess_rapid as rapid" >
+            <span class="icon rapid"></span> Rapid {{rapid.last.rating}}
+            <span *ngIf="rapid.best"> Best {{rapid.best.rating}} </span>
+          </div>
+        </div>
       </div>
     </div>
-    <div *ngIf="stats.chess_rapid">
-      <div *ngVar="stats.chess_rapid as rapid" >
-        <span class="icon rapid"></span> Rapid {{rapid.last.rating}}
-        <span *ngIf="rapid.best"> Best {{rapid.best.rating}} </span>
-      </div>
+    <div *ngIf="matchs">
+      <app-match [matchs]="matchs" (clickedMatch)="showGames($event)"></app-match>
     </div>
   </div>
-</div>
-<div *ngIf="games">
-  <app-list [games]="games"></app-list>
+
+  <div class="column">
+    <div *ngIf="games">
+      <app-list [games]="games"></app-list>
+    </div>
+  </div>
 </div>

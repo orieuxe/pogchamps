@@ -20,6 +20,7 @@ export interface Move {
 }
 
 export interface Player {
+  id : number;
   twitch: string;
   username: string;
   group: string;

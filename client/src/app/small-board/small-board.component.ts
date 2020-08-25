@@ -20,8 +20,6 @@ export class SmallBoardComponent implements OnInit {
     this.chess = new Chess();
     this.chess.load_pgn(this.game.moves);
 
-    this.game.timecontrol = this.setTimeControl(this.game.timecontrol);
-
     setTimeout(() => {
       this.board = ChessBoard('board-'+this.game.id, {
         position: this.chess.fen(),

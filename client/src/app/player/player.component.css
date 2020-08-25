@@ -1,9 +1,20 @@
+.parent {
+  display: flex;
+}
+
+.column {
+  flex: 50%;
+}
+
 .player-card{
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
   display: flex;
 }
 
 .profile-picture{
-  width: 10vw;
+  width: 150px;
 }
 
 .player-infos{
