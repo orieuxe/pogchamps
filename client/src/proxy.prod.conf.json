@@ -1,0 +1,18 @@
+{
+  "/pub": {
+      "target": "https://api.chess.com/",
+      "secure": false,
+      "logLevel": "debug",
+      "changeOrigin": true
+  },
+
+  "/api": {
+      "target": "http://http://apichamps.herokuapp.com/",
+      "secure": false,
+      "logLevel": "debug",
+      "pathRewrite": {
+        "^/api": ""
+      },
+      "changeOrigin": true
+  }
+}
