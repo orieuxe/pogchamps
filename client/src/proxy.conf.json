@@ -13,9 +13,6 @@
       "pathRewrite": {
         "^/api": ""
       },
-      "router": {
-        "localhost:4200" : "http://server.api/"
-      },
       "changeOrigin": true
   }
 }
