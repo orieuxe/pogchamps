@@ -10,18 +10,18 @@ export class MatchService {
   constructor(private _http: HttpClient) { }
 
   getMatchs() {
-    return this._http.get(`${environment.baseUrl}/api/duel/all`);
+    return this._http.get(`${environment.baseUrl}/duel/all`);
   }
 
   getMatchsFrom(group : string) {
-    return this._http.get(`${environment.baseUrl}/api/duel/from/${group}`);
+    return this._http.get(`${environment.baseUrl}/duel/from/${group}`);
   }
 
   getMatchsOf(playerId : number) {
-    return this._http.get(`${environment.baseUrl}/api/duel/of/${playerId}`);
+    return this._http.get(`${environment.baseUrl}/duel/of/${playerId}`);
   }
 
   getTodayMatchs() {
-    return this._http.get(`${environment.baseUrl}/api/duel/today`);
+    return this._http.get(`${environment.baseUrl}/duel/today`);
   }
 }

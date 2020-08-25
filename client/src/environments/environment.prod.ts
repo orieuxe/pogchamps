@@ -1,4 +1,5 @@
 export const environment = {
   production: true,
-  baseUrl:'http://apichamps.herokuapp.com'
+  baseUrl:'http://apichamps.herokuapp.com',
+  chessComUrl:'http://api.chess.com',
 };

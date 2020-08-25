@@ -7,14 +7,11 @@
   },
 
   "/api": {
-      "target": "http://apichamps.herokuapp.com/",
+      "target": "http://server.api/",
       "secure": false,
       "logLevel": "debug",
       "pathRewrite": {
         "^/api": ""
-      },
-      "router": {
-        "localhost:4200" : "http://server.api/"
       },
       "changeOrigin": true
   }

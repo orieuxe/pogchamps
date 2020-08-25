@@ -1,33 +1,26 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { environment } from '../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PlayerService {
-  private corsHeaders: HttpHeaders;
-  constructor(private _http: HttpClient) {
-    this.corsHeaders = new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Accept': 'application/json',
-      'Access-Control-Allow-Origin': '/'
-    });
-  }
+  constructor(private _http: HttpClient) {}
 
   getStats(username : string) {
-    return this._http.get(`${environment.baseUrl}/pub/player/${username}/stats`);
+    return this._http.get(`${environment.chessComUrl}/player/${username}/stats`);
   }
 
   getPlayer(username : string) {
-    return this._http.get(`${environment.baseUrl}/api/player/${username}`);
+    return this._http.get(`${environment.baseUrl}/player/${username}`);
   }
 
   getPlayers() {
-    return this._http.get(`${environment.baseUrl}/api/player/all`);
+    return this._http.get(`${environment.baseUrl}/player/all`);
   }
 
   getPlayersFrom(group : string) {
-    return this._http.get(`${environment.baseUrl}/player/from/${group}`, {headers : this.corsHeaders});
+    return this._http.get(`${environment.baseUrl}/player/from/${group}`);
   }
 }
