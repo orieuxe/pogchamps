@@ -7,7 +7,13 @@ import { environment } from '../environments/environment';
 })
 export class PlayerService {
 
-  constructor(private _http: HttpClient) { }
+  constructor(private _http: HttpClient) {
+    this.corsHeaders = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'Access-Control-Allow-Origin': '/'
+    });
+  }
 
   getStats(username : string) {
     return this._http.get(`${environment.baseUrl}/pub/player/${username}/stats`);
