@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BracketComponent implements OnInit {
 
+  matchs : Match[];
   constructor() { }
 
   ngOnInit() {
