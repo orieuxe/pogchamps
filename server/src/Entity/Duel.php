@@ -22,13 +22,13 @@ class Duel
 
     /**
      * @ORM\ManyToOne(targetEntity=Player::class)
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $player1;
 
     /**
      * @ORM\ManyToOne(targetEntity=Player::class)
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $player2;
 
@@ -51,6 +51,11 @@ class Duel
      * @ORM\Column(type="datetime")
      */
     private $date;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Duel::class)
+     */
+    private $next_duel;
 
     public function __construct()
     {
@@ -149,6 +154,18 @@ class Duel
     public function setDate(\DateTimeInterface $date): self
     {
         $this->date = $date;
+
+        return $this;
+    }
+
+    public function getNextDuel(): ?self
+    {
+        return $this->next_duel;
+    }
+
+    public function setNextDuel(?self $next_duel): self
+    {
+        $this->next_duel = $next_duel;
 
         return $this;
     }
