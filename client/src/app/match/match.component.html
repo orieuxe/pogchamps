@@ -6,7 +6,7 @@
     <td class="match-infos">
       <div>{{match.player1.twitch}} vs {{match.player2.twitch}}</div>
       <div> {{match.date | date:'short'}} </div>
-      <div>{{match.result}}</div>
+      <div *ngIf="match.result != 'NULL'"> {{match.result}}</div>
     </td>
     <td>
       <img class="avatar" src="assets/player/{{match.player2.twitch}}.png" alt="404">

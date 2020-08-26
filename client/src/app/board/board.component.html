@@ -1,6 +1,17 @@
-<div class="game-infos">
-  <b>{{game.white}} ({{game.whiteelo}}) - {{game.black}} ({{game.blackelo}})</b>
-  <div id="date"> {{game.date | date:'medium'}} </div>
-  <span id="class"> {{game.result}}, {{game.termination}} </span>
+
+<div class="parent">
+  <div class="column">
+    <div class="chessboard" id="board-{{game.id}}"></div>
+    <div class="game-infos">
+      <b>{{game.white}} ({{game.whiteelo}}) - {{game.black}} ({{game.blackelo}})</b>
+      <div id="date"> {{game.date | date:'medium'}} </div>
+      <span id="class"> {{game.result}}, {{game.termination}} </span>
+    </div>
+  </div>
+  <div class="moves column">
+    <span class="move" id="move-{{idx+1}}" *ngFor="let move of moves; index as idx" (click)="goToMove(idx+1)">
+      <span *ngIf="idx%2==0"><br/>{{idx/2+1}}</span>
+      {{move}}
+    </span>
+  </div>
 </div>
-<div class="chessboard" id="board-{{game.id}}"></div>
