@@ -5,9 +5,16 @@ import { AppComponent } from './app.component';
 import { PlayerComponent } from './player/player.component';
 import { NgVarDirective } from './ng-var.directive';
 import {HttpClientModule} from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import {MatListModule} from '@angular/material/list';
+import {MatTableModule} from '@angular/material/table';
+import {MatGridListModule} from '@angular/material/grid-list';
+
 import {RouterModule} from '@angular/router';
 import {PlayerService} from './player.service';
 import {GameService} from './game.service';
+
 import { GameComponent } from './game/game.component';
 import { ListComponent } from './list/list.component';
 import { StandingsComponent } from './standings/standings.component';
@@ -15,12 +22,10 @@ import { GroupComponent } from './group/group.component';
 import { HomeComponent } from './home/home.component';
 import { BoardComponent } from './board/board.component';
 import { SmallBoardComponent } from './small-board/small-board.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
-import {MatListModule} from '@angular/material/list';
-import {MatTableModule} from '@angular/material/table';
-import {MatGridListModule} from '@angular/material/grid-list';
 import { MatchComponent } from './match/match.component';
+import { MatchupComponent } from './matchup/matchup.component';
+import { BracketComponent } from './bracket/bracket.component';
+
 
 
 const routes = [
