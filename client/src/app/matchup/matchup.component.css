@@ -1,0 +1,26 @@
+.participant {
+  box-sizing: border-box;
+  color: #858585;
+  border-left: 0.25rem solid #858585;
+  background: white;
+  width: 14rem;
+  height: 3rem;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.12);
+}
+.participant.winner {
+  color: #60c645;
+  border-color: #60c645;
+}
+.participant.loser {
+  color: #dc563f;
+  border-color: #dc563f;
+}
+.participant:not(:last-child) {
+  border-bottom: thin solid #f0f2f2;
+}
+
+.participant span {
+  margin: 0 1.25rem;
+  line-height: 3;
+  font-size: 1rem;
+}
