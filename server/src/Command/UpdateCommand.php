@@ -56,7 +56,7 @@ class UpdateCommand extends Command
       }
 
       $repository = $this->em->getRepository(Duel::class);
-      $duels = $repository->findBy(['result' => "NULL"]);
+      $duels = $repository->findBy(['result' => null]);
       foreach ($duels as $duel) {
         $games = $duel->getGames();
         if(count($games) <= 0) continue;
