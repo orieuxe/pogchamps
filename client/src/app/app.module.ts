@@ -44,7 +44,9 @@ const routes = [
     HomeComponent,
     BoardComponent,
     SmallBoardComponent,
-    MatchComponent
+    MatchComponent,
+    BracketComponent,
+    MatchupComponent
   ],
   imports: [
     BrowserModule,
