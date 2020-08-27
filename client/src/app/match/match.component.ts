@@ -1,5 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import {Match} from '../types'
+import { TimeagoModule } from 'ngx-timeago';
+
 @Component({
   selector: 'app-match',
   templateUrl: './match.component.html',
@@ -13,9 +15,15 @@ export class MatchComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    console.log(new Date(this.matchs[0].date).getTime());
+
   }
 
   onClick(match : Match){
     this.clickedMatch.emit(match);
+  }
+
+  getUnix(match : Match){
+    return new Date(match.date).getTime();
   }
 }

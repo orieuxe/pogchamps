@@ -7,6 +7,8 @@ import { NgVarDirective } from './ng-var.directive';
 import {HttpClientModule} from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+import { TimeagoModule } from 'ngx-timeago';
+
 import {MatListModule} from '@angular/material/list';
 import {MatTableModule} from '@angular/material/table';
 import {MatGridListModule} from '@angular/material/grid-list';
@@ -62,7 +64,8 @@ const routes = [
     MatListModule,
     MatTableModule,
     MatGridListModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    TimeagoModule.forRoot()
   ],
   providers: [PlayerService, GameService],
   bootstrap: [AppComponent]

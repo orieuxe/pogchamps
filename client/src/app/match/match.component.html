@@ -5,7 +5,7 @@
     </td>
     <td class="match-infos">
       <div>{{match.player1.twitch}} vs {{match.player2.twitch}}</div>
-      <div> {{match.date | date:'short'}} </div>
+      <div>{{getUnix(match) | timeago:'live'}}</div>
       <div *ngIf="match.result"> {{match.result}}</div>
     </td>
     <td>
