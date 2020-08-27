@@ -1,8 +1,5 @@
-<div class="infos">
-  Testing only, bracket are still under construction
-</div>
 <div class="parent">
-  <div *ngIf="matchs" class="bracket column">
+  <div *ngIf="matchs" class="bracket">
     <section class="round quarterfinals">
       <div class="winners">
         <div class="matchups">
@@ -59,7 +56,7 @@
       </div>
     </section>
   </div>
-  <div *ngIf="games column">
+  <div *ngIf="games">
     <app-list [games]="games"></app-list>
   </div>
 </div>

@@ -1,23 +1,19 @@
 <div class="participant {{status[0]}}" (click)="onClick(match)">
-  <span *ngIf="match.player1">
+  <div *ngIf="match.player1">
     <img class="avatar" src="assets/player/{{match.player1.twitch}}.png" alt="">/{{match.player1.twitch}}
-    <span class="score">
-      {{scores[0]}}
-    </span>
-  </span>
-  <span *ngIf="!match.player1">
+    <span class="score">{{scores[0]}}</span>
+  </div>
+  <div *ngIf="!match.player1">
     {{match.date | date:'medium'}}
-  </span>
+  </div>
 </div>
 
 <div class="participant {{status[1]}}" (click)="onClick(match)">
-  <span *ngIf="match.player2">
+  <div *ngIf="match.player2">
     <img class="avatar" src="assets/player/{{match.player2.twitch}}.png" alt="">/{{match.player2.twitch}}
-    <span class="score">
-      {{scores[1]}}
-    </span>
-  </span>
-  <span *ngIf="!match.player2 && match.player1">
+    <span class="score">{{scores[1]}}</span>
+  </div>
+  <div *ngIf="!match.player2 && match.player1">
     {{match.date | date:'medium'}}
-  </span>
+  </div>
 </div>

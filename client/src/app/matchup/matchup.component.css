@@ -20,10 +20,15 @@
   border-bottom: thin solid #f0f2f2;
 }
 
-.participant span {
-  margin: 0 1.25rem;
+.participant div {
+  margin: 0 .5rem;
   line-height: 3;
   font-size: 1rem;
+  width: 93%;
+}
+
+.participant div span{
+  float:right;
 }
 
 .participant .avatar {

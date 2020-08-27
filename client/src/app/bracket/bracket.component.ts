@@ -19,7 +19,10 @@ export class BracketComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe(params => {
       this.stage = params['stage'];
-      this.matchService.getMatchsFromStage(this.stage).subscribe((m : Match[]) => this.matchs = m);
+      this.matchService.getMatchsFromStage(this.stage).subscribe((m : Match[]) => {
+        this.matchs = m;
+        this.games = [];
+      });
     });
   }
 

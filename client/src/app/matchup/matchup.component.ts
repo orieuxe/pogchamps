@@ -10,18 +10,24 @@ export class MatchupComponent implements OnInit {
   @Input() match: Match;
   @Output() clickedMatch = new EventEmitter<Match>();
 
-  status:string[] = ['',''];
-  scores:Number[] = [0,0];
-  constructor() { }
+  status:string[];
+  scores:Number[];
+  constructor() {
+    this.status = new Array<string>(3);
+    this.scores = new Array<Number>(3);
+  }
 
-  ngOnInit() {
+  ngOnChanges() {
     if(this.match.result != null){
       this.scores = this.match.result.split("-").map(Number);
       if(this.scores[0] > this.scores[1]){
-        this.status[0] = "winner";
+        this.status = ["winner",''];
       }else{
-        this.status[1] = "winner";
+        this.status = ['',"winner"];
       }
+    }else{
+      this.status = ['', ''];
+      this.scores = [0, 0];
     }
   }
 
