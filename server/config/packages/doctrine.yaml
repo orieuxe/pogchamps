@@ -1,11 +1,6 @@
 doctrine:
     dbal:
-        # url: 'postgresql://:poggers@127.0.0.1:5432/pogchamps?serverVersion=12.4&charset=utf8'
-        url: 'postgres://msbnqnrvgvehdm:84a5383e63737aca8b2a7639a68df67dc5a0c3c0ebd38549f9c7f30f4c4da291@ec2-54-247-103-43.eu-west-1.compute.amazonaws.com:5432/ddm1t047g0dclv'
-
-        # IMPORTANT: You MUST configure your server version,
-        # either here or in the DATABASE_URL env var (see .env file)
-        #server_version: '5.7'
+        url: "%env(DATABASE_URL)%"
     orm:
         auto_generate_proxy_classes: true
         naming_strategy: doctrine.orm.naming_strategy.underscore_number_aware
