@@ -14,6 +14,12 @@
   margin-left: 10rem;
   top:2vh;
 }
+.github{
+  position: absolute;
+  width: 5vw;
+  right: 10rem;
+  top:2vh;
+}
 
 .nav a{
   display: block;
