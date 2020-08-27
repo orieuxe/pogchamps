@@ -12,6 +12,7 @@ export interface Game {
   termination: string;
   length: number;
   moves: string;
+  clocks: string;
 }
 
 export interface Move {

@@ -85,6 +85,11 @@ class Game implements \JsonSerializable
      */
     private $duel;
 
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $clocks;
+
     public function jsonSerialize()
     {
         return get_object_vars($this);
@@ -247,6 +252,18 @@ class Game implements \JsonSerializable
     public function setDuel(?Duel $duel): self
     {
         $this->duel = $duel;
+
+        return $this;
+    }
+
+    public function getClocks(): ?string
+    {
+        return $this->clocks;
+    }
+
+    public function setClocks(?string $clocks): self
+    {
+        $this->clocks = $clocks;
 
         return $this;
     }

@@ -12,6 +12,7 @@ declare var ChessBoard : any;
 export class BoardComponent implements OnInit {
   chess: Chess;
   moves: string[];
+  clocks: string[];
   color: string;
   board:any;
   moveIdx: number = 0;
@@ -21,9 +22,15 @@ export class BoardComponent implements OnInit {
 
   ngOnInit() {
     this.chess = new Chess();
-    this.chess.load_pgn(this.game.moves);
-    this.moves = this.chess.history();
-    this.chess.reset();
+    this.moves = this.game.moves.split(' ');
+    this.clocks = this.game.clocks.split(' ');
+
+    let initialTime = Number(this.game.timecontrol.split('+')[0])/60
+    this.clocks.unshift(initialTime + ':00.0');
+    this.clocks.unshift(initialTime + ':00.0');
+    console.log(this.clocks);
+
+
     this.color = "white";
 
     setTimeout(() => {

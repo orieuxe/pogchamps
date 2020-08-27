@@ -19,9 +19,14 @@
 }
 
 .moves{
-  height: 35vw;
+  height: 33.5vw;
   width: 15vw;
   overflow: auto;
+}
+
+.clock{
+  font-size: 2em;
+  font-weight: bold;
 }
 
 .move:hover{
