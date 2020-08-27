@@ -41,6 +41,23 @@ class DuelController extends AbstractFOSRestController
     }
 
     /**
+     * Get all Duels from a stage.
+     * @Rest\Get("/stage/{stage}")
+     *
+     * @return Response
+     */
+    public function getDuelsFromStage(string $stage)
+    {
+      $repository = $this->getDoctrine()->getRepository(Duel::class);
+      $conditions = ['stage' => $stage];
+      if($stage != "group"){
+        $conditions["round"] = "Quarterfinals";
+      }
+      $duels = $repository->findBy($conditions);
+      return $this->handleView($this->view($duels));
+    }
+
+    /**
      * Get all Duels of a player.
      * @Rest\Get("/of/{id}")
      *

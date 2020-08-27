@@ -24,4 +24,8 @@ export class MatchService {
   getTodayMatchs() {
     return this._http.get(`${environment.baseUrl}/duel/today`);
   }
+
+  getMatchsFromStage(stage: string){
+    return this._http.get(`${environment.baseUrl}/duel/stage/${stage}`);
+  }
 }

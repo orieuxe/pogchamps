@@ -57,6 +57,11 @@ class Duel
      */
     private $next_duel;
 
+    /**
+     * @ORM\Column(type="string", length=8, options={"default" : "group"})
+     */
+    private $stage;
+
     public function __construct()
     {
         $this->games = new ArrayCollection();
@@ -166,6 +171,18 @@ class Duel
     public function setNextDuel(?self $next_duel): self
     {
         $this->next_duel = $next_duel;
+
+        return $this;
+    }
+
+    public function getStage(): ?string
+    {
+        return $this->stage;
+    }
+
+    public function setStage(string $stage): self
+    {
+        $this->stage = $stage;
 
         return $this;
     }

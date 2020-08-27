@@ -1,4 +1,9 @@
 <a [routerLink]="['/']">
   <img src="assets/logo/logo.png" class="logo">
 </a>
+<div class="nav">
+  <a [routerLink]="['/']"  routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"> Groupstage </a>
+  <a [routerLink]="['/bracket/winner']" routerLinkActive="active"> Winner bracket </a>
+  <a [routerLink]="['/bracket/loser']" routerLinkActive="active"> Loser Bracket </a>
+</div>
 <router-outlet></router-outlet>

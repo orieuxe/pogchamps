@@ -26,7 +26,6 @@ export interface Player {
   group: string;
   points: number;
   played: number;
-  winnerbracket: boolean;
 }
 
 export interface Stats {
@@ -51,5 +50,7 @@ export interface Match {
   player2 : Player;
   date : string;
   round : string;
+  result : string;
   games : Game[];
+  next_duel : Match;
 }

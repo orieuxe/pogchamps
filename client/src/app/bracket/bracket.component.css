@@ -30,6 +30,11 @@ body {
   overflow: hidden;
 }
 
+app-matchup:hover {
+  background-color: lightgrey;
+  cursor: pointer;
+}
+
 .bracket .round .winners > div.connector.filled .line, .bracket .round .winners > div.connector.filled.bottom .merger:after, .bracket .round .winners > div.connector.filled.top .merger:before {
   border-color: #60c645;
 }

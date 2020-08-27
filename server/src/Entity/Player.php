@@ -38,11 +38,6 @@ class Player
     private $points;
 
     /**
-     * @ORM\Column(type="boolean", options={"default" : false})
-     */
-    private $winnerBracket;
-
-    /**
      * @ORM\Column(type="integer", options={"default" : 0})
      */
     private $played;
@@ -103,18 +98,6 @@ class Player
     public function addPoints(int $val): self
     {
         $this->points += $val;
-
-        return $this;
-    }
-
-    public function getWinnerBracket(): ?bool
-    {
-        return $this->winnerBracket;
-    }
-
-    public function setWinnerBracket(bool $winnerBracket): self
-    {
-        $this->winnerBracket = $winnerBracket;
 
         return $this;
     }

@@ -31,10 +31,9 @@ import { BracketComponent } from './bracket/bracket.component';
 const routes = [
   {path: '', component : HomeComponent},
   {path: 'player/:username', component : PlayerComponent},
-  // {path: 'games/:username', component : ListComponent},
   {path: 'group/:group', component : GroupComponent},
-  // {path: 'group/:section', component : StandingsComponent},
   {path: 'game/:id', component : GameComponent},
+  {path: 'bracket/:stage', component : BracketComponent},
 ]
 
 @NgModule({

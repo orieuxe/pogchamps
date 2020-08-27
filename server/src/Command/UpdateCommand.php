@@ -77,15 +77,26 @@ class UpdateCommand extends Command
         $winner = $score1 > $score2 ? $duel->getPlayer1() : $duel->getPlayer2();
         $loser = $score1 < $score2 ? $duel->getPlayer1() : $duel->getPlayer2();
 
-        if(count($games) > 2){
-          $winner->addPoints(2);
-          $loser->addPoints(1);
-        }else {
-          $winner->addPoints(3);
-        }
+        if($duel->getStage() == "group"){
+          if(count($games) > 2){
+            $winner->addPoints(2);
+            $loser->addPoints(1);
+          }else {
+            $winner->addPoints(3);
+          }
 
-        $loser->incPlayed();
-        $winner->incPlayed();
+          $loser->incPlayed();
+          $winner->incPlayed();
+        }else{
+          $nextDuel = $duel->getNextDuel();
+          if(!is_null($nextDuel)){
+            if(is_null($nextDuel->getPlayer1())){
+              $nextDuel->setPlayer1($winner);
+            }else{
+              $nextDuel->setPlayer2($winner);
+            }
+          }
+        }
 
         $this->em->flush();
       }

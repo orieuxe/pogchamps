@@ -1,12 +1,15 @@
-<div class="bracket">
+<div *ngIf="games">
+  <app-list [games]="games"></app-list>
+</div>
+<div *ngIf="matchs" class="bracket">
   <section class="round quarterfinals">
     <div class="winners">
       <div class="matchups">
         <div class="matchup">
-          <app-matchup [match]="matchs[0]"></app-matchup>
+          <app-matchup [match]="matchs[0]" (clickedMatch)="showGames($event)"></app-matchup>
         </div>
         <div class="matchup">
-          <app-matchup [match]="matchs[1]"></app-matchup>
+          <app-matchup [match]="matchs[1]" (clickedMatch)="showGames($event)"></app-matchup>
         </div>
       </div>
       <div class="connector">
@@ -17,10 +20,10 @@
     <div class="winners">
       <div class="matchups">
         <div class="matchup">
-          <app-matchup [match]="matchs[2]"></app-matchup>
+          <app-matchup [match]="matchs[2]" (clickedMatch)="showGames($event)"></app-matchup>
         </div>
         <div class="matchup">
-          <app-matchup [match]="matchs[3]"></app-matchup>
+          <app-matchup [match]="matchs[3]" (clickedMatch)="showGames($event)"></app-matchup>
         </div>
       </div>
       <div class="connector">
@@ -33,10 +36,10 @@
     <div class="winners">
       <div class="matchups">
         <div class="matchup">
-          <app-matchup [match]="matchs[4]"></app-matchup>
+          <app-matchup [match]="matchs[0].next_duel" (clickedMatch)="showGames($event)"></app-matchup>
         </div>
         <div class="matchup">
-          <app-matchup [match]="matchs[5]"></app-matchup>
+          <app-matchup [match]="matchs[2].next_duel" (clickedMatch)="showGames($event)"></app-matchup>
         </div>
       </div>
       <div class="connector">
@@ -49,7 +52,7 @@
     <div class="winners">
       <div class="matchups">
         <div class="matchup">
-          <app-matchup [match]="matchs[6]"></app-matchup>
+          <app-matchup [match]="matchs[0].next_duel.next_duel" (clickedMatch)="showGames($event)"></app-matchup>
         </div>
       </div>
     </div>

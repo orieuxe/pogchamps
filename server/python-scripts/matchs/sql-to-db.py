@@ -1,4 +1,4 @@
-import mysql.connector
+import psycopg2
 import sys
 from datetime import datetime,timedelta,timezone
 
@@ -29,22 +29,22 @@ def str_to_utc_format(date_str):
     return date.replace(tzinfo=ptTZObject).astimezone(tz=timezone.utc).strftime('%Y-%m-%d %H:%M:%S')
 
 
-mydb = mysql.connector.connect(
-  host="localhost",
-  user="root",
-  password="",
-  database="pogchamps"
+conn = psycopg2.connect(
+  host="ec2-54-247-103-43.eu-west-1.compute.amazonaws.com",
+  database="ddm1t047g0dclv",
+  user="msbnqnrvgvehdm",
+  password="84a5383e63737aca8b2a7639a68df67dc5a0c3c0ebd38549f9c7f30f4c4da291"
 )
-curs = mydb.cursor();
+curs = conn.cursor();
 
-sql = "INSERT INTO duel (player1_id, player2_id, result, round, date) VALUES (%s,%s,%s,%s,%s)"
+sql = "INSERT INTO duel (round, date) VALUES (%s,%s)"
 with open("matchs.csv") as f:
     for l in f:
         l = l.strip('\n').split("\t")
         date_str = "2020 " + " ".join(l[0:2]);
         formatted = str_to_utc_format(date_str)
-        val = (twitch_id[l[3]], twitch_id[l[4]], '1', l[2][-1], formatted)
+        val = (l[2], formatted)
         print(val)
         curs.execute(sql, val);
 
-mydb.commit();
+conn.commit();
