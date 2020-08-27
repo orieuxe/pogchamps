@@ -72,7 +72,7 @@ class UpdateCommand extends Command
         $this->separateMovesFromClock($game);
 
         $repository = $this->em->getRepository(Duel::class);
-        $duel = $repository->findByPlayers($game->getWhite(), $game->getBlack());
+        $duel = $repository->findByPlayers($game->getWhite(), $game->getBlack(), 'winner');
         $duel->addGame($game);
         $this->em->flush();
       }

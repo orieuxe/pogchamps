@@ -49,14 +49,16 @@ class DuelRepository extends ServiceEntityRepository
     /**
      * @return Duel Returns an array of Duel objects
      */
-    public function findByPlayers($username1, $username2)
+    public function findByPlayers($username1, $username2, $stage='group')
     {
       return $this->createQueryBuilder('d')
           ->join('d.player1', 'p1')
           ->join('d.player2', 'p2')
           ->where('p1.username = :u1 AND p2.username = :u2 OR p2.username = :u1 AND p1.username = :u2')
+          ->andWhere('d.stage = :stage')
           ->setParameter('u1', $username1)
           ->setParameter('u2', $username2)
+          ->setParameter('stage', $stage)
           ->getQuery()
           ->getOneOrNullResult();
     }

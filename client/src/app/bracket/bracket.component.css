@@ -6,15 +6,17 @@ body {
   background: #f0f2f2;
 }
 
+.parent {
+  display: flex;
+}
+
+.column {
+  flex: 70%;
+}
+
+
 .bracket {
-  display: inline-block;
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  -webkit-transform: translate(-50%, -50%);
-          transform: translate(-50%, -50%);
-  white-space: nowrap;
-  font-size: 0;
+ margin-left: 10vw;
 }
 .bracket .round {
   display: inline-block;

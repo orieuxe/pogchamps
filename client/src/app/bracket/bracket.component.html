@@ -1,60 +1,65 @@
-<div *ngIf="games">
-  <app-list [games]="games"></app-list>
+<div class="infos">
+  Work in progress... no matchs are real
 </div>
-<div *ngIf="matchs" class="bracket">
-  <section class="round quarterfinals">
-    <div class="winners">
-      <div class="matchups">
-        <div class="matchup">
-          <app-matchup [match]="matchs[0]" (clickedMatch)="showGames($event)"></app-matchup>
+<div class="parent">
+  <div *ngIf="matchs" class="bracket column">
+    <section class="round quarterfinals">
+      <div class="winners">
+        <div class="matchups">
+          <div class="matchup">
+            <app-matchup [match]="matchs[0]" (clickedMatch)="showGames($event)"></app-matchup>
+          </div>
+          <div class="matchup">
+            <app-matchup [match]="matchs[1]" (clickedMatch)="showGames($event)"></app-matchup>
+          </div>
         </div>
-        <div class="matchup">
-          <app-matchup [match]="matchs[1]" (clickedMatch)="showGames($event)"></app-matchup>
-        </div>
-      </div>
-      <div class="connector">
-        <div class="merger"></div>
-        <div class="line"></div>
-      </div>
-    </div>
-    <div class="winners">
-      <div class="matchups">
-        <div class="matchup">
-          <app-matchup [match]="matchs[2]" (clickedMatch)="showGames($event)"></app-matchup>
-        </div>
-        <div class="matchup">
-          <app-matchup [match]="matchs[3]" (clickedMatch)="showGames($event)"></app-matchup>
+        <div class="connector">
+          <div class="merger"></div>
+          <div class="line"></div>
         </div>
       </div>
-      <div class="connector">
-        <div class="merger"></div>
-        <div class="line"></div>
-      </div>
-    </div>
-  </section>
-  <section class="round semifinals">
-    <div class="winners">
-      <div class="matchups">
-        <div class="matchup">
-          <app-matchup [match]="matchs[0].next_duel" (clickedMatch)="showGames($event)"></app-matchup>
+      <div class="winners">
+        <div class="matchups">
+          <div class="matchup">
+            <app-matchup [match]="matchs[2]" (clickedMatch)="showGames($event)"></app-matchup>
+          </div>
+          <div class="matchup">
+            <app-matchup [match]="matchs[3]" (clickedMatch)="showGames($event)"></app-matchup>
+          </div>
         </div>
-        <div class="matchup">
-          <app-matchup [match]="matchs[2].next_duel" (clickedMatch)="showGames($event)"></app-matchup>
+        <div class="connector">
+          <div class="merger"></div>
+          <div class="line"></div>
         </div>
       </div>
-      <div class="connector">
-        <div class="merger"></div>
-        <div class="line"></div>
-      </div>
-    </div>
-  </section>
-  <section class="round finals">
-    <div class="winners">
-      <div class="matchups">
-        <div class="matchup">
-          <app-matchup [match]="matchs[0].next_duel.next_duel" (clickedMatch)="showGames($event)"></app-matchup>
+    </section>
+    <section class="round semifinals">
+      <div class="winners">
+        <div class="matchups">
+          <div class="matchup">
+            <app-matchup [match]="matchs[0].next_duel" (clickedMatch)="showGames($event)"></app-matchup>
+          </div>
+          <div class="matchup">
+            <app-matchup [match]="matchs[2].next_duel" (clickedMatch)="showGames($event)"></app-matchup>
+          </div>
+        </div>
+        <div class="connector">
+          <div class="merger"></div>
+          <div class="line"></div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
+    <section class="round finals">
+      <div class="winners">
+        <div class="matchups">
+          <div class="matchup">
+            <app-matchup [match]="matchs[0].next_duel.next_duel" (clickedMatch)="showGames($event)"></app-matchup>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+  <div *ngIf="games column">
+    <app-list [games]="games"></app-list>
+  </div>
 </div>
