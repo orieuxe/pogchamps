@@ -1,0 +1,13 @@
+<div class="parent">
+  <div class="column">
+    <div *ngIf="matchs">
+      <app-match [matchs]="matchs" (clickedMatch)="showGames($event)"></app-match>
+    </div>
+  </div>
+
+  <div class="column">
+    <div *ngIf="games">
+      <app-list [games]="games"></app-list>
+    </div>
+  </div>
+</div>

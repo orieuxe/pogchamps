@@ -25,6 +25,7 @@ import { SmallBoardComponent } from './small-board/small-board.component';
 import { MatchComponent } from './match/match.component';
 import { MatchupComponent } from './matchup/matchup.component';
 import { BracketComponent } from './bracket/bracket.component';
+import { TodayComponent } from './today/today.component';
 
 
 
@@ -34,6 +35,7 @@ const routes = [
   {path: 'group/:group', component : GroupComponent},
   {path: 'game/:id', component : GameComponent},
   {path: 'bracket/:stage', component : BracketComponent},
+  {path: 'today', component : TodayComponent},
 ]
 
 @NgModule({
@@ -50,7 +52,8 @@ const routes = [
     SmallBoardComponent,
     MatchComponent,
     BracketComponent,
-    MatchupComponent
+    MatchupComponent,
+    TodayComponent
   ],
   imports: [
     BrowserModule,
