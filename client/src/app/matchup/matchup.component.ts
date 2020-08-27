@@ -12,7 +12,9 @@ export class MatchupComponent implements OnInit {
 
   status:string[];
   scores:Number[];
-  constructor() {
+  constructor() {}
+
+  ngOnInit(){
     this.status = new Array<string>(3);
     this.scores = new Array<Number>(3);
   }
