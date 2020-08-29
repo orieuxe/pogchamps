@@ -17,6 +17,21 @@
   width: 150px;
 }
 
+.group-link{
+  padding: 0.5vh;
+  border: 1.5px solid lightgrey;
+  text-decoration: none;
+  color: inherit;
+  width: 5em;
+  text-align: center;
+}
+
+.group-link:hover{
+  background-color: lightgrey;
+  opacity: 0.95;
+  transition: 0.2s;
+}
+
 .player-infos{
   display: flex;
   flex-flow: column;

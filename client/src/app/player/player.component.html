@@ -7,9 +7,13 @@
           /{{player.twitch}} ({{player.username}})
         </div>
 
-        <div *ngVar="stats.chess_blitz as blitz">
-          <span class="icon blitz"></span> Blitz {{blitz.last.rating}}
-          <span *ngIf="blitz.best"> Best {{blitz.best.rating}} </span>
+        <a class="group-link" [routerLink]="['/group', player.section]">Group {{player.section}}</a>
+
+        <div *ngIf="stats.chess_blitz">
+          <div *ngVar="stats.chess_blitz as blitz">
+            <span class="icon blitz"></span> Blitz {{blitz.last.rating}}
+            <span *ngIf="blitz.best"> Best {{blitz.best.rating}} </span>
+          </div>
         </div>
         <div *ngIf="stats.chess_bullet">
           <div *ngVar="stats.chess_bullet as bullet">
@@ -24,6 +28,7 @@
           </div>
         </div>
       </div>
+
     </div>
     <div *ngIf="matchs">
       <app-match [matchs]="matchs" (clickedMatch)="showGames($event)"></app-match>
