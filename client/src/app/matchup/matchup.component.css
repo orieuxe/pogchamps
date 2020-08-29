@@ -33,4 +33,5 @@
 
 .participant .avatar {
   width: 3vw;
+  max-height: 3rem;
 }
