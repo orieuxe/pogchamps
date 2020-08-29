@@ -10,7 +10,7 @@
   </div>
   <div class="column">
     <div class="clock">
-      {{clocks[moveIdx - moveIdx%2]}}
+      {{clocks[moveIdx - moveIdx%2 + 1]}}
     </div>
     <div class="moves">
       <span class="move" id="move-{{idx+1}}" *ngFor="let move of moves; index as idx" (click)="goToMove(idx+1)">
