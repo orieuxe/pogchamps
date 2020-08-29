@@ -53,7 +53,7 @@ class DuelController extends AbstractFOSRestController
       if($stage != "group"){
         $conditions["round"] = "Quarterfinals";
       }
-      $duels = $repository->findBy($conditions);
+      $duels = $repository->findBy($conditions, ['id' => "ASC"]);
       return $this->handleView($this->view($duels));
     }
 
