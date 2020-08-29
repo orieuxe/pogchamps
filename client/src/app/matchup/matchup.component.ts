@@ -28,8 +28,7 @@ export class MatchupComponent implements OnInit {
         this.status = ['',"winner"];
       }
     }else{
-      this.status = ['', ''];
-      this.scores = [0, 0];
+      this.ngOnInit();
     }
   }
 
