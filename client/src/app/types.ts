@@ -24,7 +24,7 @@ export interface Player {
   id : number;
   twitch: string;
   username: string;
-  group: string;
+  section: string;
   points: number;
   played: number;
 }
