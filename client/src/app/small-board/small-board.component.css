@@ -1,8 +1,9 @@
 .game-infos{
   display: flex;
   flex-flow: column;
-  justify-content: space-between;
+  justify-content: center;
   margin-left: 1em;
+  text-align: center;
 }
 
 .game-link{
