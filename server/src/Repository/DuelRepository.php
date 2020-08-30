@@ -43,6 +43,7 @@ class DuelRepository extends ServiceEntityRepository
           ->orWhere('d.player1 = :id')
           ->orWhere('d.player2 = :id')
           ->setParameter('id', $id)
+          ->orderBy('d.date', 'ASC')
           ->getQuery()
           ->getResult();
     }
@@ -80,6 +81,7 @@ class DuelRepository extends ServiceEntityRepository
             ->andWhere('e.date BETWEEN :from AND :to')
             ->setParameter('from', $from )
             ->setParameter('to', $to)
+            ->orderBy('e.date', 'ASC')
         ;
         $result = $qb->getQuery()->getResult();
 
