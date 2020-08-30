@@ -1,15 +1,15 @@
 <table cellspacing="0" cellpadding="10">
   <tr *ngFor="let match of matchs" (click)="onClick(match)">
-    <td>
-      <img class="avatar" src="assets/player/{{match.player1.twitch}}.png" alt="404">
-    </td>
-    <td class="match-infos">
-      <div>{{match.player1.twitch}} vs {{match.player2.twitch}}</div>
-      <div>{{getUnix(match) | timeago:'live'}}</div>
-      <div *ngIf="match.result"> {{match.result}}</div>
-    </td>
-    <td>
-      <img class="avatar" src="assets/player/{{match.player2.twitch}}.png" alt="404">
-    </td>
+      <td>
+        <img *ngIf="match.player1" class="avatar" src="assets/player/{{match.player1.twitch}}.png" alt="404">
+      </td>
+      <td class="match-infos">
+        <div *ngIf="match.player1 && match.player2">{{match.player1.twitch}} vs {{match.player2.twitch}}</div>
+        <div>{{getUnix(match) | timeago:'live'}}</div>
+        <div *ngIf="match.result"> {{match.result}}</div>
+      </td>
+      <td>
+        <img *ngIf="match.player2" class="avatar" src="assets/player/{{match.player2.twitch}}.png" alt="404">
+      </td>
   </tr>
 </table>
