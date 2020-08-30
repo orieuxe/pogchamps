@@ -36,4 +36,7 @@ export class MatchupComponent implements OnInit {
     this.clickedMatch.emit(match);
   }
 
+  getUnix(match : Match){
+    return new Date(match.date).getTime();
+  }
 }
