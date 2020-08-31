@@ -90,3 +90,14 @@ app-matchup:hover {
 .bracket .round.finals .winners .connector .line {
   height: 1.5rem;
 }
+
+.round .title{
+  border: solid 2px lightgrey;
+  text-align: center;
+}
+
+@media (min-width: 48em) {
+  .round .title{
+    display: none;
+  }
+}
