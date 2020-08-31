@@ -2,9 +2,10 @@
 
 [Pogchamps](https://www.chess.com/article/view/next-pogchamps-all-the-information) is a chess tournament for streamers organised by [chess.com](https://chess.com).
 
-[This app](https://pogchamps.herokuapp.com/) includes :
+[This app](https://pogchamps.chess.com/) includes :
 - standings for the groupstages
-- players updated chess.com ratings
+- Championship and consolation brackets
+- players up to date chess.com ratings
 - all matchs and results
 - all games through a pgn viewer
 
@@ -13,7 +14,7 @@
 # Structure
 
 - `server/` : Symfony 4.4 used as a REST API.
-- `client/` : angular8
+- `client/` : Angular 8
 
 Backend and frontend servers are both hosted on Heroku, respectively :
 - https://apichamps.herokuapp.com/
