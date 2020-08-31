@@ -1,13 +1,18 @@
-<a [routerLink]="['/']">
-  <img src="assets/logo/logo.png" class="logo">
-</a>
-<div class="nav">
-  <a [routerLink]="['/today']"  routerLinkActive="active"> Today's matches </a>
-  <a [routerLink]="['/']"  routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"> Groupstage </a>
-  <a [routerLink]="['/bracket/winner']" routerLinkActive="active"> Championship bracket </a>
-  <a [routerLink]="['/bracket/loser']" routerLinkActive="active"> Consolation bracket </a>
-</div>
-<a href="https://github.com/orieuxe/pogchamps">
-  <img src="assets/logo/github.png" class="github">
-</a>
+<header>
+  <a [routerLink]="['/']">
+    <img src="assets/logo/logo.png" class="logo">
+  </a>
+  <a href="https://github.com/orieuxe/pogchamps">
+    <img src="assets/logo/github.png" class="github">
+  </a>
+  <input class="menu-btn" type="checkbox" id="menu-btn" />
+  <label class="menu-icon" for="menu-btn"><span class="navicon"></span></label>
+  <nav>
+    <a [routerLink]="['/today']"  routerLinkActive="active"> Today's matches </a>
+    <a [routerLink]="['/']"  routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"> Groupstage </a>
+    <a [routerLink]="['/bracket/winner']" routerLinkActive="active"> Championship bracket </a>
+    <a [routerLink]="['/bracket/loser']" routerLinkActive="active"> Consolation bracket </a>
+  </nav>
+</header>
+<div class="blank"></div>
 <router-outlet></router-outlet>

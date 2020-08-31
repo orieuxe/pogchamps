@@ -1,37 +1,124 @@
 .logo{
-  display: flex;
   width: 50%;
-  margin-left: auto;
-  padding-left: 25%;
-  padding-right: 25%;
-  margin-right: auto;
-  background-image: url('../assets/logo/background.png');
-  margin-bottom: 2vh;
+  margin-left: 50px;
 }
 
-.nav{
-  position: absolute;
-  left: 10vw;
-  top:.5vh;
-}
 .github{
-  position: absolute;
-  width: 5vw;
-  right: 10vw;
-  top:1vh;
+  float: right;
+  width: 6%;
+  margin-top: 1em;
+  margin-right: 10vw;
 }
 
-.nav a{
+
+nav a:hover{
+  font-style: oblique;
+}
+
+nav a.active{
+  font-style: oblique;
+}
+
+
+/* header */
+
+header {
+  background-image: url('../assets/logo/background.png');
+  box-shadow: 1px 1px 4px 0 rgba(0,0,0,.1);
+  position: absolute;
+  width: 100%;
+  z-index: 2;
+}
+
+nav a{
   display: block;
   text-decoration :inherit;
   font-family: "Nova Square";
   color: white;
-  font-size: 1.3vw;
-}
-.nav a:hover{
-  font-style: oblique;
+  font-size: 20px;
 }
 
-.nav a.active{
-  font-style: oblique;
+header nav {
+  overflow: hidden;
+  clear: both;
+  max-height: 0;
+  transition: max-height .2s ease-in;
+  margin-left: 5vw;
+}
+
+header .menu-icon .navicon {
+  background: #333;
+  display: block;
+  position: absolute;
+  transition: background .2s ease-out;
+  height: 3px;
+  width: 20px;
+  margin-top: -1em;
+  margin-left: 15px;
+}
+
+header .menu-icon .navicon:before,
+header .menu-icon .navicon:after {
+  background: #333;
+  content: '';
+  display: block;
+  height: 100%;
+  position: absolute;
+  transition: all .2s ease-out;
+  width: 100%;
+}
+
+header .menu-icon .navicon:before {
+  top: 8px;
+}
+
+header .menu-icon .navicon:after {
+  top: -8px;
+}
+
+/* menu btn */
+
+header .menu-btn {
+  display: none;
+}
+
+header .menu-btn:checked ~ nav {
+  max-height: 240px;
+}
+
+header .menu-btn:checked ~ .menu-icon .navicon {
+  background: transparent;
+}
+
+header .menu-btn:checked ~ .menu-icon .navicon:before {
+  transform: rotate(-45deg);
+}
+
+header .menu-btn:checked ~ .menu-icon .navicon:after {
+  transform: rotate(45deg);
+}
+
+header .menu-btn:checked ~ .menu-icon:not(.steps) .navicon:before,
+header .menu-btn:checked ~ .menu-icon:not(.steps) .navicon:after {
+  top: 0;
+}
+
+/* 48em = 768px */
+
+@media (min-width: 48em) {
+  .logo{
+    margin: 0 auto;
+  }
+  header nav {
+    clear: none;
+    float: left;
+    max-height: none;
+  }
+  header .menu-icon {
+    display: none;
+  }
+}
+
+.blank{
+  height: 9vw;
 }
