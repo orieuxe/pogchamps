@@ -6,7 +6,7 @@
 .github{
   float: right;
   width: 6%;
-  margin-top: 1em;
+  margin-top: 1vw;
   margin-right: 10vw;
 }
 
@@ -103,6 +103,10 @@ header .menu-btn:checked ~ .menu-icon:not(.steps) .navicon:after {
   top: 0;
 }
 
+.blank{
+  height: 11vw;
+}
+
 /* 48em = 768px */
 
 @media (min-width: 48em) {
@@ -110,6 +114,7 @@ header .menu-btn:checked ~ .menu-icon:not(.steps) .navicon:after {
     margin: 0 auto;
   }
   header nav {
+    margin-top: .7vw;
     clear: none;
     float: left;
     max-height: none;
@@ -117,8 +122,7 @@ header .menu-btn:checked ~ .menu-icon:not(.steps) .navicon:after {
   header .menu-icon {
     display: none;
   }
-}
-
-.blank{
-  height: 9vw;
+  .blank{
+    height: 9vw;
+  }
 }
