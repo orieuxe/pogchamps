@@ -1,7 +1,9 @@
 .parent {
   display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .column {
-  flex: 50%;
+  flex: auto;
 }

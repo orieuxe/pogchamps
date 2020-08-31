@@ -10,7 +10,5 @@ export class HomeComponent implements OnInit {
   groups: string[] = ['A', 'B', 'C', 'D'];
   constructor() { }
 
-  ngOnInit() {
-  }
-
+  ngOnInit() {}
 }

@@ -28,8 +28,6 @@ export class BoardComponent implements OnInit {
     let initialTime = Number(this.game.timecontrol.split('+')[0])/60
     this.clocks.unshift(initialTime + ':00.0');
     this.clocks.unshift(initialTime + ':00.0');
-    console.log(this.clocks);
-
 
     this.color = "white";
 

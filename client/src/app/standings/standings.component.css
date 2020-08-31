@@ -21,7 +21,7 @@ table {
 
 .mat-row-link{
     position: absolute;
-    width: 60%;
+    width: 30%;
     height: 100%;
 }
 
@@ -37,4 +37,8 @@ table {
   background-color: lightgrey;
   opacity: 0.95;
   transition: 0.2s;
+}
+
+.mat-cell{
+  padding: 0 1.5em;
 }

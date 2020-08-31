@@ -8,11 +8,12 @@ body {
 
 .parent {
   display: flex;
+  flex-wrap: wrap;
 }
 
 .bracket {
  margin-left: 8vw;
- margin-right: 3vw; 
+ margin-right: 3vw;
 }
 
 .bracket .round {

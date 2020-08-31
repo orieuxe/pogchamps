@@ -1,26 +1,23 @@
 .parent {
   display: flex;
-}
-
-.column {
-  flex: 50%;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .chessboard{
-  width: 35vw;
-  margin-left: auto;
-  margin-right: 5vw;
+  width: 50vw;
+  max-width: 35vw;
+  min-width: 300px;
+  margin-right: 1em;
 }
 
 .game-infos{
-  width: 40vw;
-  margin-left: auto;
+  width: 100%;
   text-align: center;
 }
 
 .moves{
-  height: 33.5vw;
-  width: 15vw;
+  height: 65vh;
   overflow: auto;
 }
 
@@ -32,4 +29,15 @@
 .move:hover{
   cursor: pointer;
   background-color: lightgrey;
+}
+
+mat-icon{
+  font-size: 50px;
+  margin: 0 10px;
+  cursor: pointer;
+  user-select: none; /* supported by Chrome and Opera */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
 }

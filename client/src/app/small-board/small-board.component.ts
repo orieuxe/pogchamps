@@ -36,5 +36,4 @@ export class SmallBoardComponent implements OnInit {
     if(minSec.length < 2) minSec.push(0);
     return minSec.join("+")
   }
-
 }

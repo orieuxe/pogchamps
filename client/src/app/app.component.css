@@ -11,14 +11,14 @@
 
 .nav{
   position: absolute;
-  margin-left: 10rem;
-  top:2vh;
+  left: 10vw;
+  top:.5vh;
 }
 .github{
   position: absolute;
   width: 5vw;
-  right: 10rem;
-  top:2vh;
+  right: 10vw;
+  top:1vh;
 }
 
 .nav a{

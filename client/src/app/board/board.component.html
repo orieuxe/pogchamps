@@ -9,6 +9,12 @@
     <div class="chessboard" id="board-{{game.id}}"></div>
   </div>
   <div class="column">
+    <div class="controls">
+      <mat-icon title="back to start (↑)" (click)="goToMove(0)">fast_rewind</mat-icon>
+      <mat-icon title="back one move (←)" (click)="goToMove(moveIdx-1)">keyboard_arrow_left</mat-icon>
+      <mat-icon title="one move forward (→)" (click)="goToMove(moveIdx+1)">keyboard_arrow_right</mat-icon>
+      <mat-icon title="final position (↓)" (click)="goToMove(game.length)">fast_forward</mat-icon>
+    </div>
     <div class="clock">
       {{clocks[moveIdx - moveIdx%2 + 1]}}
     </div>

@@ -1,5 +1,5 @@
-<mat-grid-list cols="2" rowHeight="2:1">
-  <mat-grid-tile *ngFor="let group of groups">
+<div class="parent">
+  <div class="group" *ngFor="let group of groups">
     <app-standings [group]="group"></app-standings>
-  </mat-grid-tile>
-</mat-grid-list>
+  </div>
+</div>

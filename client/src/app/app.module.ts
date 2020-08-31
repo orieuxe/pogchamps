@@ -12,6 +12,7 @@ import { TimeagoModule } from 'ngx-timeago';
 import {MatListModule} from '@angular/material/list';
 import {MatTableModule} from '@angular/material/table';
 import {MatGridListModule} from '@angular/material/grid-list';
+import {MatIconModule} from '@angular/material/icon'
 
 import {RouterModule} from '@angular/router';
 import {PlayerService} from './player.service';
@@ -64,6 +65,7 @@ const routes = [
     MatListModule,
     MatTableModule,
     MatGridListModule,
+    MatIconModule,
     BrowserAnimationsModule,
     TimeagoModule.forRoot()
   ],

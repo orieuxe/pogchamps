@@ -1,15 +1,14 @@
 .parent {
   display: flex;
+  flex-wrap: wrap;
 }
 
 .column {
-  flex: 50%;
+  flex: auto;
 }
 
 .player-card{
-  margin-left: auto;
-  margin-right: auto;
-  width: 50%;
+  justify-content: center;
   display: flex;
 }
 
@@ -52,6 +51,6 @@
 }
 
 .icon {
-  max-height: 20px;
-  width: 1vw;
+  max-height: 1.5em;
+  width: 1em;
 }
