@@ -15,8 +15,7 @@ export class MatchupComponent implements OnInit {
   constructor() {}
 
   ngOnInit(){
-    this.status = new Array<string>(3);
-    this.scores = new Array<Number>(3);
+    this.ngOnChanges();
   }
 
   ngOnChanges() {
@@ -28,7 +27,8 @@ export class MatchupComponent implements OnInit {
         this.status = ['',"winner"];
       }
     }else{
-      this.ngOnInit();
+      this.status = new Array<string>(3);
+      this.scores = new Array<Number>(3);
     }
   }
 
