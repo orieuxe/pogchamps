@@ -1,4 +1,4 @@
-<div class="date">
+<div *ngIf="match.date" class="date">
   {{getUnix(match) | timeago:'live'}}
 </div>
 
