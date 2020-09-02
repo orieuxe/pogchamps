@@ -34,6 +34,7 @@ class Duel
 
     /**
      * @ORM\OneToMany(targetEntity=Game::class, mappedBy="duel")
+     * @ORM\OrderBy({"id" = "ASC"})
      */
     private $games;
 
