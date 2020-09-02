@@ -123,6 +123,6 @@ header .menu-btn:checked ~ .menu-icon:not(.steps) .navicon:after {
     display: none;
   }
   .blank{
-    height: 9vw;
+    height: 8.3vw;
   }
 }
