@@ -112,7 +112,7 @@ class UpdateCommand extends Command
         }else{
           $nextDuel = $duel->getNextDuel();
           if(!is_null($nextDuel)){
-            if(is_null($nextDuel->getPlayer1())){
+            if($duel->getNextDuelSlot() == 1)){
               $nextDuel->setPlayer1($winner);
             }else{
               $nextDuel->setPlayer2($winner);

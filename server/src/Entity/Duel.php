@@ -62,6 +62,11 @@ class Duel
      */
     private $stage;
 
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $nextDuelSlot;
+
     public function __construct()
     {
         $this->games = new ArrayCollection();
@@ -183,6 +188,18 @@ class Duel
     public function setStage(string $stage): self
     {
         $this->stage = $stage;
+
+        return $this;
+    }
+
+    public function getNextDuelSlot(): ?int
+    {
+        return $this->nextDuelSlot;
+    }
+
+    public function setNextDuelSlot(?int $nextDuelSlot): self
+    {
+        $this->nextDuelSlot = $nextDuelSlot;
 
         return $this;
     }
