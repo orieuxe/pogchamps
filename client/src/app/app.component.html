@@ -11,7 +11,7 @@
     </a>
     <div class="theme-switch-wrapper" matToolTip="toggle dark mode !">
       <label class="theme-switch" for="checkbox">
-          <input (change)=switchTheme($event.target.checked) type="checkbox" id="checkbox" />
+          <input (change)=updateTheme($event.target.checked) type="checkbox" id="checkbox" [checked]="darkTheme"/>
           <div class="slider round">
             <mat-icon>brightness_3</mat-icon>
             <mat-icon>wb_sunny</mat-icon>
