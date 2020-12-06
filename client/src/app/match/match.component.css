@@ -4,7 +4,7 @@ table{
 }
 
 tr:hover{
-  background-color: lightgrey;
+  background-color: var(--hover-color);
   opacity: 0.95;
   transition: 0.2s;
   cursor: pointer;

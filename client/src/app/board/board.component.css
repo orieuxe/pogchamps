@@ -28,7 +28,7 @@
 
 .move:hover{
   cursor: pointer;
-  background-color: lightgrey;
+  background-color: var(--hover-color);
 }
 
 mat-icon{

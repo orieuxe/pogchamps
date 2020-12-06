@@ -14,10 +14,7 @@ export class MatchComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
-    console.log(new Date(this.matchs[0].date).getTime());
-
-  }
+  ngOnInit() { }
 
   onClick(match : Match){
     this.clickedMatch.emit(match);

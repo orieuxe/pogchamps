@@ -4,6 +4,7 @@
   justify-content: center;
   margin-left: 1em;
   text-align: center;
+  color: var(--text-color);
 }
 
 .game-link{

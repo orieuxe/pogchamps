@@ -3,13 +3,14 @@
   margin-left: 50px;
 }
 
-.github{
+.right{
   float: right;
-  width: 6%;
-  margin-top: 1vw;
-  margin-right: 10vw;
+  width: 35%;
 }
 
+.github{
+  width: 35px;
+}
 
 nav a:hover{
   font-style: oblique;
@@ -18,9 +19,6 @@ nav a:hover{
 nav a.active{
   font-style: oblique;
 }
-
-
-/* header */
 
 header {
   background-image: url('../assets/logo/background.png');
@@ -107,11 +105,10 @@ header .menu-btn:checked ~ .menu-icon:not(.steps) .navicon:after {
   height: 11vw;
 }
 
-/* 48em = 768px */
-
-@media (min-width: 48em) {
-  .logo{
-    margin: 0 auto;
+@media (min-width: 925px) {
+  .right{
+    width: 155px;
+    margin-top: 2vw;
   }
   header nav {
     margin-top: .7vw;

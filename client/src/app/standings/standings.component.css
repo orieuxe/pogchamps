@@ -1,5 +1,6 @@
 table {
   width: 35vw;
+  background: var(--tile-bg-color);
 }
 
 .avatar{
@@ -14,7 +15,7 @@ table {
     position: relative;
 }
 .mat-row:hover{
-    background-color: lightgrey;
+    background-color: var(--hover-color);
     opacity: 0.95;
     transition: 0.2s;
 }
@@ -27,18 +28,23 @@ table {
 
 .group-link{
   padding: 1vh 2vh;
-  border: 1px solid lightgrey;
+  border: 1px solid var(--hover-color);
   text-decoration: none;
   color: inherit;
   font-size: 15px;
 }
 
 .group-link:hover{
-  background-color: lightgrey;
+  background-color: var(--hover-color);
   opacity: 0.95;
   transition: 0.2s;
 }
 
 .mat-cell{
   padding: 0 1.5em;
+  color: var(--text-color);
+}
+
+.mat-header-cell{
+  color: var(--text-color);
 }

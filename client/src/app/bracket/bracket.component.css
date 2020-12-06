@@ -31,7 +31,7 @@ body {
 }
 
 app-matchup:hover {
-  background-color: lightgrey;
+  background-color: var(--hover-color);
   cursor: pointer;
 }
 
@@ -92,7 +92,7 @@ app-matchup:hover {
 }
 
 .round .title{
-  border: solid 2px lightgrey;
+  border: solid 2px var(--hover-color);
   text-align: center;
 }
 

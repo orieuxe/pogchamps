@@ -30,14 +30,12 @@
       </div>
 
     </div>
-    <div *ngIf="matchs">
-      <app-match [matchs]="matchs" (clickedMatch)="showGames($event)"></app-match>
-    </div>
+    <app-match *ngIf="matchs" [matchs]="matchs" (clickedMatch)="showGames($event)"></app-match>
   </div>
 
   <div class="column">
-    <div *ngIf="games">
-      <app-list [games]="games"></app-list>
+    <div>
+      <app-list *ngIf="games" [games]="games"></app-list>
     </div>
   </div>
 </div>

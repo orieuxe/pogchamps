@@ -3,7 +3,7 @@ mat-list-item.mat-list-item{
 }
 
 app-small-board:hover{
-    background-color: lightgrey;
+    background-color: var(--hover-color);
     opacity: 0.95;
     transition: 0.2s;
 }
