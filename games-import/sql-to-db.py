@@ -5,7 +5,7 @@ from urllib.parse import urlparse
 file_name = sys.argv[1]
 db_url = sys.argv[2]
 
-result = urlparse(db_url);
+result = urlparse(db_url)
 username = result.username
 password = result.password
 database = result.path[1:]
@@ -17,8 +17,8 @@ conn = psycopg2.connect(
     host = hostname
 )
 
-curs = conn.cursor();
+curs = conn.cursor()
 
 sql_file = open('sql/'+file_name+'.sql')
 curs.execute(sql_file.read())
-conn.commit();
+conn.commit()
