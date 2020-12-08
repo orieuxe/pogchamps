@@ -7,6 +7,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use App\Entity\Duel;
+use App\Repository\DuelRepository;
 
 /**
  * DuelController.
@@ -23,33 +24,37 @@ class DuelController extends AbstractFOSRestController
     public function getAllDuels()
     {
       $repository = $this->getDoctrine()->getRepository(Duel::class);
-      $duels = $repository->findall();
+      $duels = $repository->findAll();
       return $this->handleView($this->view($duels));
     }
 
     /**
      * Get all Duels from a group.
-     * @Rest\Get("/from/{group}")
+     * @Rest\Get("/{tournamentId}/from/{group}")
      *
      * @return Response
      */
-    public function getDuelsFrom(string $group)
+    public function getDuelsFrom(int $tournamentId, string $group)
     {
+      /** @var DuelRepository $repository */
       $repository = $this->getDoctrine()->getRepository(Duel::class);
-      $duels = $repository->findBySection($group);
+      $duels = $repository->findByGroup($tournamentId, $group);
       return $this->handleView($this->view($duels));
     }
 
     /**
      * Get all Duels from a stage.
-     * @Rest\Get("/stage/{stage}")
+     * @Rest\Get("/{tournamentId}/stage/{stage}")
      *
      * @return Response
      */
-    public function getDuelsFromStage(string $stage)
+    public function getDuelsFromStage(int $tournamentId, string $stage)
     {
       $repository = $this->getDoctrine()->getRepository(Duel::class);
-      $conditions = ['stage' => $stage];
+      $conditions = [
+        'stage' => $stage,
+        'tournament' => $tournamentId
+      ];
       if($stage != "group"){
         $conditions["round"] = "Quarterfinals";
       }
@@ -58,15 +63,16 @@ class DuelController extends AbstractFOSRestController
     }
 
     /**
-     * Get all Duels of a player.
-     * @Rest\Get("/of/{id}")
+     * Get all Duels of a particpant.
+     * @Rest\Get("/of/{participantId}")
      *
      * @return Response
      */
-    public function getDuelsOf(int $id)
+    public function getDuelsOf(int $participantId)
     {
+      /** @var DuelRepository $repository */
       $repository = $this->getDoctrine()->getRepository(Duel::class);
-      $duels = $repository->findByPlayerId($id);
+      $duels = $repository->findByParticipantId($participantId);
       return $this->handleView($this->view($duels));
     }
 
@@ -79,6 +85,7 @@ class DuelController extends AbstractFOSRestController
     public function getTodayDuels()
     {
       $now = new \DateTime();
+      /** @var DuelRepository $repository */
       $repository = $this->getDoctrine()->getRepository(Duel::class);
       $duels = $repository->getByDate($now);
       return $this->handleView($this->view($duels));

@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { PlayerComponent } from './player/player.component';
-import { NgVarDirective } from './ng-var.directive';
+import { NgVarDirective } from './directives/ng-var.directive';
 import {HttpClientModule} from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -15,8 +15,8 @@ import {MatGridListModule} from '@angular/material/grid-list';
 import {MatIconModule} from '@angular/material/icon'
 
 import {RouterModule} from '@angular/router';
-import {PlayerService} from './player.service';
-import {GameService} from './game.service';
+import {PlayerService} from './services/player.service';
+import {GameService} from './services/game.service';
 
 import { GameComponent } from './game/game.component';
 import { ListComponent } from './list/list.component';

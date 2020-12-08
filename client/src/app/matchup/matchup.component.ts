@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import {Match} from '../types';
+import { Match } from "../models/match";
 
 @Component({
   selector: 'app-matchup',

@@ -3,15 +3,15 @@
 </div>
 
 <div class="participant {{status[0]}}" (click)="onClick(match)">
-  <div *ngIf="match.player1">
-    <img class="avatar" src="assets/player/{{match.player1.twitch}}.png" alt="">/{{match.player1.twitch}}
+  <div *ngIf="match.participant1">
+    <img class="avatar" src="assets/participant/{{match.participant1.player.twitch}}.png" alt="">/{{match.participant1.player.twitch}}
     <span class="score">{{scores[0]}}</span>
   </div>
 </div>
 
 <div class="participant {{status[1]}}" (click)="onClick(match)">
-  <div *ngIf="match.player2">
-    <img class="avatar" src="assets/player/{{match.player2.twitch}}.png" alt="">/{{match.player2.twitch}}
+  <div *ngIf="match.participant2">
+    <img class="avatar" src="assets/participant/{{match.participant2.player.twitch}}.png" alt="">/{{match.participant2.player.twitch}}
     <span class="score">{{scores[1]}}</span>
   </div>
 </div>

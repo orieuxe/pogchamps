@@ -3,7 +3,10 @@
 namespace App\Entity;
 
 use App\Repository\PlayerRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Stopwatch\Section;
 
 /**
  * @ORM\Entity(repositoryClass=PlayerRepository::class)
@@ -28,19 +31,14 @@ class Player
     private $username;
 
     /**
-     * @ORM\Column(type="string", length=8)
+     * @ORM\OneToMany(targetEntity=Participant::class, mappedBy="player")
      */
-    private $section;
+    private $participations;
 
-    /**
-     * @ORM\Column(type="integer", options={"default" : 0})
-     */
-    private $points;
-
-    /**
-     * @ORM\Column(type="integer", options={"default" : 0})
-     */
-    private $played;
+    public function __construct()
+    {
+        $this->participations = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -71,14 +69,14 @@ class Player
         return $this;
     }
 
-    public function getSection(): ?string
+    public function getParticipation(): ?string
     {
-        return $this->section;
+        return $this->participation;
     }
 
-    public function setSection(string $section): self
+    public function setParticipation(string $participation): self
     {
-        $this->section = $section;
+        $this->participation = $participation;
 
         return $this;
     }
@@ -117,6 +115,37 @@ class Player
     public function incPlayed(): self
     {
         $this->played += 1;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Participation[]
+     */
+    public function getParticipations(): Collection
+    {
+        return $this->participations;
+    }
+
+    public function addParticipation(Participant $participation): self
+    {
+        if (!$this->participations->contains($participation)) {
+            $this->participations[] = $participation;
+            $participation->setPlayer($this);
+        }
+
+        return $this;
+    }
+
+    public function removeParticipation(Participant $participation): self
+    {
+        if ($this->participations->contains($participation)) {
+            $this->participations->removeElement($participation);
+            // set the owning side to null (unless already changed)
+            if ($participation->getPlayer() === $this) {
+                $participation->setPlayer(null);
+            }
+        }
 
         return $this;
     }

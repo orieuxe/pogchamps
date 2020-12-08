@@ -21,16 +21,16 @@ class Duel
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Player::class)
+     * @ORM\ManyToOne(targetEntity=Participant::class)
      * @ORM\JoinColumn(nullable=true)
      */
-    private $player1;
+    private $participant1;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Player::class)
+     * @ORM\ManyToOne(targetEntity=Participant::class)
      * @ORM\JoinColumn(nullable=true)
      */
-    private $player2;
+    private $participant2;
 
     /**
      * @ORM\OneToMany(targetEntity=Game::class, mappedBy="duel")
@@ -68,6 +68,11 @@ class Duel
      */
     private $nextDuelSlot;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Tournament::class)
+     */
+    private $tournament;
+
     public function __construct()
     {
         $this->games = new ArrayCollection();
@@ -78,26 +83,26 @@ class Duel
         return $this->id;
     }
 
-    public function getPlayer1(): ?Player
+    public function getParticipant1(): ?Participant
     {
-        return $this->player1;
+        return $this->participant1;
     }
 
-    public function setPlayer1(?Player $player1): self
+    public function setParticipant1(?Participant $participant1): self
     {
-        $this->player1 = $player1;
+        $this->participant1 = $participant1;
 
         return $this;
     }
 
-    public function getPlayer2(): ?Player
+    public function getParticipant2(): ?Participant
     {
-        return $this->player2;
+        return $this->participant2;
     }
 
-    public function setPlayer2(?Player $player2): self
+    public function setParticipant2(?Participant $participant2): self
     {
-        $this->player2 = $player2;
+        $this->participant2 = $participant2;
 
         return $this;
     }
@@ -201,6 +206,18 @@ class Duel
     public function setNextDuelSlot(?int $nextDuelSlot): self
     {
         $this->nextDuelSlot = $nextDuelSlot;
+
+        return $this;
+    }
+
+    public function getTournament(): ?Tournament
+    {
+        return $this->tournament;
+    }
+
+    public function setTournament(?Tournament $tournament): self
+    {
+        $this->tournament = $tournament;
 
         return $this;
     }

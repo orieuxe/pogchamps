@@ -1,10 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import {PlayerService} from '../player.service';
-import {GameService} from '../game.service';
-import {MatchService} from '../match.service';
-import { tap, map, flatMap } from 'rxjs/operators';
-import { ActivatedRoute, Router } from "@angular/router";
-import {Game, Player, Stats, Match} from '../types';
+import { ActivatedRoute } from "@angular/router";
+import { flatMap, tap } from 'rxjs/operators';
+import { Game } from "../models/game";
+import { Match } from "../models/match";
+import { Participant } from '../models/participant';
+import { Player } from "../models/player";
+import { Stats } from "../models/stats";
+import { MatchService } from '../services/match.service';
+import { ParticipantService } from '../services/participant.service';
+import { PlayerService } from '../services/player.service';
 
 @Component({
   selector: 'app-player',
@@ -15,20 +19,20 @@ export class PlayerComponent implements OnInit {
 
   games : Game[];
   matchs : Match[];
-  player : Player;
+  participant : Participant;
   stats : Stats;
   constructor(private playerService: PlayerService,
-              private gameService: GameService,
+              private participantService: ParticipantService,
               private matchService: MatchService,
               private route : ActivatedRoute) { }
 
   ngOnInit() {
     let username = this.route.snapshot.paramMap.get("username");
-    this.playerService.getPlayer(username).pipe(
-        tap((p : Player) => this.player = p),
+    this.participantService.getParticipant(2, username).pipe(
+        tap((p : Participant) => this.participant = p),
         flatMap(p => {
           this.matchService.getMatchsOf(p.id).subscribe((m : Match[]) => this.matchs = m);
-          return this.playerService.getStats(p.username);
+          return this.playerService.getStats(p.player.username);
         }),
     ).subscribe((s : Stats) => this.stats = s);
   }

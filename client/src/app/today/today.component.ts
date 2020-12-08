@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {GameService} from '../game.service';
-import {MatchService} from '../match.service';
-import {Game, Match} from '../types';
+import {GameService} from '../services/game.service';
+import {MatchService} from '../services/match.service';
+import { Game } from "../models/game";
+import { Match } from "../models/match";
 
 @Component({
   selector: 'app-today',

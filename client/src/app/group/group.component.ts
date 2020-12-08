@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {GameService} from '../game.service';
-import {MatchService} from '../match.service';
+import {GameService} from '../services/game.service';
+import {MatchService} from '../services/match.service';
 import { ActivatedRoute, Router } from "@angular/router";
-import {Game, Match} from '../types';
+import { Game } from "../models/game";
+import { Match } from "../models/match";
 
 @Component({
   selector: 'app-group',
@@ -19,8 +20,7 @@ export class GroupComponent implements OnInit {
 
   ngOnInit() {
     this.group = this.route.snapshot.paramMap.get("group");
-    this.matchService.getMatchsFrom(this.group).subscribe((m : Match[]) => this.matchs = m);
-
+    this.matchService.getMatchsFrom(this.group, 2).subscribe((m : Match[]) => this.matchs = m);
   }
 
   showGames(match : Match){

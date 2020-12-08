@@ -7,6 +7,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use App\Entity\Player;
+use App\Repository\PlayerRepository;
 
 /**
  * PlayerController.
@@ -28,19 +29,6 @@ class PlayerController extends AbstractFOSRestController
     }
 
     /**
-     * Get all Players from a group.
-     * @Rest\Get("/from/{section}")
-     *
-     * @return Response
-     */
-    public function getUserPlayer(string $section)
-    {
-      $repository = $this->getDoctrine()->getRepository(Player::class);
-      $players = $repository->findBy(['section' => $section], ['points' => 'DESC', 'id' => 'DESC']);
-      return $this->handleView($this->view($players));
-    }
-
-    /**
      * Get Player by twitch or chess.com username
      * @Rest\Get("/{name}")
      *
@@ -48,6 +36,7 @@ class PlayerController extends AbstractFOSRestController
      */
     public function getPlayer(string $name)
     {
+      /** @var PlayerRepository $repository */
       $repository = $this->getDoctrine()->getRepository(Player::class);
       $player = $repository->findByName($name);
       return $this->handleView($this->view($player));

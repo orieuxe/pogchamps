@@ -22,14 +22,16 @@ class DuelRepository extends ServiceEntityRepository
     /**
      * @return Duel[] Returns an array of Duel objects
      */
-    public function findBySection($section)
+    public function findByGroup($tournamentId, $group)
     {
        return $this->createQueryBuilder('d')
-                   ->join('d.player1', 'p')
-                   ->where('p.section = :section')
+                   ->join('d.participant1', 'pa')
+                   ->where('pa.groupe = :groupe')
                    ->andWhere("d.stage = 'group'")
+                   ->andWhere('d.tournament = :tournamentId')
                    ->orderBy('d.date', 'ASC')
-                   ->setParameter(':section', $section)
+                   ->setParameter(':groupe', $group)
+                   ->setParameter(':tournamentId', $tournamentId)
                    ->getQuery()
                    ->getResult();
     }
@@ -37,21 +39,19 @@ class DuelRepository extends ServiceEntityRepository
     /**
      * @return Duel[] Returns an array of Duel objects
      */
-    public function findByPlayerId($id)
+    public function findByParticipantId($participantId)
     {
       return $this->createQueryBuilder('d')
-          ->orWhere('d.player1 = :id')
-          ->orWhere('d.player2 = :id')
-          ->setParameter('id', $id)
+          ->where('d.participant1 = :participantId')
+          ->orWhere('d.participant2 = :participantId')
+          ->setParameter('participantId', $participantId)
           ->orderBy('d.date', 'ASC')
           ->getQuery()
           ->getResult();
     }
 
-    /**
-     * @return Duel Returns an array of Duel objects
-     */
-    public function findByPlayers($username1, $username2, $stage='group')
+    
+    public function findByPlayers($tournamentId, $username1, $username2, $stage='group'): Duel
     {
       if($stage == 'group'){
         $where = "d.stage = 'group'";
@@ -60,12 +60,14 @@ class DuelRepository extends ServiceEntityRepository
       }
 
       return $this->createQueryBuilder('d')
-          ->join('d.player1', 'p1')
-          ->join('d.player2', 'p2')
+          ->join('d.participant1', 'p1')
+          ->join('d.participant2', 'p2')
           ->where('p1.username = :u1 AND p2.username = :u2 OR p2.username = :u1 AND p1.username = :u2')
+          ->andWhere('d.tournament = :tournamentId')
           ->andWhere($where)
           ->setParameter('u1', $username1)
           ->setParameter('u2', $username2)
+          ->setParameter('tournamentId', $tournamentId)
           ->getQuery()
           ->getOneOrNullResult();
     }

@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import {Player} from '../types';
-import {PlayerService} from '../player.service';
+import { Participant } from "../models/participant";
+import {ParticipantService} from '../services/participant.service';
 
 @Component({
   selector: 'app-standings',
@@ -9,13 +9,13 @@ import {PlayerService} from '../player.service';
 })
 export class StandingsComponent implements OnInit {
   displayedColumns: string[] = ['photo', 'twitch', 'points', 'played'];
-  players: Player[];
+  participants: Participant[];
   @Input() group: string;
 
-  constructor(private playerService: PlayerService){}
+  constructor(private participantService: ParticipantService){}
 
   ngOnInit() {
-    this.playerService.getPlayersFrom(this.group).subscribe((p : Player[]) => this.players = p);
+    this.participantService.getParticipantsFrom(this.group, 2).subscribe((p : Participant[]) => this.participants = p);
   }
 
 }

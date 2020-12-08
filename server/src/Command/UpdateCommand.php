@@ -7,7 +7,9 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\Duel;
 use App\Entity\Game;
-
+use App\Repository\DuelRepository;
+use App\Repository\GameRepository;
+use App\Repository\PlayerRepository;
 
 class UpdateCommand extends Command
 {
@@ -66,13 +68,15 @@ class UpdateCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+      /** @var GameRepository $repository */
       $repository = $this->em->getRepository(Game::class);
       $games = $repository->findBy(['duel' => null]);
       foreach ($games as $game){
         $this->separateMovesFromClock($game);
 
+        /** @var DuelRepository $repository */
         $repository = $this->em->getRepository(Duel::class);
-        $duel = $repository->findByPlayers($game->getWhite(), $game->getBlack(), "bracket");
+        $duel = $repository->findByPlayers(2, $game->getWhite(), $game->getBlack(), "bracket");
         $duel->addGame($game);
         $this->em->flush();
       }

@@ -1,5 +1,6 @@
 import { HostListener, Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import {Game, Move} from '../types';
+import { Game } from "../models/game";
+import { Move } from "../models/move";
 import * as Chess from 'chess.js';
 
 declare var ChessBoard : any;

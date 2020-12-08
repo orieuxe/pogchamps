@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import {Game, Rating} from '../types';
+import { Game } from "../models/game";
+import { Rating } from "../models/rating";
 @Component({
   selector: 'app-list',
   templateUrl: './list.component.html',

@@ -7,6 +7,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use App\Entity\Game;
+use App\Repository\GameRepository;
 
 /**
  * GameController.
@@ -38,31 +39,5 @@ class GameController extends AbstractFOSRestController
       $repository = $this->getDoctrine()->getRepository(Game::class);
       $game = $repository->find($id);
       return $this->handleView($this->view($game));
-    }
-
-    /**
-     * Get all Games from player.
-     * @Rest\Get("/from/{username}")
-     *
-     * @return Response
-     */
-    public function getUserGames(string $username)
-    {
-      $repository = $this->getDoctrine()->getRepository(Game::class);
-      $games = $repository->findByUsername($username);
-      return $this->handleView($this->view($games));
-    }
-
-    /**
-     * Get all Games from section.
-     * @Rest\Get("/group/{section}")
-     *
-     * @return Response
-     */
-    public function getSectionGames(string $section)
-    {
-      $repository = $this->getDoctrine()->getRepository(Game::class);
-      $games = $repository->findBySection($section);
-      return $this->handleView($this->view($games));
     }
 }
