@@ -1,6 +1,6 @@
 .logo{
+  margin-left: 40px;
   width: 50%;
-  margin-left: 50px;
 }
 
 .right{
@@ -9,7 +9,7 @@
 }
 
 .github{
-  width: 35px;
+  display: none;
 }
 
 nav a:hover{
@@ -105,10 +105,15 @@ header .menu-btn:checked ~ .menu-icon:not(.steps) .navicon:after {
   height: 11vw;
 }
 
-@media (min-width: 925px) {
+@media (min-width: 800px) {
+  .logo{
+    margin-left: auto;
+    margin-right: auto;
+  }
   .right{
-    width: 155px;
-    margin-top: 2vw;
+    width: fit-content;
+    margin-top: 3vw;
+    margin-right: 5vw;
   }
   header nav {
     margin-top: .7vw;
@@ -121,5 +126,12 @@ header .menu-btn:checked ~ .menu-icon:not(.steps) .navicon:after {
   }
   .blank{
     height: 8.3vw;
+  }
+}
+
+@media (min-width: 1000px){
+  .github{
+    width: 35px;
+    display: inline;
   }
 }

@@ -9,6 +9,7 @@ import { Stats } from "../models/stats";
 import { MatchService } from '../services/match.service';
 import { ParticipantService } from '../services/participant.service';
 import { PlayerService } from '../services/player.service';
+import { TournamentService } from '../services/tournament.service';
 
 @Component({
   selector: 'app-player',
@@ -27,8 +28,9 @@ export class PlayerComponent implements OnInit {
               private route : ActivatedRoute) { }
 
   ngOnInit() {
-    let username = this.route.snapshot.paramMap.get("username");
-    this.participantService.getParticipant(2, username).pipe(
+    const username = this.route.snapshot.paramMap.get("username");
+    const tournamentId = TournamentService.getTournamentId();
+    this.participantService.getParticipant(tournamentId, username).pipe(
         tap((p : Participant) => this.participant = p),
         flatMap(p => {
           this.matchService.getMatchsOf(p.id).subscribe((m : Match[]) => this.matchs = m);

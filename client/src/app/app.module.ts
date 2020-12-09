@@ -1,35 +1,31 @@
-import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
-
-import { AppComponent } from './app.component';
-import { PlayerComponent } from './player/player.component';
-import { NgVarDirective } from './directives/ng-var.directive';
-import {HttpClientModule} from '@angular/common/http';
+import { MatFormFieldModule, MatInputModule, MatSelectModule, MatTooltipModule } from '@angular/material';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatIconModule } from '@angular/material/icon';
+import { MatListModule } from '@angular/material/list';
+import { MatTableModule } from '@angular/material/table';
+import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
+import { RouterModule } from '@angular/router';
 import { TimeagoModule } from 'ngx-timeago';
-
-import {MatListModule} from '@angular/material/list';
-import {MatTableModule} from '@angular/material/table';
-import {MatGridListModule} from '@angular/material/grid-list';
-import {MatIconModule} from '@angular/material/icon'
-
-import {RouterModule} from '@angular/router';
-import {PlayerService} from './services/player.service';
-import {GameService} from './services/game.service';
-
+import { AppComponent } from './app.component';
+import { BoardComponent } from './board/board.component';
+import { BracketComponent } from './bracket/bracket.component';
+import { NgVarDirective } from './directives/ng-var.directive';
 import { GameComponent } from './game/game.component';
-import { ListComponent } from './list/list.component';
-import { StandingsComponent } from './standings/standings.component';
 import { GroupComponent } from './group/group.component';
 import { HomeComponent } from './home/home.component';
-import { BoardComponent } from './board/board.component';
-import { SmallBoardComponent } from './small-board/small-board.component';
+import { ListComponent } from './list/list.component';
 import { MatchComponent } from './match/match.component';
 import { MatchupComponent } from './matchup/matchup.component';
-import { BracketComponent } from './bracket/bracket.component';
+import { PlayerComponent } from './player/player.component';
+import { GameService } from './services/game.service';
+import { PlayerService } from './services/player.service';
+import { SmallBoardComponent } from './small-board/small-board.component';
+import { StandingsComponent } from './standings/standings.component';
 import { TodayComponent } from './today/today.component';
-
+import { TournamentComponent } from './tournament/tournament.component';
 
 
 const routes = [
@@ -56,7 +52,8 @@ const routes = [
     MatchComponent,
     BracketComponent,
     MatchupComponent,
-    TodayComponent
+    TodayComponent,
+    TournamentComponent,
   ],
   imports: [
     BrowserModule,
@@ -65,9 +62,17 @@ const routes = [
     MatListModule,
     MatTableModule,
     MatGridListModule,
+    MatFormFieldModule,
+    MatInputModule,
     MatIconModule,
+    MatTooltipModule,
+    MatSelectModule,
     BrowserAnimationsModule,
     TimeagoModule.forRoot()
+  ],
+  exports:[
+    MatFormFieldModule,
+    MatInputModule
   ],
   providers: [PlayerService, GameService],
   bootstrap: [AppComponent]

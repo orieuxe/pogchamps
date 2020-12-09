@@ -69,56 +69,6 @@ class Player
         return $this;
     }
 
-    public function getParticipation(): ?string
-    {
-        return $this->participation;
-    }
-
-    public function setParticipation(string $participation): self
-    {
-        $this->participation = $participation;
-
-        return $this;
-    }
-
-    public function getPoints(): ?int
-    {
-        return $this->points;
-    }
-
-    public function setPoints(int $points): self
-    {
-        $this->points = $points;
-
-        return $this;
-    }
-
-    public function addPoints(int $val): self
-    {
-        $this->points += $val;
-
-        return $this;
-    }
-
-    public function getPlayed(): ?int
-    {
-        return $this->played;
-    }
-
-    public function setPlayed(int $played): self
-    {
-        $this->played = $played;
-
-        return $this;
-    }
-
-    public function incPlayed(): self
-    {
-        $this->played += 1;
-
-        return $this;
-    }
-
     /**
      * @return Collection|Participation[]
      */

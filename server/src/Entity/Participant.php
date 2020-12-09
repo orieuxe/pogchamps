@@ -108,4 +108,18 @@ class Participant
 
         return $this;
     }
+    
+    public function addPoints(int $val): self
+    {
+        $this->points += $val;
+
+        return $this;
+    }
+
+    public function incPlayed(): self
+    {
+        $this->played += 1;
+
+        return $this;
+    }
 }

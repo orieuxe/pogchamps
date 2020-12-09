@@ -39,7 +39,7 @@ class ParticipantController extends AbstractFOSRestController
       $repository = $this->getDoctrine()->getRepository(Participant::class);
       $participants = $repository->findBy(
         ['groupe' => $groupe, 'tournament' => $tournamentId], 
-        ['points' => 'DESC', 'points' => 'ASC', 'id' => 'DESC']
+        ['points' => 'DESC', 'played' => 'ASC', 'id' => 'DESC']
       );
       return $this->handleView($this->view($participants));
     }

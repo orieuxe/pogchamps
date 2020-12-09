@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from "@angular/router";
 import { Game } from "../models/game";
 import { Match } from "../models/match";
+import { Tournament } from '../models/tournament';
 import { MatchService } from '../services/match.service';
+import { TournamentService } from '../services/tournament.service';
 
 @Component({
   selector: 'app-bracket',
@@ -20,7 +22,8 @@ export class BracketComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe(params => {
       this.stage = params['stage'];
-      this.matchService.getMatchsFromStage(this.stage, 2).subscribe((m : Match[]) => {
+      const tournamentId = TournamentService.getTournamentId();
+      this.matchService.getMatchsFromStage(this.stage, tournamentId).subscribe((m : Match[]) => {
         this.matchs = m;
         this.games = [];
       });

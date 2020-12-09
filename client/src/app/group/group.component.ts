@@ -4,6 +4,7 @@ import {MatchService} from '../services/match.service';
 import { ActivatedRoute, Router } from "@angular/router";
 import { Game } from "../models/game";
 import { Match } from "../models/match";
+import { TournamentService } from '../services/tournament.service';
 
 @Component({
   selector: 'app-group',
@@ -20,7 +21,8 @@ export class GroupComponent implements OnInit {
 
   ngOnInit() {
     this.group = this.route.snapshot.paramMap.get("group");
-    this.matchService.getMatchsFrom(this.group, 2).subscribe((m : Match[]) => this.matchs = m);
+    const tournamentId = TournamentService.getTournamentId();
+    this.matchService.getMatchsFrom(this.group, tournamentId).subscribe((m : Match[]) => this.matchs = m);
   }
 
   showGames(match : Match){

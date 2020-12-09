@@ -76,13 +76,14 @@ class UpdateCommand extends Command
 
         /** @var DuelRepository $repository */
         $repository = $this->em->getRepository(Duel::class);
-        $duel = $repository->findByPlayers(2, $game->getWhite(), $game->getBlack(), "bracket");
+
+        $duel = $repository->findOpenDuelByPlayers(1, $game->getWhite(), $game->getBlack());
         $duel->addGame($game);
-        $this->em->flush();
       }
 
-      $repository = $this->em->getRepository(Duel::class);
-      $duels = $repository->findBy(['result' => null]);
+      $this->em->flush();
+      /** @var Duel[] $duels */
+      $duels = $this->em->getRepository(Duel::class)->findBy(['result' => null]);
       foreach ($duels as $duel) {
         $games = $duel->getGames();
         if(count($games) <= 0) continue;
@@ -91,7 +92,7 @@ class UpdateCommand extends Command
         $score2 = 0.0;
         foreach ($games as $game){
           $score = $this->resultToScore($game->getResult());
-          if($game->getWhite() != $duel->getPlayer1()->getUsername()){
+          if($game->getWhite() != $duel->getParticipant1()->getPlayer()->getUsername()){
             $score = array_reverse($score);
           }
 
@@ -100,11 +101,16 @@ class UpdateCommand extends Command
         }
         $duel->setResult(strval($score1).'-'.strval($score2));
 
-        $winner = $score1 > $score2 ? $duel->getPlayer1() : $duel->getPlayer2();
-        $loser = $score1 < $score2 ? $duel->getPlayer1() : $duel->getPlayer2();
+        $winner = $score1 > $score2 ? $duel->getParticipant1() : $duel->getParticipant2();
+        $loser = ($winner->getId() === $duel->getParticipant2()->getId()) ? $duel->getParticipant1() : $duel->getParticipant2();
+
+        dump($duel->getParticipant1()->getPlayer()->getTwitch().' '.$score1.' - '.$score2.' '.$duel->getParticipant2()->getPlayer()->getTwitch());
 
         if($duel->getStage() == "group"){
-          if(count($games) > 2){
+          if ($score1 == $score2){
+            $winner->addPoints(1);
+            $loser->addPoints(1);
+          } else if(count($games) > 2){
             $winner->addPoints(2);
             $loser->addPoints(1);
           }else {
@@ -117,9 +123,9 @@ class UpdateCommand extends Command
           $nextDuel = $duel->getNextDuel();
           if(!is_null($nextDuel)){
             if($duel->getNextDuelSlot() == 1){
-              $nextDuel->setPlayer1($winner);
+              $nextDuel->setParticipant1($winner);
             }else{
-              $nextDuel->setPlayer2($winner);
+              $nextDuel->setParticipant2($winner);
             }
           }
         }

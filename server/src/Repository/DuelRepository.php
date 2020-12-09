@@ -51,20 +51,16 @@ class DuelRepository extends ServiceEntityRepository
     }
 
     
-    public function findByPlayers($tournamentId, $username1, $username2, $stage='group'): Duel
+    public function findOpenDuelByPlayers($tournamentId, $username1, $username2, $stage='group'): Duel
     {
-      if($stage == 'group'){
-        $where = "d.stage = 'group'";
-      }else{
-        $where = "d.stage != 'group'";
-      }
-
       return $this->createQueryBuilder('d')
-          ->join('d.participant1', 'p1')
-          ->join('d.participant2', 'p2')
+          ->join('d.participant1', 'pa1')
+          ->join('d.participant2', 'pa2')
+          ->join('pa1.player', 'p1')
+          ->join('pa2.player', 'p2')
           ->where('p1.username = :u1 AND p2.username = :u2 OR p2.username = :u1 AND p1.username = :u2')
           ->andWhere('d.tournament = :tournamentId')
-          ->andWhere($where)
+          ->andWhere('d.result IS NULL')
           ->setParameter('u1', $username1)
           ->setParameter('u2', $username2)
           ->setParameter('tournamentId', $tournamentId)
