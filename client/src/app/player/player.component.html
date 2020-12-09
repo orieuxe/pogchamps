@@ -1,6 +1,6 @@
 <div class="parent">
   <div class="column">
-    <div *ngIf="participant.player as player" class="player-card">
+    <div *ngIf="participant?.player as player" class="player-card">
       <img class="profile-picture" src="assets/player/{{player.twitch}}.png" alt="">
       <div *ngIf="stats" class="player-infos" >
         <div class="username">
