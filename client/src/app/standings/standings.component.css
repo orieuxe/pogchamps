@@ -11,19 +11,11 @@ table {
   width: 50px;
 }
 
-.mat-row{
-    position: relative;
-}
 .mat-row:hover{
     background-color: var(--hover-color);
+    cursor: pointer;
     opacity: 0.95;
     transition: 0.2s;
-}
-
-.mat-row-link{
-    position: absolute;
-    width: 30%;
-    height: 8%;
 }
 
 .group-link{
