@@ -6,7 +6,9 @@ img{
 mat-form-field{
     width: 35px;
     margin-right: 1vw;
+    display: block;
 }
+
 
 mat-label{
     display: none;
@@ -16,7 +18,7 @@ mat-label{
     mat-label{
         display: inline;
     }
-
+    
     mat-form-field{
         width: 65px;
     }
@@ -26,6 +28,10 @@ mat-label{
     font-family: "Nova Square";
     color: white;
     font-size: 20px;
+}
+
+::ng-deep .mat-form-field-infix{
+    border-top: none !important;
 }
 
 ::ng-deep .mat-select-arrow, ::ng-deep .mat-select-value-text{

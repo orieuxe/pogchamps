@@ -3,6 +3,12 @@ table{
   margin-right: auto;
 }
 
+@media (min-width: 800px) {
+  table{
+    margin-right: unset;
+  }
+}
+
 tr:hover{
   background-color: var(--hover-color);
   opacity: 0.95;

@@ -3,13 +3,27 @@
   flex-wrap: wrap;
 }
 
+
+@media (min-width: 800px) {
+  .parent{
+    margin-right: 10%;
+  }
+}
+
 .column {
-  flex: auto;
+  flex: 1;
 }
 
 .player-card{
   justify-content: center;
   display: flex;
+}
+
+
+@media (min-width: 800px) {
+  .player-card{
+    justify-content: flex-end;
+  }
 }
 
 .profile-picture{

@@ -6,6 +6,7 @@
 .right{
   float: right;
   width: 35%;
+  display: flex;
 }
 
 .github{
@@ -105,7 +106,13 @@ header .menu-btn:checked ~ .menu-icon:not(.steps) .navicon:after {
   height: 11vw;
 }
 
-@media (min-width: 800px) {
+@media (max-width: 809px) {
+  header{
+    height: 10vw;
+  }
+}
+
+@media (min-width: 810px) {
   .logo{
     margin-left: auto;
     margin-right: auto;
