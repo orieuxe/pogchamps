@@ -22,7 +22,6 @@ nav a.active{
 }
 
 header {
-  background-image: url('../assets/logo/background.png');
   box-shadow: 1px 1px 4px 0 rgba(0,0,0,.1);
   position: absolute;
   width: 100%;
@@ -102,13 +101,12 @@ header .menu-btn:checked ~ .menu-icon:not(.steps) .navicon:after {
   top: 0;
 }
 
-.blank{
-  height: 11vw;
-}
-
 @media (max-width: 809px) {
   header{
     height: 10vw;
+  }
+  .blank{
+    height: 11vw;
   }
 }
 
@@ -132,7 +130,7 @@ header .menu-btn:checked ~ .menu-icon:not(.steps) .navicon:after {
     display: none;
   }
   .blank{
-    height: 8.3vw;
+    height: 13vw;
   }
 }
 
@@ -140,5 +138,11 @@ header .menu-btn:checked ~ .menu-icon:not(.steps) .navicon:after {
   .github{
     width: 35px;
     display: inline;
+  }
+}
+
+@media (min-width: 1300px){
+  .blank{
+    height: 9vw;
   }
 }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { TournamentService } from './services/tournament.service';
 
 @Component({
   selector: 'app-root',
@@ -11,6 +12,10 @@ export class AppComponent implements OnInit{
 
   ngOnInit(): void {
     const darkThemeStr = localStorage.getItem(this.dataThemeAttribute) || 'false'
+    const tournamentId = TournamentService.getTournamentId();
+    const header = document.getElementsByTagName('header')[0];
+    header.style.backgroundImage = `url('../assets/logo/background-${tournamentId}.png')`
+    
     this.darkTheme = darkThemeStr === 'true';
     this.updateTheme(this.darkTheme);
   }
