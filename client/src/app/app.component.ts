@@ -11,7 +11,7 @@ export class AppComponent implements OnInit{
   private dataThemeAttribute = 'data-theme';
 
   ngOnInit(): void {
-    const darkThemeStr = localStorage.getItem(this.dataThemeAttribute) || 'false'
+    const darkThemeStr = localStorage.getItem(this.dataThemeAttribute) || 'true';
     const tournamentId = TournamentService.getTournamentId();
     const header = document.getElementsByTagName('header')[0];
     header.style.backgroundImage = `url('../assets/logo/background-${tournamentId}.png')`
