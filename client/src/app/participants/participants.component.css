@@ -1,0 +1,77 @@
+table {
+    width: 35vw;
+    background: var(--tile-bg-color);
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.avatar{
+    width: 50px;
+}
+
+.cdk-column-photo{
+    width: 50px;
+    padding-right: 0 !important;
+}
+
+.mat-cell{
+    padding: 0 1.5em;
+    color: var(--text-color);
+}
+
+.mat-header-cell{
+    color: var(--text-color);
+}
+
+::ng-deep .mat-sort-header-container {
+    justify-content: center;
+}
+
+.mat-row:hover{
+    background-color: var(--hover-color);
+    cursor: pointer;
+    opacity: 0.95;
+    transition: 0.2s;
+}
+
+.blitz{
+    content: url('../../assets/icons/blitz.png');
+}
+
+.bullet{
+    content: url('../../assets/icons/bullet.png');
+}
+
+.rapid{
+    content: url('../../assets/icons/rapid.png');
+}
+
+.games{
+    content: url('../../assets/icons/games.png');
+}
+
+.chess{
+    content: url('../../assets/icons/chess.png');
+}
+
+.twitch{
+    content: url('../../assets/icons/twitch.png');
+}
+
+.puzzles{
+    content: url('../../assets/icons/puzzles.png');
+}
+
+.icon {
+    max-width: 3em;
+    max-height: 3em;
+}
+
+a{
+    text-decoration: none;
+    color: var(--text-color);
+}
+
+a:hover{
+    color: var(--text-color);
+}

@@ -5,7 +5,7 @@ export interface Participant{
     id: number;
     player: Player;
     tournament: Tournament;
-    groupe: string;
+    groupe?: string;
     played: number;
     points: number;
 }

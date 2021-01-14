@@ -1,0 +1,66 @@
+<table mat-table [dataSource]="dataSource" matSortActive="rapid" matSortDirection="desc" matSortDisableClear matSort class="mat-elevation-z4">
+    <ng-container matColumnDef="photo">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let p">
+        <img class="avatar" src="assets/player/{{p.twitch}}.png" alt="404">
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="twitch">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header><span class="icon twitch" matTooltip="Twitch channel"></span></th>
+        <td mat-cell *matCellDef="let p">
+          <!-- <a href="https://www.twitch.tv/{{p.twitch}}" target="blank"> -->
+            /{{p.twitch}}
+          <!-- </a> -->
+        </td>
+    </ng-container>
+
+    <ng-container matColumnDef="username">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header><span class="icon chess" matTooltip="Chess.com profile"></span></th>
+        <td mat-cell *matCellDef="let p">
+          <!-- <a href="https://www.chess.com/member/{{p.username}}" target="blank"> -->
+            /{{p.username}}
+          <!-- </a> -->
+        </td>
+    </ng-container>
+      
+    <ng-container matColumnDef="rapid">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> <span class="icon rapid" matTooltip="Rapid rating"></span> </th>
+        <td mat-cell *matCellDef="let p"> {{p.rapid}} </td>
+    </ng-container>
+    
+    <ng-container matColumnDef="rapid_games">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> <span class="icon games" matTooltip="Rapid games"></span> </th>
+        <td mat-cell *matCellDef="let p"> {{p.rapid_games}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="blitz">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> <span class="icon blitz" matTooltip="Blitz rating"></span> </th>
+        <td mat-cell *matCellDef="let p"> {{p.blitz}} </td>
+    </ng-container>
+    
+    <ng-container matColumnDef="blitz_games">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> <span class="icon games" matTooltip="Blitz games"></span> </th>
+        <td mat-cell *matCellDef="let p"> {{p.blitz_games}} </td>
+    </ng-container>
+    
+    <ng-container matColumnDef="bullet">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> <span class="icon bullet" matTooltip="Bullet rating"></span> </th>
+        <td mat-cell *matCellDef="let p"> {{p.bullet}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="bullet_games">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> <span class="icon games" matTooltip="Bullet games"></span> </th>
+        <td mat-cell *matCellDef="let p"> {{p.bullet_games}} </td>
+    </ng-container>
+    
+    <ng-container matColumnDef="puzzle">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> <span class="icon puzzles" matTooltip="Puzzles best rating"></span> </th>
+      <td mat-cell *matCellDef="let p"> {{p.puzzle}} </td>
+    </ng-container>
+    
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let p; columns: displayedColumns;"
+      [routerLink]="['/player', p.username]">
+    </tr>
+  </table>

@@ -38,7 +38,7 @@ class Participant
     private $played;
 
     /**
-     * @ORM\Column(type="string", length=8)
+     * @ORM\Column(type="string", length=8, nullable=true)
      */
     private $groupe;
 
