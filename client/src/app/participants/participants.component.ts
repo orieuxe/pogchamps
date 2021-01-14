@@ -54,7 +54,7 @@ export class ParticipantsComponent implements OnInit {
         blitz: blitz ? blitz.last.rating : null,
         blitz_games: blitz ? ParticipantsComponent.sum(blitz.record) : 0,
         bullet: bullet ? bullet.last.rating : null,
-        bullet_games: bullet ? ParticipantsComponent.sum(bullet.record) : null,
+        bullet_games: bullet ? ParticipantsComponent.sum(bullet.record) : 0,
         puzzle: s.tactics && s.tactics.highest ? s.tactics.highest.rating : null
       }}));
       this.displayColumns();
