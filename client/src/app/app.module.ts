@@ -30,13 +30,13 @@ import { ParticipantsComponent } from './participants/participants.component';
 
 
 const routes = [
-  {path: '', component : HomeComponent},
+  {path: 'groupstage', component : HomeComponent},
   {path: 'player/:username', component : PlayerComponent},
   {path: 'group/:group', component : GroupComponent},
   {path: 'game/:id', component : GameComponent},
   {path: 'bracket/:stage', component : BracketComponent},
   {path: 'today', component : TodayComponent},
-  {path: 'participants', component : ParticipantsComponent},
+  {path: '', component : ParticipantsComponent},
 ]
 
 @NgModule({
