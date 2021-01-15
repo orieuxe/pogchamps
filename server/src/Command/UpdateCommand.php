@@ -46,38 +46,17 @@ class UpdateCommand extends Command
       }
     }
 
-    private function separateMovesFromClock(Game $game){
-      $chessMoves = [];
-      $clocks = [];
-
-      $moves = explode(']}', $game->getMoves());
-      foreach ($moves as $move){
-        $arr = preg_split( "/(\n|\s)/", $move );
-        if(count($arr) < 3) continue;
-        $clock = end($arr);
-        $chessMove = $arr[count($arr)-3];
-        array_push($clocks, substr($clock, 2));
-        array_push($chessMoves, $chessMove);
-      }
-
-
-      $game->setMoves(join(' ', $chessMoves));
-      $game->setClocks(join(' ', $clocks));
-      $game->setLength(count($chessMoves));
-    }
-
     protected function execute(InputInterface $input, OutputInterface $output)
     {
       /** @var GameRepository $repository */
       $repository = $this->em->getRepository(Game::class);
       $games = $repository->findBy(['duel' => null]);
       foreach ($games as $game){
-        $this->separateMovesFromClock($game);
 
         /** @var DuelRepository $repository */
         $repository = $this->em->getRepository(Duel::class);
 
-        $duel = $repository->findOpenDuelByPlayers(1, $game->getWhite(), $game->getBlack());
+        $duel = $repository->findOpenDuelByPlayers(3, $game->getWhite(), $game->getBlack());
         $duel->addGame($game);
       }
 

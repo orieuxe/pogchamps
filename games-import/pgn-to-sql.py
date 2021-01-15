@@ -1,59 +1,36 @@
-# Copyright (c) 2017, balping
-# https://github.com/balping
+import chess.pgn
+import re
+CLOCK_REGEX = re.compile(r"""\[%clk\s(\d+):(\d+):(\d+(?:\.\d*)?)\]""")
+PGN_FIELDS = ['Site', 'Date', 'White', 'Black', 'Result','WhiteElo', 'BlackElo', 'TimeControl', 'Termination']
 
-# This program is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
+pgn = open("pgn/pogchamps.pgn")
+def clock(node):
+	match = CLOCK_REGEX.search(node.comment)
+	if match is None:
+		return None
+	# return int(match.group(1)) * 3600 + int(match.group(2)) * 60 + float(match.group(3))
+	return match.group(2)+':'+match.group(3)
 
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
+def quote(str):
+	return '\''+str+'\''
 
-# You should have received a copy of the GNU General Public License
-# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+values = []
+while game:= chess.pgn.read_game(pgn):
+	board = game.board()
+	sans = []
+	clocks = []
+	for node in game.mainline():
+		
+		move = node.move
+		sans.append((board.san(move)))
+		clocks.append(clock(node))
+		board.push(move)
+	
+	value = [quote(game.headers[field]) for field in PGN_FIELDS]
+	value.append(str(len(sans)))
+	value.append(quote(' '.join(sans)))
+	value.append(quote(' '.join(clocks)))
+	values.append('(' + ', '.join(value) + ')')
 
-import pgn
-import sys
-
-fields = map(lambda x:x.lower(), pgn.PGNGame.TAG_ORDER)
-
-def values_row (game):
-	ret = '('
-	for field in fields:
-		if hasattr(game, field):
-			ret += ' \'' + getattr(game, field).replace('\'', '\\\'') + '\', '
-		else:
-			ret += ' \'\', '
-
-	if hasattr(game, 'moves'):
-		ret += str(len(game.moves)) + ', '
-		ret += ' \'' + ' '.join(game.moves) + '\''
-	else:
-		ret += '0, \'\''
-
-	ret += ')'
-	return ret
-
-if len(sys.argv) != 2:
-	print 'Usage: python pgn-to-sql.py input.pgn > out.sql'
-
-i = 0
-for game in pgn.GameIterator(sys.argv[1]):
-	if not(hasattr(game, 'result')):
-		break;
-
-	if (i % 500) == 0:
-		print 'INSERT INTO game (' + ', '.join(fields) + ', length, moves) VALUES '
-
-	print values_row(game)
-
-	if (i % 500) == 499:
-		print ';'
-	else :
-		print ','
-
-	i += 1
-
-print ';'
+print('INSERT INTO game (' + ', '.join(map(lambda x:x.lower(), PGN_FIELDS)) + ', length, moves, clocks) VALUES ')
+print(',\n'.join(values) + ';')
