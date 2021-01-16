@@ -9,18 +9,14 @@
     <ng-container matColumnDef="twitch">
         <th mat-header-cell *matHeaderCellDef mat-sort-header><span class="icon twitch" matTooltip="Twitch channel"></span></th>
         <td mat-cell *matCellDef="let p">
-          <!-- <a href="https://www.twitch.tv/{{p.twitch}}" target="blank"> -->
-            /{{p.twitch}}
-          <!-- </a> -->
+          /{{p.twitch}}
         </td>
     </ng-container>
 
     <ng-container matColumnDef="username">
         <th mat-header-cell *matHeaderCellDef mat-sort-header><span class="icon chess" matTooltip="Chess.com profile"></span></th>
         <td mat-cell *matCellDef="let p">
-          <!-- <a href="https://www.chess.com/member/{{p.username}}" target="blank"> -->
-            /{{p.username}}
-          <!-- </a> -->
+          {{p.username}}
         </td>
     </ng-container>
       

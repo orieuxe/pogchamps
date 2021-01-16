@@ -52,19 +52,7 @@
   margin-left: 1em;
 }
 
-.blitz{
-  content: url('../../assets/icons/blitz.png');
-}
-
-.bullet{
-  content: url('../../assets/icons/bullet.png');
-}
-
-.rapid{
-  content: url('../../assets/icons/rapid.png');
-}
-
 .icon {
-  max-height: 1.5em;
-  width: 1em;
+  max-width: 2em;
+  max-height: 2em;
 }

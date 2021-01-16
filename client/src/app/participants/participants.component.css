@@ -34,34 +34,6 @@ table {
     transition: 0.2s;
 }
 
-.blitz{
-    content: url('../../assets/icons/blitz.png');
-}
-
-.bullet{
-    content: url('../../assets/icons/bullet.png');
-}
-
-.rapid{
-    content: url('../../assets/icons/rapid.png');
-}
-
-.games{
-    content: url('../../assets/icons/games.png');
-}
-
-.chess{
-    content: url('../../assets/icons/chess.png');
-}
-
-.twitch{
-    content: url('../../assets/icons/twitch.png');
-}
-
-.puzzles{
-    content: url('../../assets/icons/puzzles.png');
-}
-
 .icon {
     max-width: 3em;
     max-height: 3em;

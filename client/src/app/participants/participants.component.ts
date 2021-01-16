@@ -20,7 +20,7 @@ export interface ParticipantItem{
 @Component({
   selector: 'app-participants',
   templateUrl: './participants.component.html',
-  styleUrls: ['./participants.component.css']
+  styleUrls: ['./participants.component.css', '../icons.css']
 })
 
 export class ParticipantsComponent implements OnInit {
