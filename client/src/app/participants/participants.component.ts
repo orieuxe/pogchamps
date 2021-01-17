@@ -11,10 +11,10 @@ import { TournamentService } from '../services/tournament.service';
 export interface ParticipantItem{
   username :string
   twitch :string
-  rapid :number
-  blitz :number
-  bullet :number
-  puzzle :number
+  rapid? :number
+  blitz? :number
+  bullet? :number
+  puzzle? :number
 }
 
 @Component({
@@ -27,6 +27,7 @@ export class ParticipantsComponent implements OnInit {
   participants: Participant[];
   dataSource : MatTableDataSource<ParticipantItem>;
   displayedColumns: string[];
+  statsLoading = true;
 
   @ViewChild(MatSort, {static: false}) sort: MatSort;
 
@@ -37,10 +38,20 @@ export class ParticipantsComponent implements OnInit {
 
   ngOnInit() {
     const tournamentId = TournamentService.getTournamentId();
-    this.participantService.getParticipants(tournamentId).pipe(
-      tap(participants => this.participants = participants),
-      flatMap(participants => forkJoin(participants.map(p => this.playerService.getStats(p.player.username)))),
-    ).subscribe(stats => {
+    this.participantService.getParticipants(tournamentId).subscribe(participants => {
+      this.participants = participants
+      this.dataSource = new MatTableDataSource(this.participants.map(p => ({
+        username: p.player.username,
+        twitch: p.player.twitch,
+      }))); 
+      this.displayColumns();
+      this.loadStats();
+    });
+  }
+
+  loadStats(){
+    this.statsLoading = true;
+    forkJoin(this.participants.map(p => this.playerService.getStats(p.player.username))).subscribe(stats => {
       this.dataSource = new MatTableDataSource(this.participants.map((p,idx) => {
       const s = stats[idx];
       const rapid = s.chess_rapid;
@@ -57,8 +68,9 @@ export class ParticipantsComponent implements OnInit {
         bullet_games: bullet ? ParticipantsComponent.sum(bullet.record) : 0,
         puzzle: s.tactics && s.tactics.highest ? s.tactics.highest.rating : null
       }}));
-      this.displayColumns();
       this.dataSource.sort = this.sort;
+      this.displayColumns();
+      this.statsLoading = false;
     })
   }
   

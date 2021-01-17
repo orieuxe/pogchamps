@@ -1,6 +1,8 @@
-<table mat-table [dataSource]="dataSource" matSortActive="rapid" matSortDirection="desc" matSortDisableClear matSort class="mat-elevation-z4">
+<table mat-table [dataSource]="dataSource" matSortStart="desc" matSortActive="rapid" matSortDirection="desc" matSortDisableClear matSort class="mat-elevation-z4">
     <ng-container matColumnDef="photo">
-      <th mat-header-cell *matHeaderCellDef></th>
+      <th mat-header-cell *matHeaderCellDef>
+        <mat-icon class="refresh" [ngClass]="statsLoading ? 'rotating' : ''" matTooltip="Refresh ratings" (click)="loadStats()">refresh</mat-icon>
+      </th>
       <td mat-cell *matCellDef="let p">
         <img class="avatar" src="assets/player/{{p.twitch}}.png" alt="404">
       </td>

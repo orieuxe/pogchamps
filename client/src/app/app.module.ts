@@ -69,6 +69,7 @@ const routes = [
     MatFormFieldModule,
     MatInputModule,
     MatIconModule,
+    BrowserAnimationsModule,
     MatTooltipModule,
     MatSelectModule,
     BrowserAnimationsModule,
