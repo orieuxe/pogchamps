@@ -1,6 +1,6 @@
 .logo{
-  margin-left: 40px;
-  width: 50%;
+  width: 45%;
+  margin-top: .5vw;
 }
 
 .right{
@@ -21,6 +21,10 @@ nav a.active{
   font-style: oblique;
 }
 
+nav a.active::before{
+  content: ">";
+}
+
 header {
   box-shadow: 1px 1px 4px 0 rgba(0,0,0,.1);
   position: absolute;
@@ -33,7 +37,7 @@ nav a{
   text-decoration :inherit;
   font-family: "Nova Square";
   color: white;
-  font-size: 20px;
+  font-size: 1em;
 }
 
 header nav {
@@ -41,7 +45,7 @@ header nav {
   clear: both;
   max-height: 0;
   transition: max-height .2s ease-in;
-  margin-left: 5vw;
+  margin-left: 4vw;
 }
 
 header .menu-icon .navicon {
@@ -108,13 +112,12 @@ header .menu-btn:checked ~ .menu-icon:not(.steps) .navicon:after {
   .blank{
     height: 11vw;
   }
+  .logo{
+    margin-left: 40px;
+  }
 }
 
 @media (min-width: 810px) {
-  .logo{
-    margin-left: auto;
-    margin-right: auto;
-  }
   .right{
     width: fit-content;
     margin-top: 3vw;
@@ -138,6 +141,12 @@ header .menu-btn:checked ~ .menu-icon:not(.steps) .navicon:after {
   .github{
     width: 35px;
     display: inline;
+  }
+  header nav{
+    width: 231px;
+  }
+  nav a{
+    font-size: 20px;
   }
 }
 
