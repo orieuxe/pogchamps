@@ -36,6 +36,6 @@ with open("matchs.csv") as f:
         print(l)
         values.append(str((3, twitch_id[l[4]], twitch_id[l[5]], l[2], l[3], formatted)))
 
-    with open("../sql/matchs.sql", "w") as m:
+    with open("../matchs.sql", "w") as m:
         m.write("INSERT INTO duel (tournament_id, participant1_id, participant2_id, round, stage, date) VALUES\n")
         m.write('\n,\t'.join(values) + ';')

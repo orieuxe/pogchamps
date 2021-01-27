@@ -1,10 +1,10 @@
 db="pogchamps"
 d=$(date +%Y-%m-%d)
-mv ~/Downloads/chess_com_games_$d.pgn pgn/$db.pgn
-python3 pgn-to-sql.py pgn/$db.pgn > sql/$db.sql
+mv ~/Downloads/chess_com_games_$d.pgn $db.pgn
+python3 pgn-to-sql.py $db.pgn > $db.sql
 if [ $# -eq 0 ] #if no arguments supplied
   then
-    url="postgresql://:poggers@127.0.0.1:5432/$db"
+    url="postgresql://postgres:postgres@127.0.0.1:5432/$db"
   else
     url=$(heroku config:get DATABASE_URL -a apichamps)
 fi

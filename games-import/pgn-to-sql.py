@@ -3,7 +3,7 @@ import re
 CLOCK_REGEX = re.compile(r"""\[%clk\s(\d+):(\d+):(\d+(?:\.\d*)?)\]""")
 PGN_FIELDS = ['Site', 'Date', 'White', 'Black', 'Result','WhiteElo', 'BlackElo', 'TimeControl', 'Termination']
 
-pgn = open("pgn/pogchamps.pgn")
+pgn = open("pogchamps.pgn")
 def clock(node):
 	match = CLOCK_REGEX.search(node.comment)
 	if match is None:

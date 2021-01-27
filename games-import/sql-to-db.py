@@ -19,6 +19,6 @@ conn = psycopg2.connect(
 
 curs = conn.cursor()
 
-sql_file = open('sql/'+file_name+'.sql')
+sql_file = open(file_name+'.sql')
 curs.execute(sql_file.read())
 conn.commit()
