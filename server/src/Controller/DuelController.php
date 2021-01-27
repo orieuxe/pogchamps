@@ -91,4 +91,25 @@ class DuelController extends AbstractFOSRestController
       return $this->handleView($this->view($duels));
     }
 
+    /**
+     * Get todays Archives
+     * @Rest\Get("/today_archives")
+     *
+     * @return Response
+     */
+    public function getTodayArchives()
+    {
+      $f = function (Duel $duel){
+        $u1 = $duel->getParticipant1()->getPlayer()->getUsername();
+        $u2 = $duel->getParticipant2()->getPlayer()->getUsername();
+        return "https://www.chess.com/games/archive/".$u1."?gameOwner=other_game&gameType=recent&opponent=".$u2;
+      };
+
+      $now = new \DateTime();
+      /** @var DuelRepository $repository */
+      $repository = $this->getDoctrine()->getRepository(Duel::class);
+      $duels = $repository->getByDate($now);
+      return $this->handleView($this->view(array_map($f, $duels)));
+    }
+
 }
