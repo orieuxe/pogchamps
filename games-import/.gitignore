@@ -1,4 +1,4 @@
 pgn
-sql
+*.sql
 *.pyc
 *.csv
