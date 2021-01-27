@@ -25,4 +25,16 @@ class TournamentController extends AbstractFOSRestController
       $tournaments = $this->getDoctrine()->getRepository(Tournament::class)->findBy([], ['id' => 'ASC']);
       return $this->handleView($this->view($tournaments));
     }
+    
+    /**
+     * Get tournament by id
+     * @Rest\Get("/{id}")
+     *
+     * @return Tournament
+     */
+    public function getOne(int $id)
+    {
+      $tournament = $this->getDoctrine()->getRepository(Tournament::class)->find($id);
+      return $this->handleView($this->view($tournament));
+    }
 }

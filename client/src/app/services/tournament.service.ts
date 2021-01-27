@@ -15,6 +15,10 @@ export class TournamentService {
     return this._http.get<Tournament[]>(`${environment.baseUrl}/tournament/all`);
   }
 
+  getTournament(id: number) {
+    return this._http.get<Tournament>(`${environment.baseUrl}/tournament/${id}`);
+  }
+
   public static getTournamentId(): number {
     return parseInt(localStorage.getItem(this.tournamentId), 10) || 3;
   }

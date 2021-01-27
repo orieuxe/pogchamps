@@ -22,6 +22,11 @@ class Tournament
      */
     private $winner;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $infoUrl;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -35,6 +40,18 @@ class Tournament
     public function setWinner(?Player $winner): self
     {
         $this->winner = $winner;
+
+        return $this;
+    }
+
+    public function getInfoUrl(): ?string
+    {
+        return $this->infoUrl;
+    }
+
+    public function setInfoUrl(string $infoUrl): self
+    {
+        $this->infoUrl = $infoUrl;
 
         return $this;
     }
