@@ -29,6 +29,19 @@ class DuelController extends AbstractFOSRestController
     }
 
     /**
+     * Get One by id.
+     * @Rest\Get("/{id}")
+     *
+     * @return Response
+     */
+    public function getById(int $id)
+    {
+      $repository = $this->getDoctrine()->getRepository(Duel::class);
+      $duel = $repository->find($id);
+      return $this->handleView($this->view($duel));
+    }
+
+    /**
      * Get all Duels from a group.
      * @Rest\Get("/{tournamentId}/from/{group}")
      *
