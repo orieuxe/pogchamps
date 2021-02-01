@@ -12,7 +12,7 @@ export class PlayerService {
   constructor(private _http: HttpClient) {}
 
   getStats(username : string) {
-    return this._http.get<Stats>(`${environment.chessComUrl}/player/${username}/stats`).pipe(
+    return this._http.get<Stats>(`${environment.chessComUrl}/player/${username.toLowerCase()}/stats`).pipe(
       retry(3),
       delay(1000)
     );
