@@ -20,6 +20,6 @@ if [ $# -eq 0 ] #if no arguments supplied
   else
     url=$(heroku config:get DATABASE_URL -a apichamps)
 fi
-python3 sql-to-db.py $db $url
-cd ../server/
+python3 ../sql-to-db.py $db $url
+cd ../../server/
 php bin/console app:update
