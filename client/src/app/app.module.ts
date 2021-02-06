@@ -31,13 +31,13 @@ import { DateComponent } from './date/date.component';
 
 
 const routes = [
-  {path: 'groupstage', component : HomeComponent},
+  {path: '', component : HomeComponent},
   {path: 'player/:username', component : PlayerComponent},
   {path: 'group/:group', component : GroupComponent},
   {path: 'game/:id', component : GameComponent},
   {path: 'bracket/:stage', component : BracketComponent},
   {path: 'today', component : TodayComponent},
-  {path: '', component : ParticipantsComponent},
+  {path: 'participants', component : ParticipantsComponent},
 ]
 
 @NgModule({
