@@ -1,6 +1,4 @@
-<div *ngIf="match.date" class="date">
-  {{getUnix(match) | timeago:'live'}}
-</div>
+<app-date *ngIf="match.date" [strDate]="match.date"></app-date>
 
 <div class="participant {{status[0]}}" (click)="onClick(match)">
   <div *ngIf="match.participant1">

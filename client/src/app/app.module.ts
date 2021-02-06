@@ -27,6 +27,7 @@ import { StandingsComponent } from './standings/standings.component';
 import { TodayComponent } from './today/today.component';
 import { TournamentComponent } from './tournament/tournament.component';
 import { ParticipantsComponent } from './participants/participants.component';
+import { DateComponent } from './date/date.component';
 
 
 const routes = [
@@ -57,6 +58,7 @@ const routes = [
     TodayComponent,
     TournamentComponent,
     ParticipantsComponent,
+    DateComponent,
   ],
   imports: [
     BrowserModule,
