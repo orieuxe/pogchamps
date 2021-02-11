@@ -30,7 +30,7 @@ class DuelController extends AbstractFOSRestController
 
     /**
      * Get One by id.
-     * @Rest\Get("/{id}")
+     * @Rest\Get("/{id}",  requirements={"id"="\d+"})
      *
      * @return Response
      */
