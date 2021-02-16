@@ -10,6 +10,7 @@ import { TimeagoModule } from 'ngx-timeago';
 export class MatchComponent implements OnInit {
 
   @Input() matchs: Match[];
+  @Input() extendedInfo = false;
   @Output() clickedMatch = new EventEmitter<Match>();
 
   constructor() { }

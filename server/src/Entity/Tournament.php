@@ -27,6 +27,16 @@ class Tournament
      */
     private $infoUrl;
 
+    /**
+     * @ORM\Column(type="date", nullable=true)
+     */
+    private $startDate;
+
+    /**
+     * @ORM\Column(type="date", nullable=true)
+     */
+    private $endDate;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -52,6 +62,30 @@ class Tournament
     public function setInfoUrl(string $infoUrl): self
     {
         $this->infoUrl = $infoUrl;
+
+        return $this;
+    }
+
+    public function getStartDate(): ?\DateTimeInterface
+    {
+        return $this->startDate;
+    }
+
+    public function setStartDate(?\DateTimeInterface $startDate): self
+    {
+        $this->startDate = $startDate;
+
+        return $this;
+    }
+
+    public function getEndDate(): ?\DateTimeInterface
+    {
+        return $this->endDate;
+    }
+
+    public function setEndDate(?\DateTimeInterface $endDate): self
+    {
+        $this->endDate = $endDate;
 
         return $this;
     }

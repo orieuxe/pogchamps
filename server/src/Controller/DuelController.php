@@ -8,6 +8,7 @@ use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use App\Entity\Duel;
 use App\Repository\DuelRepository;
+use DateTime;
 
 /**
  * DuelController.
@@ -90,27 +91,27 @@ class DuelController extends AbstractFOSRestController
     }
 
     /**
-     * Get todays Duels
-     * @Rest\Get("/today")
+     * Get schedules Duels
+     * @Rest\Get("/schedule/{strDate}")
      *
      * @return Response
      */
-    public function getTodayDuels()
+    public function getscheduleDuels(string $strDate)
     {
-      $now = new \DateTime();
+      $date = DateTime::createFromFormat('Y-m-d', $strDate);
       /** @var DuelRepository $repository */
       $repository = $this->getDoctrine()->getRepository(Duel::class);
-      $duels = $repository->getByDate($now);
+      $duels = $repository->getByDate($date);
       return $this->handleView($this->view($duels));
     }
 
     /**
-     * Get todays Archives
-     * @Rest\Get("/today_archives")
+     * Get schedules Archives
+     * @Rest\Get("/schedule_archives")
      *
      * @return Response
      */
-    public function getTodayArchives()
+    public function getscheduleArchives()
     {
       $f = function (Duel $duel){
         $u1 = $duel->getParticipant1()->getPlayer()->getUsername();

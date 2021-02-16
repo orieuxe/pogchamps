@@ -1,6 +1,6 @@
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
-import { MatFormFieldModule, MatInputModule, MatSelectModule, MatSortModule, MatTooltipModule } from '@angular/material';
+import { MatDatepicker, MatDatepickerModule, MatFormFieldModule, MatInputModule, MatNativeDateModule, MatSelectModule, MatSortModule, MatTooltipModule } from '@angular/material';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
@@ -24,10 +24,11 @@ import { GameService } from './services/game.service';
 import { PlayerService } from './services/player.service';
 import { SmallBoardComponent } from './small-board/small-board.component';
 import { StandingsComponent } from './standings/standings.component';
-import { TodayComponent } from './today/today.component';
+import { ScheduleComponent } from './schedule/schedule.component';
 import { TournamentComponent } from './tournament/tournament.component';
 import { ParticipantsComponent } from './participants/participants.component';
 import { DateComponent } from './date/date.component';
+import { DatePipe } from '@angular/common';
 
 
 const routes = [
@@ -36,7 +37,7 @@ const routes = [
   {path: 'group/:group', component : GroupComponent},
   {path: 'game/:id', component : GameComponent},
   {path: 'bracket/:stage', component : BracketComponent},
-  {path: 'today', component : TodayComponent},
+  {path: 'schedule', component : ScheduleComponent},
   {path: 'participants', component : ParticipantsComponent},
 ]
 
@@ -55,7 +56,7 @@ const routes = [
     MatchComponent,
     BracketComponent,
     MatchupComponent,
-    TodayComponent,
+    ScheduleComponent,
     TournamentComponent,
     ParticipantsComponent,
     DateComponent,
@@ -74,14 +75,16 @@ const routes = [
     BrowserAnimationsModule,
     MatTooltipModule,
     MatSelectModule,
+    MatDatepickerModule,
     BrowserAnimationsModule,
+    MatNativeDateModule,
     TimeagoModule.forRoot()
   ],
   exports:[
     MatFormFieldModule,
     MatInputModule
   ],
-  providers: [PlayerService, GameService],
+  providers: [PlayerService, GameService, DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

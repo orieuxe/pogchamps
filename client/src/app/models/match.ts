@@ -8,6 +8,7 @@ export interface Match {
   participant2: Participant;
   date: string;
   round: string;
+  stage: string;
   result: string;
   games: Game[];
   next_duel: Match;

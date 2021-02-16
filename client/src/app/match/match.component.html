@@ -5,6 +5,9 @@
       </td>
       <td class="match-infos">
         <div *ngIf="match.participant1 && match.participant2">{{match.participant1.player.twitch}} vs {{match.participant2.player.twitch}}</div>
+        <div *ngIf="extendedInfo">
+          {{match.stage}} {{match.stage === "group" ? match.participant1.groupe : match.round}}
+        </div>
         <app-date *ngIf="match.date" [strDate]="match.date"></app-date>
         <div *ngIf="match.result"> {{match.result}}</div>
       </td>
