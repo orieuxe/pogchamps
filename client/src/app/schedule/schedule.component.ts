@@ -35,6 +35,7 @@ export class ScheduleComponent implements OnInit {
   }
 
   getMatches(date: Date){
+    if(!date) return;
     this.matchService.getScheduledMatchs(date).subscribe((m : Match[]) => this.matchs = m);
   }
 }
