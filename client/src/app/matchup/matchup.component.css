@@ -32,8 +32,8 @@
 }
 
 .participant .avatar {
-  width: 2.8rem;
-  max-height: 3rem;
+  max-width: 2.8rem;
+  max-height: 2.9rem;
 }
 
 .date{
