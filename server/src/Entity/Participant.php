@@ -42,6 +42,11 @@ class Participant
      */
     private $groupe;
 
+    /**
+     * @ORM\Column(type="integer", options={"default" : 0})
+     */
+    private $tiebreak;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -119,6 +124,18 @@ class Participant
     public function incPlayed(): self
     {
         $this->played += 1;
+
+        return $this;
+    }
+
+    public function getTiebreak(): ?int
+    {
+        return $this->tiebreak;
+    }
+
+    public function setTiebreak(?int $tiebreak): self
+    {
+        $this->tiebreak = $tiebreak;
 
         return $this;
     }
