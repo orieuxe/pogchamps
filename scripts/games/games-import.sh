@@ -8,8 +8,8 @@ if [[ "$OSTYPE" == "linux-gnu"* ]]; then
     else #Linux
       download_dir="/home/$(whoami)/Downloads"
     fi
-else #Anything else
-    download_dir="~"
+else #Git bash (windows)
+    download_dir="$HOME/Downloads"
 fi
 
 mv $download_dir/chess_com_games_$d.pgn $db.pgn
