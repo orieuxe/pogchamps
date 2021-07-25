@@ -1,9 +1,0 @@
-.parent{
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
-.group{
-  margin: 3vh 4vw;
-}
