@@ -18,6 +18,17 @@ interface Params {
 export async function getStaticProps({ params }: Params) {
 	const res = await fetch(`${process.env.NEXT_PUBLIC_API}/participant/${params.tournament}/all`, { mode: 'cors' })
 	const data = await res.json()
+	await Promise.all(
+		data.map(async (p: Participant, index: number, array: Participant[]) => {
+			try {
+				const r = await fetch(`https://api.chess.com/pub/player/${p.player.username}/stats`)
+				const stats = await r.json()
+				array[index].player.stats = stats
+			} catch (error) {
+				console.error(error)
+			}
+		})
+	)
 
 	if (!data) {
 		return {
