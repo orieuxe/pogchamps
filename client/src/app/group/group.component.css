@@ -1,9 +1,0 @@
-.parent {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
-.column{
-  margin: 1em;
-}
