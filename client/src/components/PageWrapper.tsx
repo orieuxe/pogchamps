@@ -20,50 +20,6 @@ import Link from 'next/link'
 import { getTournaments } from '@services/Tournaments'
 import { useRouter } from 'next/router'
 
-<<<<<<< HEAD
-=======
-//import { BracketsIcon } from '@components/CustomIcons'
-
-/* const Background = styled(Box)`
-   min-height:100%;
-   background-attachment: fixed;
-   overflow-x:hidden
-`
-const NavSticky = styled(Nav)`
-   position: -webkit-sticky;
-   position: sticky;
-   top:0;
-   z-index:20;
-   background-attachment: fixed;
-`
-const NoFlexImage = styled(Image)`
-   flex: none;
-`
-const BoxTitle = styled(Box)`
-   position: relative;
-`
-const Title = styled(NoFlexImage)`
-   ${props => css`max-height:${props.theme.global!.size!.small};`}
-   z-index: 21;
-   pointer-events: none;
-`
-const BoxTitleMenu = styled(Box)`
-   display:flex;
-   margin:auto;
-   position: absolute;
-   max-width:516px;
-   left:0;
-   right:0;
-   top:0;
-   bottom:0;
-`
-const TitleMenu = styled(Menu)`
-   position: absolute;
-   right: calc(5% - 24px);
-   top: calc(65% - 24px);
-`
- */
->>>>>>> cee2f8c44b86862262769fe5dc0edced8eb79a4c
 type props = {
 	children: ReactChild | ReactChildren
 }
@@ -72,18 +28,6 @@ export default function PageWrapper(props: props): JSX.Element {
 	const tournaments = getTournaments()
 	const [selectedTournament, setSelectedTournament] = useGlobal('selectedTournament')
 
-<<<<<<< HEAD
-=======
-	/*useEffect(() => {
-		//(router.asPath === '/schedule' || router.asPath === '/') &&
-		//	selectedTournament === 0 &&
-		if (tournaments.length > 0) {
-			setSelectedTournament(tournaments[tournaments.length - 1].id)
-		}
-	}, [tournaments]) */
-
-	//const hasLabel = size !== 'small'
->>>>>>> cee2f8c44b86862262769fe5dc0edced8eb79a4c
 	return (
 		<Box background={`url(/backgrounds/Background3.svg)`} h="100vh" overflowY="scroll" backgroundSize="cover">
 			<Container maxW={['full', '30em', '48em', '62em']}>
