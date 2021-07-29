@@ -1,23 +1,24 @@
 import {
 	Box,
-	Button,
 	Center,
 	Container,
 	Flex,
 	HStack,
 	Icon,
+	IconButton,
 	Image,
 	Menu,
 	MenuButton,
 	MenuItem,
 	MenuList,
+	useColorMode,
 } from '@chakra-ui/react'
-import { FaCalendarAlt, FaCaretDown, FaCrown, FaGithub, FaListAlt, FaTwitter, FaUsers } from 'react-icons/fa'
-import React, { useGlobal } from 'reactn'
-import { ReactChild, ReactChildren } from 'react'
+import { FaCalendarAlt, FaCaretDown, FaCrown, FaGithub, FaListAlt, FaMoon, FaTwitter, FaUsers } from 'react-icons/fa'
+import React, { ReactChild, ReactChildren } from 'react'
 
-import Link from 'next/link'
+import NavLink from './NavLink'
 import { getTournaments } from '@services/Tournaments'
+import { useGlobal } from 'reactn'
 import { useRouter } from 'next/router'
 
 type props = {
@@ -27,72 +28,93 @@ export default function PageWrapper(props: props): JSX.Element {
 	const router = useRouter()
 	const tournaments = getTournaments()
 	const [selectedTournament, setSelectedTournament] = useGlobal('selectedTournament')
+	const { colorMode, toggleColorMode } = useColorMode()
 
 	return (
-		<Box background={`url(/backgrounds/Background3.svg)`} h="100vh" overflowY="scroll" backgroundSize="cover">
-			<Container maxW={['full', '30em', '48em', '62em']}>
-				<Box>
-					<Flex w="full" direction="row" justify="space-between" align="center" marginY="4" wrap="wrap">
-						<Box h="24px">
-							<Image height="24px" src="/logos/Chesscom.svg" fit="contain" />
-						</Box>
-						<Center h="64px" width={['full', 'full', 'auto']} order={[1, 1, 0]}>
-							<Box position="relative">
-								<Image height="64px" src={`/logos/Pogchamps${selectedTournament}.svg`} fit="contain" />
-								<Box position="absolute" right="8px" bottom="3">
-									<Menu>
-										<MenuButton>
-											<Icon as={FaCaretDown} color="white" />
-										</MenuButton>
-										<MenuList>
-											{tournaments.map((e, i) => {
-												return (
-													<MenuItem
-														key={i}
-														onClick={() => {
-															setSelectedTournament(e)
-															router.push(`/participants/${e}`)
-														}}
-													>
-														Edition {e}
-													</MenuItem>
-												)
-											})}
-										</MenuList>
-									</Menu>
-								</Box>
+		<Box
+			background={`url(/backgrounds/Background3.svg)`}
+			minH="100vh"
+			backgroundSize="cover"
+			backgroundAttachment="fixed"
+		>
+			<Container maxW={['full', '40em', '48em', '64em']} padding="2">
+				<Flex
+					w="full"
+					direction="row"
+					justify="space-between"
+					align="center"
+					marginTop="4"
+					marginBottom="2"
+					wrap="wrap"
+				>
+					<Box h="24px">
+						<Image height="24px" src="/logos/Chesscom.svg" fit="contain" />
+					</Box>
+					<Center h="64px" width={['full', 'auto']} order={[1, 0]}>
+						<Box position="relative">
+							<Image height="64px" src={`/logos/Pogchamps${selectedTournament}.svg`} fit="contain" />
+							<Box position="absolute" right="2%" bottom="20%">
+								<Menu>
+									<MenuButton>
+										<Icon as={FaCaretDown} color="white" />
+									</MenuButton>
+									<MenuList>
+										{tournaments.map((e, i) => {
+											return (
+												<MenuItem
+													key={i}
+													onClick={() => {
+														setSelectedTournament(e)
+														router.push(`/participants/${e}`)
+													}}
+												>
+													Edition {e}
+												</MenuItem>
+											)
+										})}
+									</MenuList>
+								</Menu>
 							</Box>
-						</Center>
-						<HStack height="24px" spacing="4">
-							<Icon as={FaGithub} color="white" />
-							<Icon as={FaTwitter} color="white" />
-						</HStack>
-					</Flex>
-				</Box>
-				<Flex flexDirection="row" width="full" justify="space-between">
-					<Link href="/">
-						<Button variant="link" color="white" leftIcon={<Icon as={FaCalendarAlt} color="white" />}>
-							Schedule
-						</Button>
-					</Link>
-
-					<Link href={`/participants/${selectedTournament}`}>
-						<Button variant="link" color="white" leftIcon={<Icon as={FaUsers} color="white" />}>
-							participants
-						</Button>
-					</Link>
-
-					<Link href={`/groupstage/${selectedTournament}`}>
-						<Button variant="link" color="white" leftIcon={<Icon as={FaListAlt} color="white" />}>
-							groupstage
-						</Button>
-					</Link>
-
-					<Link href={`/brackets/${selectedTournament}`}>
-						<Button variant="link" color="white" leftIcon={<Icon as={FaCrown} color="white" />}>
-							brackets
-						</Button>
-					</Link>
+						</Box>
+					</Center>
+					<HStack height="24px">
+						<IconButton
+							aria-label="Toggle theme"
+							variant="link"
+							icon={<Icon as={FaMoon} />}
+							onClick={toggleColorMode}
+						/>
+						<IconButton
+							aria-label="Github"
+							variant="link"
+							marginInline="0"
+							icon={<Icon as={FaGithub} />}
+							color="white"
+						/>
+						<IconButton
+							aria-label="Twitter"
+							variant="link"
+							marginInline="0"
+							icon={<Icon as={FaTwitter} />}
+							color="white"
+						/>
+					</HStack>
+				</Flex>
+				<Flex
+					flexDirection="row"
+					width="full"
+					justify="space-between"
+					position="sticky"
+					top="0"
+					paddingY="2"
+					background={`url(/backgrounds/Background3.svg)`}
+					backgroundSize="cover"
+					backgroundAttachment="fixed"
+				>
+					<NavLink text="Schedule" href={'/'} icon={FaCalendarAlt} />
+					<NavLink text="Participants" href={`/participants/${selectedTournament}`} icon={FaUsers} />
+					<NavLink text="Groupstage" href={`/groupstage/${selectedTournament}`} icon={FaListAlt} />
+					<NavLink text="Brackets" href={`/brackets/${selectedTournament}`} icon={FaCrown} />
 				</Flex>
 
 				{props.children}

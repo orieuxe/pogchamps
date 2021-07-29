@@ -1,13 +1,8 @@
-import { Participant } from './models/participant';
-import { Tournament } from '@models/tournament'
 import 'reactn'
+declare module 'react-table'
 
 declare module 'reactn/default' {
-
-   export interface State {
-      themeMode: 'light' | 'dark',
-      selectedTournament: number,
-      tournaments:Tournament[],
-   }
+	export interface State {
+		selectedTournament: number
+	}
 }
-
