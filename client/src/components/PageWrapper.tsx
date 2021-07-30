@@ -1,21 +1,31 @@
 import {
 	Box,
+	ButtonGroup,
 	Center,
 	Container,
 	Flex,
-	HStack,
 	Icon,
 	IconButton,
-	Image,
 	Menu,
 	MenuButton,
 	MenuItem,
 	MenuList,
 	useColorMode,
 } from '@chakra-ui/react'
-import { FaCalendarAlt, FaCaretDown, FaCrown, FaGithub, FaListAlt, FaMoon, FaTwitter, FaUsers } from 'react-icons/fa'
+import {
+	FaCalendarAlt,
+	FaCaretDown,
+	FaCrown,
+	FaGithub,
+	FaListAlt,
+	FaMoon,
+	FaSun,
+	FaTwitter,
+	FaUsers,
+} from 'react-icons/fa'
 import React, { ReactChild, ReactChildren } from 'react'
 
+import Image from 'next/image'
 import NavLink from './NavLink'
 import { getTournaments } from '@services/Tournaments'
 import { useGlobal } from 'reactn'
@@ -48,12 +58,12 @@ export default function PageWrapper(props: props): JSX.Element {
 					wrap="wrap"
 				>
 					<Box h="24px">
-						<Image height="24px" src="/logos/Chesscom.svg" fit="contain" />
+						<Image height="24px" width="100px" src="/logos/Chesscom.svg" />
 					</Box>
 					<Center h="64px" width={['full', 'auto']} order={[1, 0]}>
 						<Box position="relative">
-							<Image height="64px" src={`/logos/Pogchamps${selectedTournament}.svg`} fit="contain" />
-							<Box position="absolute" right="2%" bottom="20%">
+							<Image height="64px" width="250px" src={`/logos/Pogchamps${selectedTournament}.svg`} />
+							<Box position="absolute" right="1%" bottom="25%" zIndex="2">
 								<Menu>
 									<MenuButton>
 										<Icon as={FaCaretDown} color="white" />
@@ -77,28 +87,16 @@ export default function PageWrapper(props: props): JSX.Element {
 							</Box>
 						</Box>
 					</Center>
-					<HStack height="24px">
+					<ButtonGroup height="24px" isAttached>
 						<IconButton
 							aria-label="Toggle theme"
 							variant="link"
-							icon={<Icon as={FaMoon} />}
+							icon={<Icon as={colorMode === 'light' ? FaMoon : FaSun} />}
 							onClick={toggleColorMode}
 						/>
-						<IconButton
-							aria-label="Github"
-							variant="link"
-							marginInline="0"
-							icon={<Icon as={FaGithub} />}
-							color="white"
-						/>
-						<IconButton
-							aria-label="Twitter"
-							variant="link"
-							marginInline="0"
-							icon={<Icon as={FaTwitter} />}
-							color="white"
-						/>
-					</HStack>
+						<IconButton aria-label="Github" variant="link" icon={<Icon as={FaGithub} />} color="white" />
+						<IconButton aria-label="Twitter" variant="link" icon={<Icon as={FaTwitter} />} color="white" />
+					</ButtonGroup>
 				</Flex>
 				<Flex
 					flexDirection="row"
@@ -110,6 +108,7 @@ export default function PageWrapper(props: props): JSX.Element {
 					background={`url(/backgrounds/Background3.svg)`}
 					backgroundSize="cover"
 					backgroundAttachment="fixed"
+					zIndex="1"
 				>
 					<NavLink text="Schedule" href={'/'} icon={FaCalendarAlt} />
 					<NavLink text="Participants" href={`/participants/${selectedTournament}`} icon={FaUsers} />

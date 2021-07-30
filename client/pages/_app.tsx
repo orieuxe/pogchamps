@@ -8,12 +8,15 @@ import { AppProps } from 'next/app'
 import { ChakraProvider } from '@chakra-ui/react'
 import PageWrapper from '@components/PageWrapper'
 import addReactNDevTools from 'reactn-devtools'
+import { getTournaments } from '@services/Tournaments'
 import theme from 'src/theme/Theme'
 
 addReactNDevTools()
 
+const tournaments = getTournaments()
+
 setGlobal({
-	selectedTournament: 3,
+	selectedTournament: tournaments[tournaments.length - 1],
 })
 
 function App({ Component, pageProps }: AppProps): JSX.Element {

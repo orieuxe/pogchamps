@@ -2,10 +2,10 @@ import {
 	Box,
 	Flex,
 	Icon,
-	Image,
 	Table,
 	Tbody,
 	Td,
+	Tfoot,
 	Th,
 	Thead,
 	Tr,
@@ -15,6 +15,7 @@ import {
 import { FaBolt, FaBullseye, FaCaretDown, FaCaretUp, FaClock, FaPuzzlePiece, FaUser } from 'react-icons/fa'
 import { useSortBy, useTable } from 'react-table'
 
+import Image from 'next/image'
 import { Participant } from '@models/participant'
 import React from 'react'
 import { getTournaments } from '@services/Tournaments'
@@ -29,7 +30,7 @@ export default function Participants({ data }: Props): JSX.Element {
 			data.map((e) => {
 				return {
 					id: e.player.id,
-					image: `https://www.pogchampschess.com/assets/player/${e.player.twitch}.png`,
+					image: `/players/${e.player.twitch}.png`,
 					twitch: e.player.twitch,
 					username: e.player.username,
 					rapid: e.player.stats?.chess_rapid?.last?.rating || 0,
@@ -48,6 +49,7 @@ export default function Participants({ data }: Props): JSX.Element {
 				accessor: 'image',
 				isImage: true,
 				icon: FaUser,
+				width: '48px',
 			},
 			{
 				Header: 'Twitch',
@@ -66,24 +68,28 @@ export default function Participants({ data }: Props): JSX.Element {
 				accessor: 'rapid',
 				isNumeric: true,
 				icon: FaClock,
+				width: '48px',
 			},
 			{
 				Header: 'Blitz',
 				accessor: 'blitz',
 				isNumeric: true,
 				icon: FaBolt,
+				width: '48px',
 			},
 			{
 				Header: 'Bullet',
 				accessor: 'bullet',
 				isNumeric: true,
 				icon: FaBullseye,
+				width: '48px',
 			},
 			{
 				Header: 'Puzzle',
 				accessor: 'puzzle',
 				isNumeric: true,
 				icon: FaPuzzlePiece,
+				width: '48px',
 			},
 		],
 		[]
@@ -97,18 +103,19 @@ export default function Participants({ data }: Props): JSX.Element {
 	const isSm = useBreakpointValue({ base: true, sm: false })
 
 	return (
-		<Box backgroundColor={bg}>
+		<Box backgroundColor={bg} marginTop="4">
 			<Table {...getTableProps()} size="sm">
 				<Thead>
-					{headerGroups.map((headerGroup) => (
+					{headerGroups.map((headerGroup: any) => (
 						<Tr {...headerGroup.getHeaderGroupProps()} key={headerGroup.id}>
-							{headerGroup.headers.map((column, i) => (
+							{headerGroup.headers.map((column: any, i: number) => (
 								<Th
 									padding={2}
 									{...column.getHeaderProps(column.getSortByToggleProps())}
 									isNumeric={column.isNumeric}
 									key={i}
 									hidden={column.hiddeable && isSm}
+									width={column.width ? column.width : 'auto'}
 								>
 									<Flex direction="row" alignItems="center" justify={column.isNumeric ? 'end' : 'start'}>
 										{isSm ? <Icon as={column.icon} boxSize="4" /> : column.render('Header')}
@@ -126,21 +133,20 @@ export default function Participants({ data }: Props): JSX.Element {
 					))}
 				</Thead>
 				<Tbody {...getTableBodyProps()}>
-					{rows.map((row) => {
+					{rows.map((row: any) => {
 						prepareRow(row)
 						return (
 							<Tr {...row.getRowProps()} key={row.id}>
-								{row.cells.map((cell, i) => (
+								{row.cells.map((cell: any, i: number) => (
 									<Td
 										paddingX={isSm ? 1 : 2}
 										{...cell.getCellProps()}
 										isNumeric={cell.column.isNumeric}
 										key={i}
 										hidden={cell.column.hiddeable && isSm}
-										maxW={cell.column.isNumeric ? 20 : 'auto'}
 									>
 										{cell.column.isImage ? (
-											<Image src={cell.value} boxSize="10" minW="10"></Image>
+											<Image src={cell.value} width="32px" height="32px"></Image>
 										) : (
 											cell.render('Cell')
 										)}
@@ -150,6 +156,33 @@ export default function Participants({ data }: Props): JSX.Element {
 						)
 					})}
 				</Tbody>
+				<Tfoot>
+					{headerGroups.map((headerGroup: any) => (
+						<Tr {...headerGroup.getHeaderGroupProps()} key={headerGroup.id}>
+							{headerGroup.headers.map((column: any, i: number) => (
+								<Th
+									padding={2}
+									{...column.getHeaderProps(column.getSortByToggleProps())}
+									isNumeric={column.isNumeric}
+									key={i}
+									hidden={column.hiddeable && isSm}
+									width={column.width ? column.width : 'auto'}
+								>
+									<Flex direction="row" alignItems="center" justify={column.isNumeric ? 'end' : 'start'}>
+										{isSm ? <Icon as={column.icon} boxSize="4" /> : column.render('Header')}
+										{column.isSorted ? (
+											column.isSortedDesc ? (
+												<Icon as={FaCaretUp} />
+											) : (
+												<Icon as={FaCaretDown} />
+											)
+										) : null}
+									</Flex>
+								</Th>
+							))}
+						</Tr>
+					))}
+				</Tfoot>
 			</Table>
 		</Box>
 	)
