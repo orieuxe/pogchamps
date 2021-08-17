@@ -21,12 +21,12 @@ class Player
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=16)
+     * @ORM\Column(type="string", length=32)
      */
     private $twitch;
 
     /**
-     * @ORM\Column(type="string", length=16)
+     * @ORM\Column(type="string", length=32)
      */
     private $username;
 
@@ -35,8 +35,10 @@ class Player
      */
     private $participations;
 
-    public function __construct()
+    public function __construct($twitch, $username)
     {
+        $this->twitch = $twitch;
+        $this->username = $username;
         $this->participations = new ArrayCollection();
     }
 
