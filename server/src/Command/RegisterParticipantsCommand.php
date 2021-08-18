@@ -12,7 +12,7 @@ use App\Repository\PlayerRepository;
 use App\Repository\TournamentRepository;
 use Symfony\Component\Finder\Finder;
 
-class ImportParticipantsCommand extends Command
+class RegisterParticipantsCommand extends Command
 {
     // the name of the command (the part after "bin/console")
     protected static $defaultName = 'app:import';
@@ -65,25 +65,25 @@ class ImportParticipantsCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-      /** @var TournamentRepository $repository */
+
       $tournamentRepository = $this->em->getRepository(Tournament::class);
+      /** @var Tournament $currentTournament */
       $currentTournament = $tournamentRepository->find(4);
       
         /** @var PlayerRepository $repositry */
       $repository = $this->em->getRepository(Player::class);
 
       $csv = $this->parseCSV();
-      dump($csv);
       foreach ($csv as $row) {
         $twitch = $row[0];
         $player = $repository->findOneBy(['twitch' => $twitch]);
-        var_dump($twitch);
         if($player == null) {
             $username = array_key_exists(1, $row) ? $row[1] : "undefined";
             $player = new Player($twitch, $username);
             $this->em->persist($player);
             $this->em->flush();
         }
+        $output->writeln($player->getName()." registered to pogchamps ".$currentTournament->getId());
         $particpant = new Participant($player, $currentTournament);
         $this->em->persist($particpant);
       }
