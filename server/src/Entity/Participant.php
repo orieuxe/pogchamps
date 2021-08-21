@@ -30,12 +30,12 @@ class Participant
     /**
      * @ORM\Column(type="integer", options={"default" : 0})
      */
-    private $points;
+    private $points = 0;
 
     /**
      * @ORM\Column(type="integer", options={"default" : 0})
      */
-    private $played;
+    private $played = 0;
 
     /**
      * @ORM\Column(type="string", length=8, nullable=true)
@@ -45,7 +45,12 @@ class Participant
     /**
      * @ORM\Column(type="integer", options={"default" : 0})
      */
-    private $tiebreak;
+    private $tiebreak = 0;
+
+    public function __construct(Player $player, Tournament $tournament) {
+        $this->player = $player;
+        $this->tournament = $tournament;
+    }
 
     public function getId(): ?int
     {
