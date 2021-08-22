@@ -13,7 +13,7 @@ import {
 	useColorModeValue,
 } from '@chakra-ui/react'
 import { FaBolt, FaBullseye, FaCaretDown, FaCaretUp, FaClock, FaPuzzlePiece, FaUser } from 'react-icons/fa'
-import { useSortBy, useTable } from 'react-table'
+import { Column, useSortBy, useTable } from 'react-table'
 
 import Image from 'next/image'
 import { Participant } from '@models/participant'
@@ -42,7 +42,7 @@ export default function Participants({ data }: Props): JSX.Element {
 		[data]
 	)
 
-	const columns = React.useMemo(
+	const columns: Column[] = React.useMemo(
 		() => [
 			{
 				Header: '',
