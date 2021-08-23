@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" id="Layer_1" x="0" y="0" version="1.1" viewBox="0 0 1920 1080" xml:space="preserve">
+  <style>
+    .st4{fill:none;stroke:#12a4ef;stroke-width:1.9843;stroke-miterlimit:10}
+  </style>
+  <linearGradient id="SVGID_1_" x1="321.3" x2="1182.4" y1="1165.4" y2="322.3" gradientUnits="userSpaceOnUse">
+    <stop offset="0" stop-color="#1d97ee"/>
+    <stop offset=".3" stop-color="#0db1ef"/>
+    <stop offset=".5" stop-color="#04c0f0"/>
+    <stop offset=".5" stop-color="#04c0f0"/>
+    <stop offset=".7" stop-color="#0cbcd8"/>
+    <stop offset=".9" stop-color="#11b9ca"/>
+    <stop offset="1" stop-color="#13b8c5"/>
+  </linearGradient>
+  <path fill="url(#SVGID_1_)" d="M0 0h1920v1080H0z"/>
+  <linearGradient id="SVGID_2_" x1="960" x2="960" y1="-336" y2="1295.9" gradientUnits="userSpaceOnUse">
+    <stop offset="0" stop-color="#13d49a"/>
+    <stop offset=".4" stop-color="#01d2ee"/>
+    <stop offset="1" stop-color="#534fe8"/>
+  </linearGradient>
+  <path fill="url(#SVGID_2_)" d="M881 0L0 885v195h1920V0z"/>
+  <linearGradient id="SVGID_3_" x1="1072.7" x2="1072.7" y1="2.8" y2="987" gradientUnits="userSpaceOnUse">
+    <stop offset="0" stop-color="#13d49a"/>
+    <stop offset=".3" stop-color="#01d2ee"/>
+    <stop offset="1" stop-color="#534fe8"/>
+  </linearGradient>
+  <path fill="url(#SVGID_3_)" d="M1179 0L234.6 937.8a31.1 31.1 0 0021.9 53.2H1920V0h-741z"/>
+  <linearGradient id="SVGID_4_" x1="389.5" x2="389.5" y1="2.2" y2="778.9" gradientUnits="userSpaceOnUse">
+    <stop offset="0" stop-color="#13d49a"/>
+    <stop offset=".3" stop-color="#01d2ee"/>
+    <stop offset="1" stop-color="#534fe8"/>
+  </linearGradient>
+  <path fill="url(#SVGID_4_)" d="M0 0v782C0 776 779 0 779 0H0z"/>
+  <path d="M1655.5 418.5l264-264M1756.5 417.5l163-164M1678.5 588.5l241-244M1804.5 559.5l115-115M1754.5 710.5l166-164M1855.5 711.5l65-67M1536.5 36.5l37-37M1426.5 66.5l66-67M1365.5 36.5l37-37M1256.5 67.5l65-67M415.5 67.5l65-67M355.5 36.5l34-36M244.5 66.5l66-67M64.5 152.5l-65 65M163.5 153.5l-164 165M114.5 303.5l-115 116" class="st4"/>
+</svg>

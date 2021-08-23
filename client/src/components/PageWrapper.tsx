@@ -42,10 +42,11 @@ export default function PageWrapper(props: props): JSX.Element {
 
 	return (
 		<Box
-			background={`url(/backgrounds/Background3.svg)`}
+			background={`url(/backgrounds/Background${selectedTournament}.svg)`}
 			minH="100vh"
 			backgroundSize="cover"
 			backgroundAttachment="fixed"
+			backgroundPosition="center"
 		>
 			<Container maxW={['full', '40em', '48em', '64em']} padding="2">
 				<Flex
@@ -61,10 +62,13 @@ export default function PageWrapper(props: props): JSX.Element {
 						<Image height="24px" width="100px" src="/logos/Chesscom.svg" />
 					</Box>
 					<Center h="64px" width={['full', 'auto']} order={[1, 0]}>
-						<Box position="relative">
-							<Image height="64px" width="250px" src={`/logos/Pogchamps${selectedTournament}.svg`} />
+						<Box position="relative" width="288px">
+							<Image height="64px" width="256px" src={`/logos/Pogchamps.svg`} />
+							<Box position="absolute" right="0" top="0" zIndex="2">
+								<Image height="32px" width="32px" src={`/logos/Pogchamps${selectedTournament}.svg`} />
+							</Box>
 							<Box position="absolute" right="1%" bottom="25%" zIndex="2">
-								<Menu>
+								<Menu isLazy id="1">
 									<MenuButton>
 										<Icon as={FaCaretDown} color="white" />
 									</MenuButton>
@@ -76,10 +80,10 @@ export default function PageWrapper(props: props): JSX.Element {
 													onClick={() => {
 														setSelectedTournament(e)
 														const path = router.asPath
-														const newPath = path.replace(String(selectedTournament), String(e));
-														if(path != newPath) {
+														const newPath = path.replace(String(selectedTournament), String(e))
+														if (path != newPath) {
 															router.push(newPath)
-														};
+														}
 													}}
 												>
 													Edition {e}
@@ -109,9 +113,10 @@ export default function PageWrapper(props: props): JSX.Element {
 					position="sticky"
 					top="0"
 					paddingY="2"
-					background={`url(/backgrounds/Background3.svg)`}
+					background={`url(/backgrounds/Background${selectedTournament}.svg)`}
 					backgroundSize="cover"
 					backgroundAttachment="fixed"
+					backgroundPosition="center"
 					zIndex="1"
 				>
 					<NavLink text="Schedule" href={'/'} icon={FaCalendarAlt} />
