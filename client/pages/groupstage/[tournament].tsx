@@ -1,3 +1,4 @@
+import { Box, SimpleGrid } from '@chakra-ui/react';
 import Standings from '@components/Standings';
 import { Participant } from '@models/participant';
 import { getTournaments } from '@services/Tournaments';
@@ -9,14 +10,13 @@ interface Props {
 
 export default function Participants({ data }: Props) {
   return (
-    <div>
+    <SimpleGrid minChildWidth={310} spacing={10}>
       {data.map((participants, i: number) => (
-        <Standings
-          key={i}
-          participants={participants}
-        ></Standings>
+        <Box key={i}>
+          <Standings key={i} participants={participants}></Standings>
+        </Box>
       ))}
-    </div>
+    </SimpleGrid>
   );
 }
 
@@ -36,7 +36,6 @@ export async function getStaticProps({ params }: Params) {
     );
     data.push(await res.json());
   }
-	
 
   if (data == []) {
     return {

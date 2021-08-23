@@ -75,7 +75,11 @@ export default function PageWrapper(props: props): JSX.Element {
 													key={i}
 													onClick={() => {
 														setSelectedTournament(e)
-														router.push(`/participants/${e}`)
+														const path = router.asPath
+														const newPath = path.replace(String(selectedTournament), String(e));
+														if(path != newPath) {
+															router.push(newPath)
+														};
 													}}
 												>
 													Edition {e}

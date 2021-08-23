@@ -1,20 +1,8 @@
-import {
-  Box,
-  Flex,
-  Icon,
-  Table,
-  Tbody,
-  Td,
-  Th,
-  Thead,
-  Tr,
-  useBreakpointValue,
-  useColorModeValue,
-} from '@chakra-ui/react';
+import { Box, Flex, Table, Tbody, Td, Th, Thead, Tr } from '@chakra-ui/react';
 import { Participant } from '@models/participant';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 import React from 'react';
-import { FaUser } from 'react-icons/fa';
 import { Column, useTable } from 'react-table';
 
 interface Props {
@@ -22,6 +10,8 @@ interface Props {
 }
 
 function Standings({ participants }: Props) {
+  const router = useRouter();
+  const { tournament } = router.query
   const s = React.useMemo(
     () =>
       participants.map((p) => {
@@ -42,39 +32,38 @@ function Standings({ participants }: Props) {
         Header: '',
         accessor: 'image',
         isImage: true,
-        icon: FaUser,
         width: '48px',
       },
       {
         Header: 'Twitch',
         accessor: 'twitch',
         isNumeric: false,
-        hiddeable: true,
       },
       {
         Header: 'Points',
         accessor: 'points',
         isNumeric: true,
-        width: '48px',
+        width: '24px'
       },
       {
         Header: 'Played',
         accessor: 'played',
         isNumeric: true,
-        width: '48px',
-        hiddeable: true,
+        width: '24px',
       },
     ],
     []
   );
 
+  const onClick = (row: any) => {
+    router.push(`/player/${tournament}/${row.twitch}`);
+  };
+
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
     useTable({ columns, data: s });
-  const bg = useColorModeValue('white', 'gray.800');
-  const isSm = useBreakpointValue({ base: true, sm: false });
 
   return (
-    <Box backgroundColor={bg} marginTop="4">
+    <Box className="bg-color" marginTop="4">
       <Table {...getTableProps()} size="sm">
         <Thead>
           {headerGroups.map((headerGroup: any) => (
@@ -85,7 +74,6 @@ function Standings({ participants }: Props) {
                   {...column.getHeaderProps()}
                   isNumeric={column.isNumeric}
                   key={i}
-                  hidden={column.hiddeable && isSm}
                   width={column.width ? column.width : 'auto'}
                 >
                   <Flex
@@ -93,11 +81,7 @@ function Standings({ participants }: Props) {
                     alignItems="center"
                     justify={column.isNumeric ? 'end' : 'start'}
                   >
-                    {isSm ? (
-                      <Icon as={column.icon} boxSize="4" />
-                    ) : (
-                      column.render('Header')
-                    )}
+                    {column.render('Header')}
                   </Flex>
                 </Th>
               ))}
@@ -108,17 +92,26 @@ function Standings({ participants }: Props) {
           {rows.map((row: any) => {
             prepareRow(row);
             return (
-              <Tr {...row.getRowProps()} key={row.id}>
+              <Tr
+                {...row.getRowProps()}
+                key={row.id}
+                onClick={() => onClick(row.original)}
+                className="clickable"
+              >
                 {row.cells.map((cell: any, i: number) => (
-                  <Td
-                    paddingX={isSm ? 1 : 2}
+                  <Td style={{textAlign: cell.column.isNumeric && 'center'}}
+                    paddingX={2}
                     {...cell.getCellProps()}
                     isNumeric={cell.column.isNumeric}
                     key={i}
-                    hidden={cell.column.hiddeable && isSm}
                   >
                     {cell.column.isImage ? (
-                      <div style={{ position: "relative", height: cell.column.width}} >
+                      <div
+                        style={{
+                          position: 'relative',
+                          height: cell.column.width,
+                        }}
+                      >
                         <Image
                           src={cell.value}
                           layout="fill"
