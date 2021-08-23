@@ -133,7 +133,7 @@ export default function Player({ participant, matchs, stats }: Props) {
 				>
 					<GroupButton selectedTournament={selectedTournament} participant={participant} isHidden={!isHidden} />
 					<Box position="absolute" right="0" bottom="0" width={['128px', '288px']} height={['128px', '288px']}>
-						<Image src={`/players/${player.twitch}.png`} layout="fill"></Image>
+						<Image src={`/players/${player.twitch}.png`} layout="fill" objectFit="cover"></Image>
 					</Box>
 				</Box>
 			</Flex>
