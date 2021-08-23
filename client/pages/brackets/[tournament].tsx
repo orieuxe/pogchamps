@@ -1,5 +1,5 @@
 import { Participant } from '@models/participant'
-import { getTournaments } from '@services/Tournament'
+import { getTournaments } from '@services/TournamentService'
 
 interface Props {
 	data: Participant[]

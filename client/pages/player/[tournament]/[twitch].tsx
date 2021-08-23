@@ -1,7 +1,7 @@
 import { Box, SimpleGrid } from '@chakra-ui/react';
 import { Participant } from '@models/participant';
-import { getAllParticipants, getParticipant } from '@services/Participant';
-import { getTournaments } from '@services/Tournament';
+import { getAllParticipants, getParticipant } from '@services/ParticipantService';
+import { getTournaments } from '@services/TournamentService';
 import React from 'react';
 
 interface Props {

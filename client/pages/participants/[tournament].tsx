@@ -12,9 +12,9 @@ import {
   useBreakpointValue,
 } from '@chakra-ui/react';
 import { Participant } from '@models/participant';
-import { getStats } from '@services/Chesscom';
-import { getAllParticipants } from '@services/Participant';
-import { getTournaments } from '@services/Tournament';
+import { getStats } from '@services/ChesscomService';
+import { getAllParticipants } from '@services/ParticipantService';
+import { getTournaments } from '@services/TournamentService';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import React from 'react';

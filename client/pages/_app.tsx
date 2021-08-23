@@ -8,7 +8,7 @@ import { AppProps } from 'next/app'
 import { ChakraProvider } from '@chakra-ui/react'
 import PageWrapper from '@components/PageWrapper'
 import addReactNDevTools from 'reactn-devtools'
-import { getTournaments } from '@services/Tournament'
+import { getTournaments } from '@services/TournamentService'
 import theme from 'src/theme/Theme'
 
 addReactNDevTools()
