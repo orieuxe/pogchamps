@@ -1,7 +1,8 @@
 import { Box, SimpleGrid } from '@chakra-ui/react';
 import Standings from '@components/Standings';
 import { Participant } from '@models/participant';
-import { getTournaments } from '@services/Tournaments';
+import { getParticipantsFrom } from '@services/Participant';
+import { getTournaments } from '@services/Tournament';
 import React from 'react';
 
 interface Props {
@@ -30,11 +31,7 @@ export async function getStaticProps({ params }: Params) {
   const data: Participant[][] = [];
   const groupNames = ['A', 'B', 'C', 'D'];
   for (const g of groupNames) {
-    const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API}/participant/${params.tournament}/from/${g}`,
-      { mode: 'cors' }
-    );
-    data.push(await res.json());
+    data.push(await getParticipantsFrom(params.tournament, g));
   }
 
   if (data == []) {

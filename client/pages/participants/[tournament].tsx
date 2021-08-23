@@ -12,7 +12,9 @@ import {
   useBreakpointValue,
 } from '@chakra-ui/react';
 import { Participant } from '@models/participant';
-import { getTournaments } from '@services/Tournaments';
+import { getStats } from '@services/Chesscom';
+import { getAllParticipants } from '@services/Participant';
+import { getTournaments } from '@services/Tournament';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import React from 'react';
@@ -238,18 +240,11 @@ interface Params {
 }
 
 export async function getStaticProps({ params }: Params) {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API}/participant/${params.tournament}/all`,
-    { mode: 'cors' }
-  );
-  const data = await res.json();
+  const participants = await getAllParticipants(params.tournament);
   await Promise.all(
-    data.map(async (p: Participant, index: number, array: Participant[]) => {
+    participants.map(async (p: Participant, index: number, array: Participant[]) => {
       try {
-        const r = await fetch(
-          `https://api.chess.com/pub/player/${p.player.username}/stats`
-        );
-        const stats = await r.json();
+        const stats = await getStats(p.player.username);
         array[index].player.stats = stats;
       } catch (error) {
         console.error(error);
@@ -257,14 +252,14 @@ export async function getStaticProps({ params }: Params) {
     })
   );
 
-  if (!data) {
+  if (!participants) {
     return {
       notFound: true,
     };
   }
 
   return {
-    props: { data },
+    props: { data: participants },
     revalidate: 30,
   };
 }

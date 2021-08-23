@@ -27,7 +27,7 @@ import React, { ReactChild, ReactChildren } from 'react'
 
 import Image from 'next/image'
 import NavLink from './NavLink'
-import { getTournaments } from '@services/Tournaments'
+import { getTournaments } from '@services/Tournament'
 import { useGlobal } from 'reactn'
 import { useRouter } from 'next/router'
 

@@ -1,16 +1,17 @@
 import { Box, SimpleGrid } from '@chakra-ui/react';
 import { Participant } from '@models/participant';
-import { getTournaments } from '@services/Tournaments';
+import { getAllParticipants, getParticipant } from '@services/Participant';
+import { getTournaments } from '@services/Tournament';
 import React from 'react';
 
 interface Props {
-  data: Participant;
+  participant: Participant;
 }
 
-export default function Player({ data }: Props) {
+export default function Player({ participant }: Props) {
   return (
     <SimpleGrid minChildWidth={310} spacing={10}>
-      <Box>Profile of {data.player.twitch}</Box>
+      <Box>Profile of {participant.player.twitch}</Box>
     </SimpleGrid>
   );
 }
@@ -23,20 +24,16 @@ interface Params {
 }
 
 export async function getStaticProps({ params }: Params) {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API}/participant/${params.tournament}/username/${params.twitch}`,
-    { mode: 'cors' }
-  );
-  const data: Participant = await res.json();
+  const participant = await getParticipant(params.tournament, params.twitch);
 
-  if (data == null) {
+  if (participant == null) {
     return {
       notFound: true,
     };
   }
 
   return {
-    props: { data },
+    props: { participant },
     revalidate: 30,
   };
 }
@@ -47,19 +44,13 @@ export async function getStaticPaths() {
   const paths = {
     paths: await Promise.all(
       tournaments.map(async (e) => {
-        const res = await fetch(
-          `${process.env.NEXT_PUBLIC_API}/participant/${e}/all`,
-          { mode: 'cors' }
-        );
-        const participants: Participant[] = await res.json();
-        return participants.map((p) => {
-          return {
-            params: {
-              tournament: String(e),
-              twitch: p.player.twitch,
-            },
-          };
-        });
+        const participants: Participant[] = await getAllParticipants(e);
+        return participants.map((p) => ({
+          params: {
+            tournament: String(e),
+            twitch: p.player.twitch
+          }
+        }));
       })
     ).then((nestedArrays: any[]) => [].concat(...nestedArrays)),
     fallback: false,
