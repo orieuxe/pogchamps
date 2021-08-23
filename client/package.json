@@ -23,12 +23,14 @@
 		"framer-motion": "^4.1.17",
 		"next": "^11.0.1",
 		"react": "^17.0.2",
+		"react-brackets": "^0.4.6",
 		"react-dom": "^17.0.2",
 		"react-icons": "^4.2.0",
 		"react-table": "^7.7.0",
 		"reactn": "^2.2.7",
 		"reactn-devtools": "^1.1.0",
-		"redux": "^4.1.0"
+		"redux": "^4.1.0",
+		"timeago-react": "^3.0.3"
 	},
 	"devDependencies": {
 		"@emotion/babel-plugin": "^11.3.0",

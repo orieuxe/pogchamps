@@ -1,0 +1,49 @@
+import { Text, Tooltip } from '@chakra-ui/react'
+import { Match } from '@models/match'
+import { Player } from '@models/player'
+import Image from 'next/image'
+import React from 'react'
+import { RenderSeedProps, Seed, SeedItem, SeedTeam } from 'react-brackets'
+import TimeAgo from 'timeago-react';
+
+interface Props {
+	player: Player
+	score: number
+	winner: boolean
+}
+export const CustomSeed = ({ seed, breakpoint }: RenderSeedProps) => {
+	const m = seed as Match
+
+	let scores = new Array<number>(2)
+	let winners = new Array<boolean>(2)
+	if (m?.result) {
+		scores = m.result.split('-').map(Number)
+		winners = scores[0] > scores[1] ? [true, false] : [false, true]
+	}
+
+	return (
+		<Seed mobileBreakpoint={breakpoint} style={{ fontSize: 16 }}>
+			{m?.date && <Tooltip label={new Date(m?.date).toLocaleString()} placement='top' hasArrow>
+				<span>
+					<TimeAgo datetime={m?.date}/>
+				</span>
+			</Tooltip>}
+			<SeedItem className="clickable">
+				<div>
+					<CustomSeedTeam player={m?.participant1?.player} score={scores[0]} winner={winners[0]} />
+					<CustomSeedTeam player={m?.participant2?.player} score={scores[1]} winner={winners[1]} />
+				</div>
+			</SeedItem>
+		</Seed>
+	)
+}
+
+const CustomSeedTeam = ({ player, score, winner }: Props) => {
+	return (
+		<SeedTeam style={{ color: winner ? 'green' : 'default' }} className="bg-color">
+			<Image src={`/players/${player?.twitch}.png`} width={32} height={32} />
+			<Text className={!winner ? 'text-color' : ''}>{player?.twitch}</Text>
+			<Text className={!winner ? 'text-color' : ''}>{score}</Text>
+		</SeedTeam>
+	)
+}

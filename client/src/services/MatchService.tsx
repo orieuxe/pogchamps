@@ -11,7 +11,7 @@ export async function getMatchsFrom(group: string, tournamentId: number | string
 	return res.json()
 }
 
-export async function getMatchsFromStage(stage: string, tournamentId: number | string): Promise<Match[]> {
+export async function getMatchsFromStage(tournamentId: number | string, stage: string): Promise<Match[]> {
 	const res = await fetch(`${process.env.NEXT_PUBLIC_API}/duel/${tournamentId}/stage/${stage}`, defaultHeaders)
 	return res.json()
 }

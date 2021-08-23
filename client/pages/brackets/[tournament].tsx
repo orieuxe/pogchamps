@@ -1,12 +1,34 @@
-import { Participant } from '@models/participant'
+import { Tab, TabList, TabPanel, TabPanels, Tabs } from '@chakra-ui/react'
+import { CustomSeed } from '@components/bracket/CustomSeed'
+import { renderCustomTitle } from '@components/bracket/CustomTitle'
+import { Match } from '@models/match'
+import { getMatchsFromStage } from '@services/MatchService'
 import { getTournaments } from '@services/TournamentService'
+import React from 'react'
+import { Bracket, RoundProps } from 'react-brackets'
 
 interface Props {
-	data: Participant[]
+	winnerRounds: RoundProps[]
+	loserRounds: RoundProps[]
 }
 
-export default function Participants({ data }: Props) {
-	return <div>{JSON.stringify(data)}</div>
+export default function Brackets({ winnerRounds, loserRounds }: Props) {
+	return (
+		<Tabs isFitted variant="soft-rounded" colorScheme="purple">
+			<TabList>
+				<Tab color="white">Championship Bracket</Tab>
+				<Tab color="white">Consolation Bracket</Tab>
+			</TabList>
+			<TabPanels>
+				<TabPanel>
+					<Bracket rounds={winnerRounds} roundTitleComponent={renderCustomTitle} renderSeedComponent={CustomSeed} />
+				</TabPanel>
+				<TabPanel>
+					<Bracket rounds={loserRounds} roundTitleComponent={renderCustomTitle} renderSeedComponent={CustomSeed} />
+				</TabPanel>
+			</TabPanels>
+		</Tabs>
+	)
 }
 
 interface Params {
@@ -16,19 +38,34 @@ interface Params {
 }
 
 export async function getStaticProps({ params }: Params) {
-	const res1 = await fetch(`${process.env.NEXT_PUBLIC_API}/duel/${params.tournament}/stage/winner`, { mode: 'cors' })
-	const winner = await res1.json()
-	const res2 = await fetch(`${process.env.NEXT_PUBLIC_API}/duel/${params.tournament}/stage/loser`, { mode: 'cors' })
-	const loser = await res2.json()
+	const buildRoundProps = (bracket: Match[]): RoundProps[] => {
+		return [
+			{
+				title: 'Quarterfinals',
+				seeds: [bracket[0] || null, bracket[1] || null, bracket[2] || null, bracket[3] || null],
+			},
+			{
+				title: 'Semifinals',
+				seeds: [bracket[0]?.next_duel || null, bracket[2]?.next_duel || null],
+			},
+			{
+				title: 'Finals',
+				seeds: [bracket[0]?.next_duel?.next_duel || null],
+			},
+		]
+	}
 
-	if (!winner || !loser) {
+	const loserRounds = buildRoundProps(await getMatchsFromStage(params.tournament, 'loser'))
+	const winnerRounds = buildRoundProps(await getMatchsFromStage(params.tournament, 'winner'))
+
+	if (!winnerRounds || !loserRounds) {
 		return {
 			notFound: true,
 		}
 	}
 
 	return {
-		props: { data: { winner, loser } },
+		props: { winnerRounds, loserRounds },
 		revalidate: 30,
 	}
 }
