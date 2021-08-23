@@ -1,10 +1,11 @@
-import { Box, Flex, Table, Tbody, Td, Th, Thead, Tr } from '@chakra-ui/react'
+import { Box, Button, Flex, Link, Table, Tbody, Td, Th, Thead, Tr, useBreakpointValue } from '@chakra-ui/react'
 import { Column, useTable } from 'react-table'
 
 import Image from 'next/image'
 import { Participant } from '@models/participant'
 import React from 'react'
 import { useRouter } from 'next/router'
+import { useGlobal } from 'reactn'
 
 interface Props {
 	participants: Participant[]
@@ -12,7 +13,8 @@ interface Props {
 
 function Standings({ participants }: Props) {
 	const router = useRouter()
-	const { tournament } = router.query
+	const [selectedTournament] = useGlobal('selectedTournament')
+	const currentGroup = participants[0].groupe
 	const s = React.useMemo(
 		() =>
 			participants.map((p) => {
@@ -30,7 +32,13 @@ function Standings({ participants }: Props) {
 	const columns: Column[] = React.useMemo(
 		() => [
 			{
-				Header: '',
+				Header: () => (
+					<Link href={`/group/${selectedTournament}/${currentGroup}`} style={{ textDecoration: 'none' }}>
+						<Button colorScheme="purple" variant="outline">
+							Group {currentGroup}
+						</Button>
+					</Link>
+				),
 				accessor: 'image',
 				isImage: true,
 				width: '48px',
@@ -51,16 +59,19 @@ function Standings({ participants }: Props) {
 				accessor: 'played',
 				isNumeric: true,
 				width: '24px',
+				hiddeable: true,
 			},
 		],
 		[]
 	)
 
 	const onClick = (row: any) => {
-		router.push(`/player/${tournament}/${row.twitch}`)
+		router.push(`/player/${selectedTournament}/${row.twitch}`)
 	}
 
 	const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } = useTable({ columns, data: s })
+
+	const hideColumn = useBreakpointValue({ base: true, sm: false })
 
 	return (
 		<Box className="bg-color" marginTop="4">
@@ -75,6 +86,7 @@ function Standings({ participants }: Props) {
 									isNumeric={column.isNumeric}
 									key={i}
 									width={column.width ? column.width : 'auto'}
+									hidden={column.hiddeable && hideColumn}
 								>
 									<Flex direction="row" alignItems="center" justify={column.isNumeric ? 'end' : 'start'}>
 										{column.render('Header')}
@@ -96,6 +108,7 @@ function Standings({ participants }: Props) {
 										{...cell.getCellProps()}
 										isNumeric={cell.column.isNumeric}
 										key={i}
+										hidden={cell.column.hiddeable && hideColumn}
 									>
 										{cell.column.isImage ? (
 											<div
