@@ -1,158 +1,205 @@
-import { Box, Button, SimpleGrid, space, Tooltip } from '@chakra-ui/react';
-import GameList from '@components/GameList';
-import MatchList from '@components/MatchList';
-import MyImage from '@components/MyImage';
-import { Game } from '@models/game';
-import { Match } from '@models/match';
-import { Participant } from '@models/participant';
-import { Stats } from '@models/stats';
-import { getStats } from '@services/ChesscomService';
-import { getMatchsOf } from '@services/MatchService';
 import {
-  getAllParticipants,
-  getParticipant,
-} from '@services/ParticipantService';
-import { getTournaments } from '@services/TournamentService';
-import Image from 'next/image';
-import React, { useState } from 'react';
-import { FaBolt, FaBullseye, FaClock, FaTwitch } from 'react-icons/fa';
+	Accordion,
+	AccordionButton,
+	AccordionItem,
+	AccordionPanel,
+	Box,
+	Button,
+	Flex,
+	Icon,
+	Spacer,
+	Text,
+	Tooltip,
+	useBreakpointValue,
+	useColorMode,
+} from '@chakra-ui/react'
+import { FaBolt, FaBullseye, FaClock } from 'react-icons/fa'
+import { getAllParticipants, getParticipant } from '@services/ParticipantService'
 
-interface Props {
-  participant: Participant;
-  matchs: Match[];
-  stats: Stats;
+import { Game } from '@models/game'
+import GameList from '@components/GameList'
+import Image from 'next/image'
+import Link from 'next/link'
+import { Match } from '@models/match'
+import { Participant } from '@models/participant'
+import React from 'react'
+import { Stats } from '@models/stats'
+import { getMatchsOf } from '@services/MatchService'
+import { getStats } from '@services/ChesscomService'
+import { getTournaments } from '@services/TournamentService'
+import { useGlobal } from 'reactn'
+
+interface PropsGB {
+	participant: Participant
+	selectedTournament: number
+	isHidden: boolean
 }
-
+const GroupButton = ({ participant, selectedTournament, isHidden }: PropsGB) => {
+	if (participant.groupe && !isHidden) {
+		return (
+			<Link href={`/group/${selectedTournament}/${participant.groupe}`}>
+				<Button colorScheme="purple" mt="3" ml="3">
+					Group {participant.groupe}
+				</Button>
+			</Link>
+		)
+	} else {
+		return null
+	}
+}
+interface Props {
+	participant: Participant
+	matchs: Match[]
+	stats: Stats
+}
 export default function Player({ participant, matchs, stats }: Props) {
-  const [shownGames, setShownGames] = useState<Game[]>([]);
-  const player = participant.player;
+	const player = participant.player
+	const [selectedTournament] = useGlobal('selectedTournament')
+	const bgColor = ['#DCC9FF', '#FFB278', '#26DBBC', '#F9FE56']
+	const isHidden = useBreakpointValue([true, false])
+	const { colorMode } = useColorMode()
 
-  return (
-    <SimpleGrid minChildWidth={310} spacing={10}>
-      <Box>
-        <SimpleGrid minChildWidth={100} spacing={2}>
-          <Box>
-            <MyImage
-              src={`/players/${player.twitch}.png`}
-              width={200}
-            ></MyImage>
-          </Box>
-          <Box style={{ fontSize: '1.2em' }}>
-            <div
-              style={{
-                display: 'flex',
-                flexDirection: 'row',
-                justifyContent: 'space-around',
-              }}
-            >
-              /{player.twitch}
-              <a
-                href={`https://www.twitch.tv/${player.twitch}`}
-                target="_blank"
-                rel="noreferrer"
-              >
-                <FaTwitch size={32} color="#b9a3e3" />
-              </a>
-              <a
-                href={`https://www.chess.com/member/${player.username.toLowerCase()}`}
-                target="_blank"
-                rel="noreferrer"
-              >
-                <Image width={32} height={32} src="/icons/chess.svg" />
-              </a>
-            </div>
-            <Button colorScheme="purple" marginBottom={3}>
-              Group {participant.groupe || 'unknown'}
-            </Button>
-            <ul>
-              {stats.chess_rapid && (
-                <li style={{ display: 'flex', whiteSpace: 'nowrap' }}>
-                  <Tooltip label="rapid rating">
-                    <span style={{ marginRight: 5 }}>
-                      <FaClock />
-                    </span>
-                  </Tooltip>
-                  {stats.chess_rapid?.last?.rating} Best{' '}
-                  {stats.chess_rapid?.best?.rating}
-                </li>
-              )}
-              {stats.chess_blitz && (
-                <li style={{ display: 'flex', whiteSpace: 'nowrap' }}>
-                  <Tooltip label="blitz rating">
-                    <span style={{ marginRight: 5 }}>
-                      <FaBolt />
-                    </span>
-                  </Tooltip>
-                  {stats.chess_blitz?.last?.rating} Best{' '}
-                  {stats.chess_blitz?.best?.rating}
-                </li>
-              )}
-              {stats.chess_bullet && (
-                <li style={{ display: 'flex', whiteSpace: 'nowrap' }}>
-                  <Tooltip label="bullet rating">
-                    <span style={{ marginRight: 5 }}>
-                      <FaBullseye />
-                    </span>
-                  </Tooltip>
-                  {stats.chess_bullet?.last?.rating} Best{' '}
-                  {stats.chess_bullet?.best?.rating}
-                </li>
-              )}
-            </ul>
-          </Box>
-        </SimpleGrid>
-        <MatchList
-          matchs={matchs}
-          onMatchClick={(match) => setShownGames(match.games)}
-        ></MatchList>
-      </Box>
-      <Box>
-        <GameList games={shownGames}></GameList>
-      </Box>
-    </SimpleGrid>
-  );
+	return (
+		<>
+			<Flex className="bg-color" marginTop="8" flexWrap="wrap">
+				<Flex direction="column" flex="1" height="256px" p="4" minWidth="300px">
+					<Text fontSize="3xl" fontWeight="semibold" color={colorMode == 'light' ? 'purple' : 'white'}>
+						{player.username}
+					</Text>
+					<Text color="teal.300">
+						<a href={`https://www.twitch.tv/${player.twitch}`} target="_blank" rel="noreferrer">
+							{`twitch.tv/${player.twitch}`}
+						</a>
+					</Text>
+					<Text color="teal.300">
+						<a
+							href={`https://www.chess.com/member/${player.username.toLowerCase()}`}
+							target="_blank"
+							rel="noreferrer"
+						>
+							{`chess.com/member/${player.username.toLowerCase()}`}
+						</a>
+					</Text>
+					<Spacer />
+					<Flex direction="row" alignItems="end">
+						<ul>
+							{stats.chess_rapid && (
+								<li style={{ display: 'flex', whiteSpace: 'nowrap' }}>
+									<Tooltip label="rapid rating">
+										<span>
+											<Icon as={FaClock} />
+										</span>
+									</Tooltip>
+									<Text ml="2">
+										{stats.chess_rapid?.last?.rating} Best {stats.chess_rapid?.best?.rating}
+									</Text>
+								</li>
+							)}
+							{stats.chess_blitz && (
+								<li style={{ display: 'flex', whiteSpace: 'nowrap' }}>
+									<Tooltip label="blitz rating">
+										<span>
+											<Icon as={FaBolt} />
+										</span>
+									</Tooltip>
+
+									<Text ml="2">
+										{stats.chess_blitz?.last?.rating} Best {stats.chess_blitz?.best?.rating}
+									</Text>
+								</li>
+							)}
+							{stats.chess_bullet && (
+								<li style={{ display: 'flex', whiteSpace: 'nowrap' }}>
+									<Tooltip label="bullet rating">
+										<span>
+											<Icon as={FaBullseye} />
+										</span>
+									</Tooltip>
+									<Text ml="2">
+										{stats.chess_bullet?.last?.rating} Best {stats.chess_bullet?.best?.rating}
+									</Text>
+								</li>
+							)}
+						</ul>
+						<Spacer />
+						<GroupButton selectedTournament={selectedTournament} participant={participant} isHidden={isHidden} />
+					</Flex>
+				</Flex>
+				<Box
+					position="relative"
+					backgroundColor={bgColor[selectedTournament - 1]}
+					minWidth={['100%', '288px']}
+					height={['64px', '256px']}
+				>
+					<GroupButton selectedTournament={selectedTournament} participant={participant} isHidden={!isHidden} />
+					<Box position="absolute" right="0" bottom="0" width={['128px', '288px']} height={['128px', '288px']}>
+						<Image src={`/players/${player.twitch}.png`} layout="fill"></Image>
+					</Box>
+				</Box>
+			</Flex>
+
+			<Box className="bg-color" marginTop="8" flexWrap="wrap">
+				<Accordion allowToggle allowMultiple>
+					{matchs.map((match, i) => (
+						<AccordionItem key={i}>
+							<h2>
+								<AccordionButton>
+									<Box flex="1" textAlign="left">
+										{match.participant1.player.twitch} vs {match.participant2.player.twitch}
+									</Box>
+								</AccordionButton>
+							</h2>
+							<AccordionPanel pb={4}>
+								<GameList games={match.games}></GameList>
+							</AccordionPanel>
+						</AccordionItem>
+					))}
+				</Accordion>
+			</Box>
+		</>
+	)
 }
 
 interface Params {
-  params: {
-    tournament: string;
-    twitch: string;
-  };
+	params: {
+		tournament: string
+		twitch: string
+	}
 }
 
 export async function getStaticProps({ params }: Params) {
-  const participant = await getParticipant(params.tournament, params.twitch);
-  if (participant == null) {
-    return {
-      notFound: true,
-    };
-  }
+	const participant = await getParticipant(params.tournament, params.twitch)
+	if (participant == null) {
+		return {
+			notFound: true,
+		}
+	}
 
-  const matchs = await getMatchsOf(participant.id);
-  const stats = await getStats(participant.player.username);
+	const matchs = await getMatchsOf(participant.id)
+	const stats = await getStats(participant.player.username)
 
-  return {
-    props: { participant, matchs, stats },
-    revalidate: 30,
-  };
+	return {
+		props: { participant, matchs, stats },
+		revalidate: 30,
+	}
 }
 
 export async function getStaticPaths() {
-  const tournaments = getTournaments();
+	const tournaments = getTournaments()
 
-  const paths = {
-    paths: await Promise.all(
-      tournaments.map(async (e) => {
-        const participants: Participant[] = await getAllParticipants(e);
-        return participants.map((p) => ({
-          params: {
-            tournament: String(e),
-            twitch: p.player.twitch,
-          },
-        }));
-      })
-    ).then((nestedArrays: any[]) => [].concat(...nestedArrays)),
-    fallback: false,
-  };
-  return paths;
+	const paths = {
+		paths: await Promise.all(
+			tournaments.map(async (e) => {
+				const participants: Participant[] = await getAllParticipants(e)
+				return participants.map((p) => ({
+					params: {
+						tournament: String(e),
+						twitch: p.player.twitch,
+					},
+				}))
+			})
+		).then((nestedArrays: any[]) => [].concat(...nestedArrays)),
+		fallback: false,
+	}
+	return paths
 }

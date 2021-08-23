@@ -23,7 +23,7 @@ import {
 	FaTwitter,
 	FaUsers,
 } from 'react-icons/fa'
-import React, { ReactChild, ReactChildren } from 'react'
+import React, { ReactChild, ReactChildren, useEffect } from 'react'
 
 import Image from 'next/image'
 import NavLink from './NavLink'
@@ -39,6 +39,14 @@ export default function PageWrapper(props: props): JSX.Element {
 	const tournaments = getTournaments()
 	const [selectedTournament, setSelectedTournament] = useGlobal('selectedTournament')
 	const { colorMode, toggleColorMode } = useColorMode()
+
+	useEffect(() => {
+		const path = router.asPath
+		const res = path.split('/')
+		if (res.length > 2) {
+			setSelectedTournament(Number(res[2]))
+		}
+	}, [])
 
 	return (
 		<Box
