@@ -9,4 +9,14 @@ module.exports = {
 	trailingSlash: true,
 	poweredByHeader: false,
 	reactStrictMode: true,
+	webpack: (config) => {
+		config.module.rules.push({
+			test: /chess.js/,
+			parser: {
+				amd: false,
+			},
+		})
+
+		return config
+	},
 }

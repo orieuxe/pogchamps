@@ -45,7 +45,7 @@ const theme = extendTheme({
         color: mode('rgba(0, 0, 0, 0.12)', 'white')(props),
       },
       '.clickable:hover': {
-        backgroundColor: mode('lightgrey', '#6e468f')(props),
+        backgroundColor: mode('lightgrey', 'brand')(props),
         cursor: 'pointer',
         opacity: 0.95,
         transition: '0.2s',
@@ -56,6 +56,9 @@ const theme = extendTheme({
     outline: '0px 0px 0px 3px rgba(66,153,225,0.75)',
   },
   breakpoints,
+  colors: {
+    brand: '#6e468f'
+  }
 });
 
 export default theme;

@@ -1,14 +1,13 @@
-import { Box, SimpleGrid } from '@chakra-ui/react'
+import { Box, SimpleGrid, Stack } from '@chakra-ui/react'
 import GameList from '@components/GameList'
 import MatchList from '@components/MatchList'
 import Standings from '@components/Standings'
-import { Game } from '@models/game'
 import { Match } from '@models/match'
 import { Participant } from '@models/participant'
 import { getMatchsFrom } from '@services/MatchService'
 import { getParticipantsFrom } from '@services/ParticipantService'
 import { getTournaments } from '@services/TournamentService'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 interface Props {
 	participants: Participant[]
@@ -16,17 +15,21 @@ interface Props {
 }
 
 export default function Group({ participants, matchs }: Props) {
-	const [shownGames, setShownGames] = useState<Game[]>([])
+	const [shownMatchIndex, setShownMatchIndex] = useState(0)
+
+	useEffect(() => {
+		setShownMatchIndex(shownMatchIndex)
+	}, [matchs])
 
 	return (
 		<SimpleGrid minChildWidth={310} spacing={10}>
 			<Box>
-				<MatchList matchs={matchs} onMatchClick={(match) => setShownGames(match.games)}></MatchList>
+				<MatchList matchs={matchs} onMatchClick={(idx) => setShownMatchIndex(idx)}></MatchList>
 			</Box>
-			<Box>
+			<Stack spacing={3}>
 				<Standings participants={participants}></Standings>
-				<GameList games={shownGames}></GameList>
-			</Box>
+				{matchs[shownMatchIndex] && <GameList games={matchs[shownMatchIndex].games}></GameList>}
+			</Stack>
 		</SimpleGrid>
 	)
 }
