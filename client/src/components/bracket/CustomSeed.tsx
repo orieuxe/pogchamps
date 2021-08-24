@@ -5,7 +5,7 @@ import { Player } from '@models/player'
 import { getTournamentColor } from '@services/TournamentService'
 import React from 'react'
 import { RenderSeedProps, Seed, SeedItem, SeedTeam } from 'react-brackets'
-import { useGlobal } from 'reactn'
+import { setGlobal, useGlobal } from 'reactn'
 import TimeAgo from 'timeago-react'
 
 interface Props {
@@ -23,6 +23,12 @@ export const CustomSeed = ({ seed, breakpoint }: RenderSeedProps) => {
 		winners = scores[0] > scores[1] ? [true, false] : [false, true]
 	}
 
+	const onSeedClicked = () => {
+		setGlobal({
+			selectedMatch: m,
+		})
+	}
+
 	return (
 		<Seed mobileBreakpoint={breakpoint} style={{ fontSize: 16 }}>
 			{m?.date && (
@@ -34,7 +40,7 @@ export const CustomSeed = ({ seed, breakpoint }: RenderSeedProps) => {
 			)}
 
 			<SeedItem style={{ backgroundColor: 'transparent' }}>
-				<Box className="bg-color clickable" boxShadow="dark-lg" rounded="lg">
+				<Box className="bg-color clickable" boxShadow="dark-lg" rounded="lg" onClick={() => onSeedClicked()}>
 					<CustomSeedTeam player={m?.participant1?.player} score={scores[0]} winner={winners[0]} />
 					<CustomSeedTeam player={m?.participant2?.player} score={scores[1]} winner={winners[1]} />
 				</Box>

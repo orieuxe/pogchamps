@@ -1,11 +1,10 @@
 import { Tab, TabList, TabPanel, TabPanels, Tabs } from '@chakra-ui/react'
-import { CustomSeed } from '@components/bracket/CustomSeed'
-import { renderCustomTitle } from '@components/bracket/CustomTitle'
+import CustomBracket from '@components/bracket/CustomBracket'
 import { Match } from '@models/match'
 import { getMatchsFromStage } from '@services/MatchService'
 import { getTournaments } from '@services/TournamentService'
 import React from 'react'
-import { Bracket, RoundProps } from 'react-brackets'
+import { RoundProps } from 'react-brackets'
 
 interface Props {
 	winnerRounds: RoundProps[]
@@ -21,10 +20,10 @@ export default function Brackets({ winnerRounds, loserRounds }: Props) {
 			</TabList>
 			<TabPanels>
 				<TabPanel>
-					<Bracket rounds={winnerRounds} roundTitleComponent={renderCustomTitle} renderSeedComponent={CustomSeed} />
+					<CustomBracket rounds={winnerRounds} />
 				</TabPanel>
 				<TabPanel>
-					<Bracket rounds={loserRounds} roundTitleComponent={renderCustomTitle} renderSeedComponent={CustomSeed} />
+					<CustomBracket rounds={loserRounds} />
 				</TabPanel>
 			</TabPanels>
 		</Tabs>
