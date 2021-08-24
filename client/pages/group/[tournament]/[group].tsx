@@ -7,7 +7,7 @@ import { Participant } from '@models/participant'
 import { getMatchsFrom } from '@services/MatchService'
 import { getParticipantsFrom } from '@services/ParticipantService'
 import { getTournaments } from '@services/TournamentService'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 
 interface Props {
 	participants: Participant[]
@@ -16,10 +16,17 @@ interface Props {
 
 export default function Group({ participants, matchs }: Props) {
 	const [shownMatchIndex, setShownMatchIndex] = useState(0)
+	const bottomRef = useRef<HTMLDivElement>(null);
 
 	useEffect(() => {
 		setShownMatchIndex(shownMatchIndex)
 	}, [matchs])
+
+	useEffect(() => {
+		const ref = bottomRef.current;
+		if(!ref) return;
+		ref.scrollIntoView({ behavior: 'smooth' })
+	}, [shownMatchIndex])
 
 	return (
 		<SimpleGrid minChildWidth={310} spacing={10}>
@@ -29,6 +36,7 @@ export default function Group({ participants, matchs }: Props) {
 			<Stack spacing={3}>
 				<Standings participants={participants}></Standings>
 				{matchs[shownMatchIndex] && <GameList games={matchs[shownMatchIndex].games}></GameList>}
+				<div ref={bottomRef} />
 			</Stack>
 		</SimpleGrid>
 	)
