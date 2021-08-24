@@ -6,7 +6,7 @@ import { Match } from '@models/match'
 import { Participant } from '@models/participant'
 import { getMatchsFrom } from '@services/MatchService'
 import { getParticipantsFrom } from '@services/ParticipantService'
-import { getTournaments } from '@services/TournamentService'
+import { getTournamentIds } from '@services/TournamentService'
 import React, { useEffect, useRef, useState } from 'react'
 
 interface Props {
@@ -65,11 +65,11 @@ export async function getStaticProps({ params }: Params) {
 }
 
 export async function getStaticPaths() {
-	const tournaments = getTournaments()
+	const tournamentIds = getTournamentIds()
 
 	const paths = {
 		paths: await Promise.all(
-			tournaments.map(async (e) => {
+			tournamentIds.map(async (e) => {
 				return ['A', 'B', 'C', 'D'].map((g) => ({
 					params: {
 						tournament: String(e),

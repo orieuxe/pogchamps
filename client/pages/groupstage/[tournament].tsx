@@ -2,7 +2,7 @@ import { Box, SimpleGrid } from '@chakra-ui/react'
 import Standings from '@components/Standings'
 import { Participant } from '@models/participant'
 import { getParticipantsFrom } from '@services/ParticipantService'
-import { getTournaments } from '@services/TournamentService'
+import { getTournamentIds } from '@services/TournamentService'
 import React from 'react'
 import { Text } from '@chakra-ui/react'
 interface Props {
@@ -56,9 +56,9 @@ export async function getStaticProps({ params }: Params) {
 }
 
 export async function getStaticPaths() {
-	const tournaments = getTournaments()
+	const tournamentIds = getTournamentIds()
 	return {
-		paths: tournaments.map((e) => {
+		paths: tournamentIds.map((e) => {
 			return { params: { tournament: String(e) } }
 		}),
 		fallback: false,

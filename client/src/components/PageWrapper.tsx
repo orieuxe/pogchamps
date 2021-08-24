@@ -27,7 +27,7 @@ import React, { ReactChild, ReactChildren, useEffect } from 'react'
 
 import Image from 'next/image'
 import NavLink from './NavLink'
-import { getTournaments } from '@services/TournamentService'
+import { getTournamentIds } from '@services/TournamentService'
 import { useGlobal } from 'reactn'
 import { useRouter } from 'next/router'
 
@@ -36,7 +36,7 @@ type props = {
 }
 export default function PageWrapper(props: props): JSX.Element {
 	const router = useRouter()
-	const tournaments = getTournaments()
+	const tournamentIds = getTournamentIds()
 	const [selectedTournament, setSelectedTournament] = useGlobal('selectedTournament')
 	const { colorMode, toggleColorMode } = useColorMode()
 
@@ -81,7 +81,7 @@ export default function PageWrapper(props: props): JSX.Element {
 										<Icon as={FaCaretDown} color="white" />
 									</MenuButton>
 									<MenuList>
-										{tournaments.map((e, i) => {
+										{tournamentIds.map((e, i) => {
 											return (
 												<MenuItem
 													key={i}

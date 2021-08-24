@@ -2,7 +2,7 @@ import { Tab, TabList, TabPanel, TabPanels, Tabs } from '@chakra-ui/react'
 import CustomBracket from '@components/bracket/CustomBracket'
 import { Match } from '@models/match'
 import { getMatchsFromStage } from '@services/MatchService'
-import { getTournaments } from '@services/TournamentService'
+import { getTournamentIds } from '@services/TournamentService'
 import React from 'react'
 import { RoundProps } from 'react-brackets'
 
@@ -70,9 +70,9 @@ export async function getStaticProps({ params }: Params) {
 }
 
 export async function getStaticPaths() {
-	const tournaments = getTournaments()
+	const tournamentIds = getTournamentIds()
 	return {
-		paths: tournaments.map((e) => {
+		paths: tournamentIds.map((e) => {
 			return { params: { tournament: String(e) } }
 		}),
 		fallback: false,

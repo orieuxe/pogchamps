@@ -20,7 +20,7 @@ import { Stats } from '@models/stats'
 import { getStats } from '@services/ChesscomService'
 import { getMatchsOf } from '@services/MatchService'
 import { getAllParticipants, getParticipant } from '@services/ParticipantService'
-import { getTournamentColor, getTournaments } from '@services/TournamentService'
+import { getTournamentColor, getTournamentIds } from '@services/TournamentService'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
@@ -182,11 +182,11 @@ export async function getStaticProps({ params }: Params) {
 }
 
 export async function getStaticPaths() {
-	const tournaments = getTournaments()
+	const tournamentIds = getTournamentIds()
 
 	const paths = {
 		paths: await Promise.all(
-			tournaments.map(async (e) => {
+			tournamentIds.map(async (e) => {
 				const participants: Participant[] = await getAllParticipants(e)
 				return participants.map((p) => ({
 					params: {
