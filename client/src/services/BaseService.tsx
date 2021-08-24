@@ -1,3 +1,3 @@
 export const defaultHeaders: RequestInit = {
-  mode: 'cors'
+	mode: 'cors',
 }
