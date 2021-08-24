@@ -1,14 +1,14 @@
 import { Box, Flex, Icon, Table, Tbody, Td, Tfoot, Th, Thead, Tr, useBreakpointValue } from '@chakra-ui/react'
-import { Column, useSortBy, useTable } from 'react-table'
-import { FaBolt, FaBullseye, FaCaretDown, FaCaretUp, FaClock, FaPuzzlePiece, FaUser } from 'react-icons/fa'
-
-import Image from 'next/image'
 import { Participant } from '@models/participant'
-import React from 'react'
-import { getAllParticipants } from '@services/ParticipantService'
 import { getStats } from '@services/ChesscomService'
-import { getTournaments } from '@services/TournamentService'
+import { getAllParticipants } from '@services/ParticipantService'
+import { getTournamentColor, getTournaments } from '@services/TournamentService'
+import Image from 'next/image'
 import { useRouter } from 'next/router'
+import React from 'react'
+import { FaBolt, FaBullseye, FaCaretDown, FaCaretUp, FaClock, FaPuzzlePiece, FaUser } from 'react-icons/fa'
+import { Column, useSortBy, useTable } from 'react-table'
+import { useGlobal } from 'reactn'
 
 interface Props {
 	data: Participant[]
@@ -16,7 +16,7 @@ interface Props {
 
 export default function Participants({ data }: Props): JSX.Element {
 	const router = useRouter()
-	const { tournament } = router.query
+	const [tournament] = useGlobal('selectedTournament')
 
 	const d = React.useMemo(
 		() =>
@@ -62,6 +62,7 @@ export default function Participants({ data }: Props): JSX.Element {
 				isNumeric: true,
 				icon: FaClock,
 				width: '48px',
+				sortDescFirst: true,
 			},
 			{
 				Header: 'Blitz',
@@ -69,6 +70,7 @@ export default function Participants({ data }: Props): JSX.Element {
 				isNumeric: true,
 				icon: FaBolt,
 				width: '48px',
+				sortDescFirst: true,
 			},
 			{
 				Header: 'Bullet',
@@ -76,6 +78,7 @@ export default function Participants({ data }: Props): JSX.Element {
 				isNumeric: true,
 				icon: FaBullseye,
 				width: '48px',
+				sortDescFirst: true,
 			},
 			{
 				Header: 'Puzzle',
@@ -83,6 +86,7 @@ export default function Participants({ data }: Props): JSX.Element {
 				isNumeric: true,
 				icon: FaPuzzlePiece,
 				width: '48px',
+				sortDescFirst: true,
 			},
 		],
 		[]
@@ -93,7 +97,18 @@ export default function Participants({ data }: Props): JSX.Element {
 	}
 
 	const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } = useTable(
-		{ columns, data: d },
+		{
+			columns,
+			data: d,
+			initialState: {
+				sortBy: [
+					{
+						id: 'rapid',
+						desc: true,
+					},
+				],
+			},
+		},
 		useSortBy
 	)
 	const isSm = useBreakpointValue({ base: true, sm: false })
@@ -108,12 +123,12 @@ export default function Participants({ data }: Props): JSX.Element {
 								<Th
 									padding={2}
 									{...column.getHeaderProps(column.getSortByToggleProps())}
-									isNumeric={column.isNumeric}
 									key={i}
 									hidden={column.hiddeable && isSm}
 									width={column.width ? column.width : 'auto'}
+									color={getTournamentColor(tournament)}
 								>
-									<Flex direction="row" alignItems="center" justify={column.isNumeric ? 'center' : 'start'}>
+									<Flex direction="row" alignItems="center" justify={column.isNumeric && 'center'}>
 										{isSm ? <Icon as={column.icon} boxSize="4" /> : column.render('Header')}
 										{column.isSorted ? (
 											column.isSortedDesc ? (
@@ -137,9 +152,9 @@ export default function Participants({ data }: Props): JSX.Element {
 									<Td
 										paddingX={isSm ? 1 : 2}
 										{...cell.getCellProps()}
-										isNumeric={cell.column.isNumeric}
 										key={i}
 										hidden={cell.column.hiddeable && isSm}
+										style={{ textAlign: cell.column.isNumeric && 'center' }}
 									>
 										{cell.column.isImage ? (
 											<div
@@ -166,12 +181,12 @@ export default function Participants({ data }: Props): JSX.Element {
 								<Th
 									padding={2}
 									{...column.getHeaderProps(column.getSortByToggleProps())}
-									isNumeric={column.isNumeric}
 									key={i}
 									hidden={column.hiddeable && isSm}
 									width={column.width ? column.width : 'auto'}
+									color={getTournamentColor(tournament)}
 								>
-									<Flex direction="row" alignItems="center" justify={column.isNumeric ? 'end' : 'start'}>
+									<Flex direction="row" alignItems="center" justify={column.isNumeric && 'center'}>
 										{isSm ? <Icon as={column.icon} boxSize="4" /> : column.render('Header')}
 										{column.isSorted ? (
 											column.isSortedDesc ? (

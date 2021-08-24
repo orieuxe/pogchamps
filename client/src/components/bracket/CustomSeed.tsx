@@ -1,10 +1,12 @@
-import { Text, Tooltip } from '@chakra-ui/react'
+import { Box, Text, Tooltip } from '@chakra-ui/react'
+import MyImage from '@components/MyImage'
 import { Match } from '@models/match'
 import { Player } from '@models/player'
-import Image from 'next/image'
+import { getTournamentColor } from '@services/TournamentService'
 import React from 'react'
 import { RenderSeedProps, Seed, SeedItem, SeedTeam } from 'react-brackets'
-import TimeAgo from 'timeago-react';
+import { useGlobal } from 'reactn'
+import TimeAgo from 'timeago-react'
 
 interface Props {
 	player: Player
@@ -23,25 +25,30 @@ export const CustomSeed = ({ seed, breakpoint }: RenderSeedProps) => {
 
 	return (
 		<Seed mobileBreakpoint={breakpoint} style={{ fontSize: 16 }}>
-			{m?.date && <Tooltip label={new Date(m?.date).toLocaleString()} placement='top' hasArrow>
-				<span>
-					<TimeAgo datetime={m?.date}/>
-				</span>
-			</Tooltip>}
-			<SeedItem className="clickable">
-				<div>
+			{m?.date && (
+				<Tooltip label={new Date(m?.date).toLocaleString()} placement="top" hasArrow>
+					<span>
+						<TimeAgo datetime={m?.date} />
+					</span>
+				</Tooltip>
+			)}
+
+			<SeedItem style={{ backgroundColor: 'transparent' }}>
+				<Box className="bg-color clickable" boxShadow="dark-lg" rounded="lg">
 					<CustomSeedTeam player={m?.participant1?.player} score={scores[0]} winner={winners[0]} />
 					<CustomSeedTeam player={m?.participant2?.player} score={scores[1]} winner={winners[1]} />
-				</div>
+				</Box>
 			</SeedItem>
 		</Seed>
 	)
 }
 
 const CustomSeedTeam = ({ player, score, winner }: Props) => {
+	const [tournament] = useGlobal('selectedTournament')
+
 	return (
-		<SeedTeam style={{ color: winner ? 'green' : 'default' }} className="bg-color">
-			<Image src={`/players/${player?.twitch}.png`} width={32} height={32} />
+		<SeedTeam style={{ color: winner ? getTournamentColor(tournament) : 'default' }}>
+			<MyImage src={`/players/${player?.twitch}.png`} width={32} />
 			<Text className={!winner ? 'text-color' : ''}>{player?.twitch}</Text>
 			<Text className={!winner ? 'text-color' : ''}>{score}</Text>
 		</SeedTeam>

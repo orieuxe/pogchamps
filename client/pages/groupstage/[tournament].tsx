@@ -1,57 +1,66 @@
-import { Box, SimpleGrid } from '@chakra-ui/react';
-import Standings from '@components/Standings';
-import { Participant } from '@models/participant';
-import { getParticipantsFrom } from '@services/ParticipantService';
-import { getTournaments } from '@services/TournamentService';
-import React from 'react';
-
+import { Box, SimpleGrid } from '@chakra-ui/react'
+import Standings from '@components/Standings'
+import { Participant } from '@models/participant'
+import { getParticipantsFrom } from '@services/ParticipantService'
+import { getTournaments } from '@services/TournamentService'
+import React from 'react'
+import { Text } from '@chakra-ui/react'
 interface Props {
-  data: Participant[][];
+	data: Participant[][],
+  total: number,
 }
 
-export default function Participants({ data }: Props) {
-  return (
-    <SimpleGrid minChildWidth={310} spacing={10}>
-      {data.map((participants, i: number) => (
-        <Box key={i}>
-          <Standings key={i} participants={participants}></Standings>
-        </Box>
-      ))}
-    </SimpleGrid>
-  );
+export default function Participants({ data, total }: Props) {
+	return total > 0 ? (
+		<SimpleGrid minChildWidth={310} spacing={10} marginTop="4">
+			{data.map(
+				(participants, i: number) =>
+					participants.length > 0 && (
+						<Box key={i}>
+							<Standings key={i} participants={participants}></Standings>
+						</Box>
+					)
+			)}
+		</SimpleGrid>
+	) : (
+		<Text>Groupstage are not published yet !</Text>
+	)
 }
 
 interface Params {
-  params: {
-    tournament: string;
-  };
+	params: {
+		tournament: string
+	}
 }
 
 export async function getStaticProps({ params }: Params) {
-  const data: Participant[][] = [];
-  const groupNames = ['A', 'B', 'C', 'D'];
-  for (const g of groupNames) {
-    data.push(await getParticipantsFrom(params.tournament, g));
-  }
+	const data: Participant[][] = []
+  let total = 0;
+	const groupNames = ['A', 'B', 'C', 'D']
+	for (const g of groupNames) {
+    const participants = await getParticipantsFrom(params.tournament, g);
+    total += participants.length;
+		data.push(participants)
+	}
 
-  if (data == []) {
-    return {
-      notFound: true,
-    };
-  }
+	if (data == []) {
+		return {
+			notFound: true,
+		}
+	}
 
-  return {
-    props: { data },
-    revalidate: 30,
-  };
+	return {
+		props: { data, total },
+		revalidate: 30,
+	}
 }
 
 export async function getStaticPaths() {
-  const tournaments = getTournaments();
-  return {
-    paths: tournaments.map((e) => {
-      return { params: { tournament: String(e) } };
-    }),
-    fallback: false,
-  };
+	const tournaments = getTournaments()
+	return {
+		paths: tournaments.map((e) => {
+			return { params: { tournament: String(e) } }
+		}),
+		fallback: false,
+	}
 }

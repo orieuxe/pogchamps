@@ -1,11 +1,12 @@
 import { Box, Button, Flex, Link, Table, Tbody, Td, Th, Thead, Tr, useBreakpointValue } from '@chakra-ui/react'
-import { Column, useTable } from 'react-table'
-
-import Image from 'next/image'
 import { Participant } from '@models/participant'
-import React from 'react'
+import { getTournamentColor } from '@services/TournamentService'
 import { useRouter } from 'next/router'
+import React from 'react'
+import { Column, useTable } from 'react-table'
 import { useGlobal } from 'reactn'
+import MyImage from './MyImage'
+
 
 interface Props {
 	participants: Participant[]
@@ -14,7 +15,7 @@ interface Props {
 function Standings({ participants }: Props) {
 	const router = useRouter()
 	const [selectedTournament] = useGlobal('selectedTournament')
-	const currentGroup = participants[0].groupe
+	const currentGroup = participants[0]?.groupe
 	const s = React.useMemo(
 		() =>
 			participants.map((p) => {
@@ -74,7 +75,7 @@ function Standings({ participants }: Props) {
 	const hideColumn = useBreakpointValue({ base: true, sm: false })
 
 	return (
-		<Box className="bg-color" marginTop="4">
+		<Box className="bg-color" boxShadow="dark-lg" rounded="lg">
 			<Table {...getTableProps()} size="sm">
 				<Thead>
 					{headerGroups.map((headerGroup: any, i: number) => (
@@ -87,6 +88,7 @@ function Standings({ participants }: Props) {
 									key={i}
 									width={column.width ? column.width : 'auto'}
 									hidden={column.hiddeable && hideColumn}
+									color={getTournamentColor(selectedTournament)}
 								>
 									<Flex direction="row" alignItems="center" justify={column.isNumeric ? 'end' : 'start'}>
 										{column.render('Header')}
@@ -105,20 +107,14 @@ function Standings({ participants }: Props) {
 									<Td
 										style={{ textAlign: cell.column.isNumeric && 'center' }}
 										paddingX={2}
+										paddingY={1}
 										{...cell.getCellProps()}
 										isNumeric={cell.column.isNumeric}
 										key={i}
 										hidden={cell.column.hiddeable && hideColumn}
 									>
 										{cell.column.isImage ? (
-											<div
-												style={{
-													position: 'relative',
-													height: cell.column.width,
-												}}
-											>
-												<Image src={cell.value} layout="fill" objectFit="contain"></Image>
-											</div>
+											<MyImage src={cell.value} width={cell.column.width}/>
 										) : (
 											cell.render('Cell')
 										)}

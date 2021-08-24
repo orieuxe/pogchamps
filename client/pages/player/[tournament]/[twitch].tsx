@@ -13,26 +13,24 @@ import {
 	useBreakpointValue,
 	useColorMode,
 } from '@chakra-ui/react'
-import { FaBolt, FaBullseye, FaClock } from 'react-icons/fa'
-import { getAllParticipants, getParticipant } from '@services/ParticipantService'
-
-import { Game } from '@models/game'
 import GameList from '@components/GameList'
-import Image from 'next/image'
-import Link from 'next/link'
 import { Match } from '@models/match'
 import { Participant } from '@models/participant'
-import React from 'react'
 import { Stats } from '@models/stats'
-import { getMatchsOf } from '@services/MatchService'
 import { getStats } from '@services/ChesscomService'
-import { getTournaments } from '@services/TournamentService'
+import { getMatchsOf } from '@services/MatchService'
+import { getAllParticipants, getParticipant } from '@services/ParticipantService'
+import { getTournamentColor, getTournaments } from '@services/TournamentService'
+import Image from 'next/image'
+import Link from 'next/link'
+import React from 'react'
+import { FaBolt, FaBullseye, FaClock } from 'react-icons/fa'
 import { useGlobal } from 'reactn'
 
 interface PropsGB {
 	participant: Participant
 	selectedTournament: number
-	isHidden: boolean
+	isHidden: boolean|undefined
 }
 const GroupButton = ({ participant, selectedTournament, isHidden }: PropsGB) => {
 	if (participant.groupe && !isHidden) {
@@ -55,7 +53,6 @@ interface Props {
 export default function Player({ participant, matchs, stats }: Props) {
 	const player = participant.player
 	const [selectedTournament] = useGlobal('selectedTournament')
-	const bgColor = ['#DCC9FF', '#FFB278', '#26DBBC', '#F9FE56']
 	const isHidden = useBreakpointValue([true, false])
 	const { colorMode } = useColorMode()
 
@@ -127,7 +124,7 @@ export default function Player({ participant, matchs, stats }: Props) {
 				</Flex>
 				<Box
 					position="relative"
-					backgroundColor={bgColor[selectedTournament - 1]}
+					backgroundColor={getTournamentColor(selectedTournament)}
 					minWidth={['100%', '288px']}
 					height={['64px', '256px']}
 				>

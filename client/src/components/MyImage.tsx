@@ -11,10 +11,11 @@ function MyImage({ src, width }: Props) {
     <div
       style={{
         position: 'relative',
+        width: width,
         height: width,
       }}
     >
-      <Image src={src} layout="fill" objectFit="contain"></Image>
+      <Image src={src} layout="fill" objectFit="contain" objectPosition="bottom"></Image>
     </div>
   );
 }
