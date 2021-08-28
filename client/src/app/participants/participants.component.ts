@@ -2,7 +2,7 @@ import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { forkJoin } from 'rxjs';
-import { flatMap, tap } from 'rxjs/operators';
+import { retry } from 'rxjs/operators';
 import { Participant } from '../models/participant';
 import { ParticipantService } from '../services/participant.service';
 import { PlayerService } from '../services/player.service';
@@ -51,7 +51,9 @@ export class ParticipantsComponent implements OnInit {
 
   loadStats(){
     this.statsLoading = true;
-    forkJoin(this.participants.map(p => this.playerService.getStats(p.player.username))).subscribe(stats => {
+    forkJoin(this.participants.map(p => this.playerService.getStats(p.player.username))).pipe(
+      retry(3)
+    ).subscribe(stats => {
       this.dataSource = new MatTableDataSource(this.participants.map((p,idx) => {
       const s = stats[idx];
       const rapid = s.chess_rapid;

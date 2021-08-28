@@ -9,4 +9,4 @@
 /vendor/
 ###< symfony/framework-bundle ###
 
-.csv
+*.csv

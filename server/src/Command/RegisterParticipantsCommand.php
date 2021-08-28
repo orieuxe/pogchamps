@@ -9,13 +9,12 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\PlayerRepository;
-use App\Repository\TournamentRepository;
 use Symfony\Component\Finder\Finder;
 
 class RegisterParticipantsCommand extends Command
 {
     // the name of the command (the part after "bin/console")
-    protected static $defaultName = 'app:import';
+    protected static $defaultName = 'app:register';
 
     private $em;
 
@@ -25,19 +24,19 @@ class RegisterParticipantsCommand extends Command
         $this->em = $em;
     }
 
+    protected function configure(): void
+    {
+    $this->setDescription('Register a new particpant for an upcoming tournament')
+         ->setHelp('source file path : server/particpants.csv. Expected format for each line [Twitch];[chess.com username]');
+    }
 
-    // change these options about the file to read
     private $csvParsingOptions = array(
       'finder_in' => '.',
       'finder_name' => 'participants.csv',
-      'ignoreFirstLine' => false
+      'ignoreFirstLine' => false,
+      'separator' => ';'
   );
 
-  /**
-   * Parse a csv file
-   * 
-   * @return array
-   */
   private function parseCSV()
   {
       $ignoreFirstLine = $this->csvParsingOptions['ignoreFirstLine'];
@@ -45,14 +44,13 @@ class RegisterParticipantsCommand extends Command
       $finder = new Finder();
       $finder->files()
           ->in($this->csvParsingOptions['finder_in'])
-          ->name($this->csvParsingOptions['finder_name'])
-      ;
+          ->name($this->csvParsingOptions['finder_name']);
       foreach ($finder as $file) { $csv = $file; }
 
       $rows = array();
       if (($handle = fopen($csv->getRealPath(), "r")) !== FALSE) {
           $i = 0;
-          while (($data = fgetcsv($handle, null, " ")) !== FALSE) {
+          while (($data = fgetcsv($handle, null, $this->csvParsingOptions['separator'])) !== FALSE) {
               $i++;
               if ($ignoreFirstLine && $i == 1) { continue; }
               $rows[] = $data;
@@ -83,7 +81,7 @@ class RegisterParticipantsCommand extends Command
             $this->em->persist($player);
             $this->em->flush();
         }
-        $output->writeln($player->getName()." registered to pogchamps ".$currentTournament->getId());
+        $output->writeln($player->getTwitch()." successfully registered to pogchamps ".$currentTournament->getId());
         $particpant = new Participant($player, $currentTournament);
         $this->em->persist($particpant);
       }

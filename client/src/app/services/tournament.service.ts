@@ -20,7 +20,7 @@ export class TournamentService {
   }
 
   public static getTournamentId(): number {
-    return parseInt(localStorage.getItem(this.tournamentId), 10) || 3;
+    return parseInt(localStorage.getItem(this.tournamentId), 10) || 4;
   }
 
   public static setTournamentId(id: number): void {
