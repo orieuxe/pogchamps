@@ -1,4 +1,4 @@
-import { Flex, Icon, Stack, Text, Tooltip } from '@chakra-ui/react'
+import { Flex, Icon, Stack, Text, Tooltip, useColorModeValue } from '@chakra-ui/react'
 import { Match } from '@models/match'
 import { getTournamentColor } from '@services/TournamentService'
 import React, { useState } from 'react'
@@ -15,6 +15,7 @@ function MatchList({ matchs, onMatchClick }: Props) {
 	const [selectedTournament] = useGlobal('selectedTournament')
 	const [selectedMatchIndex, setSelectedMatchIndex] = useState(0)
 	const tournamentColor = getTournamentColor(selectedTournament)
+	const winnerColor = useColorModeValue('brand', tournamentColor);
 
 	return (
 		<Stack minWidth={{ base: '2xs', md: 'sm' }} spacing={3}>
@@ -45,11 +46,11 @@ function MatchList({ matchs, onMatchClick }: Props) {
 						}}
 					>
 						<Flex alignSelf="center">
-							<Text color={winners[0] ? getTournamentColor(selectedTournament) : 'default'}>
+							<Text color={winners[0] ? winnerColor : 'default'}>
 								{m.participant1.player.twitch}
 							</Text>
 							<Icon as={RiSwordFill} marginInline={2} />
-							<Text color={winners[1] ? getTournamentColor(selectedTournament) : 'default'}>
+							<Text color={winners[1] ? winnerColor : 'default'}>
 								{m.participant2.player.twitch}
 							</Text>
 						</Flex>

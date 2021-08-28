@@ -33,7 +33,7 @@ const theme = extendTheme({
         flexDirection: 'column',
       },
       '.bg-color': {
-        backgroundColor: mode('white', '#2b2a44')(props),
+        backgroundColor: mode('#E6E6E6', '#2b2a44')(props),
       },
       '.text-color': {
         color: mode('black', 'rgba(210,209,236,1)')(props),

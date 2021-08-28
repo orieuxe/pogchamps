@@ -12,9 +12,9 @@ interface Props {
 
 export default function GameList({ games }: Props) {
 	const [selectedTournament] = useGlobal('selectedTournament')
-	const winnerColor = useColorModeValue('brand',getTournamentColor(selectedTournament))
-  
-  const isSm = useBreakpointValue({ base: true, sm: false });
+	const winnerColor = useColorModeValue('brand', getTournamentColor(selectedTournament))
+
+	const isSm = useBreakpointValue({ base: true, sm: false })
 
 	return (
 		<Stack spacing={3}>
@@ -33,8 +33,8 @@ export default function GameList({ games }: Props) {
 					>
 						<SmallChessBoard game={game} size={128} />
 
-						<Stack spacing={3} style={{ textAlign: 'center', margin:'0' }} >
-							<Box style={{ display: 'flex', alignItems: 'center', flexDirection: isSm ? 'column': 'row' }}>
+						<Stack spacing={3} textAlign="center" marginLeft="1">
+							<Box style={{ display: 'flex', alignItems: 'center', flexDirection: isSm ? 'column' : 'row' }}>
 								<Text adjustsFontSizeToFit color={scores[0] > 0.5 ? winnerColor : 'default'}>
 									{game.white} ({game.whiteelo})
 								</Text>
