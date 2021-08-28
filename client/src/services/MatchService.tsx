@@ -22,7 +22,9 @@ export async function getMatchsOf(participantId: number): Promise<Match[]> {
 }
 
 export async function getScheduledMatchs(date: Date): Promise<Match[]> {
-	const strDate = date.toISOString().slice(0, 10)
+	const strDate = date
+		.toLocaleString('en', { year: 'numeric', month: '2-digit', day: '2-digit' })
+		.replace(/(\d+)\/(\d+)\/(\d+)/, '$3-$1-$2')
 	const res = await fetch(`${process.env.NEXT_PUBLIC_API}/duel/schedule/${strDate}`, defaultHeaders)
 	return res.json()
 }

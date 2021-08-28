@@ -16,7 +16,7 @@ function MatchList({ matchs, onMatchClick }: Props) {
 	const [selectedMatchIndex, setSelectedMatchIndex] = useState(0)
 
 	return (
-		<UnorderedList>
+		<UnorderedList minWidth={{ base: "2xs", md: "sm" }}>
 			{matchs.map((m, i) => {
 				let scores = new Array<number>(2)
 				let winners = new Array<boolean>(2)
