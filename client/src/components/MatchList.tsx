@@ -1,4 +1,4 @@
-import { Box, Icon, ListItem, Stack, Text, Tooltip, UnorderedList } from '@chakra-ui/react'
+import { Flex, Icon, Stack, Text, Tooltip } from '@chakra-ui/react'
 import { Match } from '@models/match'
 import { getTournamentColor } from '@services/TournamentService'
 import React, { useState } from 'react'
@@ -14,9 +14,10 @@ interface Props {
 function MatchList({ matchs, onMatchClick }: Props) {
 	const [selectedTournament] = useGlobal('selectedTournament')
 	const [selectedMatchIndex, setSelectedMatchIndex] = useState(0)
+	const tournamentColor = getTournamentColor(selectedTournament)
 
 	return (
-		<UnorderedList minWidth={{ base: "2xs", md: "sm" }}>
+		<Stack minWidth={{ base: '2xs', md: 'sm' }} spacing={3}>
 			{matchs.map((m, i) => {
 				let scores = new Array<number>(2)
 				let winners = new Array<boolean>(2)
@@ -27,25 +28,23 @@ function MatchList({ matchs, onMatchClick }: Props) {
 				const selected = i == selectedMatchIndex && m.games.length > 0
 
 				return (
-					<ListItem
+					<Flex
+						direction="column"
 						key={i}
 						onClick={() => {
 							setSelectedMatchIndex(i)
 							onMatchClick(i)
 						}}
-						className="clickable"
-						style={{
-							display: 'flex',
-							flexDirection: 'column',
-							marginBottom: '0.5em',
-							opacity: selected ? '0.8' : '1.0',
+						className="clickable bg-color"
+						boxShadow="lg"
+						rounded="sm"
+						sx={{
+							outlineWidth: 2,
+							outlineColor: tournamentColor,
+							outlineStyle: selected ? 'solid' : 'none',
 						}}
-						boxShadow="dark-lg"
-						rounded="md"
-						bg={selected ? 'brand' : 'transparent'}
-						color="white"
 					>
-						<Box style={{ display: 'flex', alignSelf: 'center' }}>
+						<Flex alignSelf="center">
 							<Text color={winners[0] ? getTournamentColor(selectedTournament) : 'default'}>
 								{m.participant1.player.twitch}
 							</Text>
@@ -53,17 +52,10 @@ function MatchList({ matchs, onMatchClick }: Props) {
 							<Text color={winners[1] ? getTournamentColor(selectedTournament) : 'default'}>
 								{m.participant2.player.twitch}
 							</Text>
-						</Box>
-						<Box
-							style={{
-								display: 'flex',
-								flexWrap: 'nowrap',
-								justifyContent: 'space-between',
-								alignItems: 'center',
-							}}
-						>
+						</Flex>
+						<Flex wrap="nowrap" justify="space-between" align="center">
 							<MyImage src={`/players/${m.participant1.player.twitch}.png`} width={90} />
-							<Stack spacing={3} style={{ textAlign: 'center' }}>
+							<Stack spacing={3} textAlign="center">
 								<Text>
 									{m?.date && (
 										<Tooltip label={new Date(m?.date).toLocaleString()} placement="top" hasArrow>
@@ -76,11 +68,11 @@ function MatchList({ matchs, onMatchClick }: Props) {
 								<Text>{m.result}</Text>
 							</Stack>
 							<MyImage src={`/players/${m.participant2.player.twitch}.png`} width={90} />
-						</Box>
-					</ListItem>
+						</Flex>
+					</Flex>
 				)
 			})}
-		</UnorderedList>
+		</Stack>
 	)
 }
 

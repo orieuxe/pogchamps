@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDatePicker, { ReactDatePickerProps } from 'react-datepicker';
-
 import 'react-datepicker/dist/react-datepicker.css';
+
 
 function DatePicker(props: ReactDatePickerProps) {
   const {
@@ -25,4 +25,4 @@ function DatePicker(props: ReactDatePickerProps) {
   );
 };
 
-export {DatePicker}
+export { DatePicker };

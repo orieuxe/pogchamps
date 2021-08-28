@@ -1,10 +1,11 @@
-import { Tab, TabList, TabPanel, TabPanels, Tabs } from '@chakra-ui/react'
+import { Tab, TabList, TabPanel, TabPanels, Tabs, useColorModeValue } from '@chakra-ui/react'
 import CustomBracket from '@components/bracket/CustomBracket'
 import { Match } from '@models/match'
 import { getMatchsFromStage } from '@services/MatchService'
-import { getTournamentIds } from '@services/TournamentService'
+import { getTournamentColor, getTournamentIds } from '@services/TournamentService'
 import React from 'react'
 import { RoundProps } from 'react-brackets'
+import { useGlobal } from 'reactn'
 
 interface Props {
 	winnerRounds: RoundProps[]
@@ -12,11 +13,18 @@ interface Props {
 }
 
 export default function Brackets({ winnerRounds, loserRounds }: Props) {
+	const [tournamentId] = useGlobal('selectedTournament')
+	const selectedTabColor = useColorModeValue('brand', getTournamentColor(tournamentId))
+
 	return (
-		<Tabs isFitted variant="soft-rounded" colorScheme="purple">
+		<Tabs isFitted>
 			<TabList>
-				<Tab color="white">Championship Bracket</Tab>
-				<Tab color="white">Consolation Bracket</Tab>
+				<Tab _selected={{ color: selectedTabColor, borderColor: selectedTabColor }} className="bg-color clickable">
+					Championship Bracket
+				</Tab>
+				<Tab _selected={{ color: selectedTabColor, borderColor: selectedTabColor }} className="bg-color clickable">
+					Consolation Bracket
+				</Tab>
 			</TabList>
 			<TabPanels>
 				<TabPanel>

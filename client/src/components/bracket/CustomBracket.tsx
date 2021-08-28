@@ -27,7 +27,7 @@ function CustomBracket({ rounds }: Props) {
 
 	return (
 		<div style={{ display: 'flex', flexDirection: isSm ? 'column' : 'row' }}>
-			<Bracket rounds={rounds} roundTitleComponent={renderCustomTitle} renderSeedComponent={CustomSeed} />
+			<Bracket mobileBreakpoint={750} rounds={rounds} roundTitleComponent={renderCustomTitle} renderSeedComponent={CustomSeed} />
 			<GameList games={shownGames} />
 			<div ref={bottomRef} />
 		</div>

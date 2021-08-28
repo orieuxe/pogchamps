@@ -1,9 +1,9 @@
-import { Box, Icon, ListItem, UnorderedList, Text, Stack, useBreakpointValue } from '@chakra-ui/react'
+import { Box, Flex, Icon, Stack, Text, useBreakpointValue, useColorModeValue } from '@chakra-ui/react'
 import { Game } from '@models/game'
-import React from 'react'
-import { useGlobal } from 'reactn'
 import { getTournamentColor } from '@services/TournamentService'
+import React from 'react'
 import { RiSwordFill } from 'react-icons/ri'
+import { useGlobal } from 'reactn'
 import SmallChessBoard from './chess/SmallChessBoard'
 import { formatTimeControl } from './chess/TimeControl'
 interface Props {
@@ -12,48 +12,43 @@ interface Props {
 
 export default function GameList({ games }: Props) {
 	const [selectedTournament] = useGlobal('selectedTournament')
-	const tournamentColor = getTournamentColor(selectedTournament)
+	const winnerColor = useColorModeValue('brand',getTournamentColor(selectedTournament))
   
   const isSm = useBreakpointValue({ base: true, sm: false });
 
 	return (
-		<UnorderedList>
+		<Stack spacing={3}>
 			{games.map((game, i) => {
 				const scores = game.result.split('-').map(Number)
 				return (
-					<ListItem
-						className="clickable"
+					<Flex
+						align="center"
+						justify="space-around"
+						p="1vw"
+						wrap="nowrap"
+						className="clickable bg-color"
 						key={i}
-						style={{
-							display: 'flex',
-							flexWrap: 'nowrap',
-							justifyContent: 'space-around',
-							marginBottom: '0.5em',
-							alignSelf: 'center',
-							padding: '1vw',
-						}}
-						boxShadow="dark-lg"
+						boxShadow="lg"
 						rounded="md"
-						bg="transparent"
 					>
 						<SmallChessBoard game={game} size={128} />
 
 						<Stack spacing={3} style={{ textAlign: 'center', margin:'0' }} >
 							<Box style={{ display: 'flex', alignItems: 'center', flexDirection: isSm ? 'column': 'row' }}>
-								<Text adjustsFontSizeToFit color={scores[0] > 0.5 ? tournamentColor : 'default'}>
+								<Text adjustsFontSizeToFit color={scores[0] > 0.5 ? winnerColor : 'default'}>
 									{game.white} ({game.whiteelo})
 								</Text>
 								<Icon as={RiSwordFill} marginInline={1} />
-								<Text adjustsFontSizeToFit color={scores[1] > 0.5 ? tournamentColor : 'default'}>
+								<Text adjustsFontSizeToFit color={scores[1] > 0.5 ? winnerColor : 'default'}>
 									{game.black} ({game.blackelo})
 								</Text>
 							</Box>
 							<Text>{formatTimeControl(game.timecontrol)}</Text>
 							<Text>{game.termination}</Text>
 						</Stack>
-					</ListItem>
+					</Flex>
 				)
 			})}
-		</UnorderedList>
+		</Stack>
 	)
 }

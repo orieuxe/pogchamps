@@ -1,4 +1,4 @@
-import { Box, Text, Tooltip } from '@chakra-ui/react'
+import { Box, Text, Tooltip, useColorModeValue } from '@chakra-ui/react'
 import MyImage from '@components/MyImage'
 import { Match } from '@models/match'
 import { Player } from '@models/player'
@@ -30,7 +30,7 @@ export const CustomSeed = ({ seed, breakpoint }: RenderSeedProps) => {
 	}
 
 	return (
-		<Seed mobileBreakpoint={breakpoint} style={{ fontSize: 16 }}>
+		<Seed mobileBreakpoint={breakpoint} style={{ fontSize: 16, color: 'white'}}>
 			{m?.date && (
 				<Tooltip label={new Date(m?.date).toLocaleString()} placement="top" hasArrow>
 					<span>
@@ -51,12 +51,17 @@ export const CustomSeed = ({ seed, breakpoint }: RenderSeedProps) => {
 
 const CustomSeedTeam = ({ player, score, winner }: Props) => {
 	const [tournament] = useGlobal('selectedTournament')
+	const winnerColor = useColorModeValue('brand', getTournamentColor(tournament))
 
 	return (
-		<SeedTeam style={{ color: winner ? getTournamentColor(tournament) : 'default' }}>
+		<SeedTeam style={{ color: winnerColor }}>
 			<MyImage src={`/players/${player?.twitch}.png`} width={32} />
-			<Text className={!winner ? 'text-color' : ''}>{player?.twitch}</Text>
-			<Text className={!winner ? 'text-color' : ''}>{score}</Text>
+			<Text className={!winner ? 'text-color' : ''} color={winner ? winnerColor : 'default'}>
+				{player?.twitch}
+			</Text>
+			<Text className={!winner ? 'text-color' : ''} color={winner ? winnerColor : 'default'}>
+				{score}
+			</Text>
 		</SeedTeam>
 	)
 }
