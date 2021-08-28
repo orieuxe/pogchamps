@@ -1,62 +1,72 @@
 {
-  "name": "pogchamps",
-  "version": "0.0.0",
-  "scripts": {
-    "ng": "ng",
-    "start": "node server.js",
-    "build": "ng build",
-    "test": "ng test",
-    "lint": "ng lint",
-    "e2e": "ng e2e",
-    "heroku-postbuild": "ng build --prod"
-  },
-  "private": true,
-  "dependencies": {
-    "@angular/animations": "~8.1.0",
-    "@angular/cdk": "~8.2.3",
-    "@angular/cli": "~8.1.0",
-    "@angular/common": "~8.1.0",
-    "@angular/compiler": "~8.1.0",
-    "@angular/compiler-cli": "~8.1.0",
-    "@angular/core": "~8.1.0",
-    "@angular/forms": "~8.1.0",
-    "@angular/material": "^8.2.3",
-    "@angular/platform-browser": "~8.1.0",
-    "@angular/platform-browser-dynamic": "~8.1.0",
-    "@angular/router": "~8.1.0",
-    "chess.js": "^0.11.0",
-    "chessboardjs": "0.0.1",
-    "express": "^4.17.1",
-    "hammerjs": "^2.0.8",
-    "jquery": "^3.5.1",
-    "ngx-timeago": "^1.0.4",
-    "path": "^0.12.7",
-    "rxjs": "~6.4.0",
-    "tslib": "^1.9.0",
-    "typescript": "~3.4.3",
-    "zone.js": "~0.9.1"
-  },
-  "devDependencies": {
-    "@angular-devkit/build-angular": "~0.801.0",
-    "@angular/language-service": "~8.1.0",
-    "@types/jasmine": "~3.3.8",
-    "@types/jasminewd2": "~2.0.3",
-    "@types/node": "~8.9.4",
-    "codelyzer": "^5.0.0",
-    "enhanced-resolve": "^3.3.0",
-    "jasmine-core": "~3.4.0",
-    "jasmine-spec-reporter": "~4.2.1",
-    "karma": "~4.1.0",
-    "karma-chrome-launcher": "~2.2.0",
-    "karma-coverage-istanbul-reporter": "~2.0.1",
-    "karma-jasmine": "~2.0.1",
-    "karma-jasmine-html-reporter": "^1.4.0",
-    "protractor": "~5.4.0",
-    "ts-node": "~7.0.0",
-    "tslint": "~5.15.0"
-  },
-  "engines": {
-    "node": "14.15.1",
-    "npm": "6.14.8"
-  }
+	"name": "pogchamps-next",
+	"version": "0.1.0",
+	"private": true,
+	"scripts": {
+		"dev": "next dev",
+		"build": "next build",
+		"start": "next start"
+	},
+	"lint-staged": {
+		"*.@(ts|tsx)": [
+			"npm lint",
+			"npm format"
+		]
+	},
+	"dependencies": {
+		"@chakra-ui/icons": "^1.0.14",
+		"@chakra-ui/react": "^1.6.6",
+		"@emotion/react": "^11.4.0",
+		"@emotion/styled": "^11.3.0",
+		"@fontsource/inter": "^4.5.0",
+		"chess.js": "^0.12.0",
+		"chessboardjsx": "^2.4.7",
+		"focus-visible": "^5.2.0",
+		"framer-motion": "^4.1.17",
+		"next": "^11.0.1",
+		"react": "^17.0.2",
+		"react-brackets": "^0.4.6",
+		"react-datepicker": "^4.2.1",
+		"react-dom": "^17.0.2",
+		"react-icons": "^4.2.0",
+		"react-loading-icons": "^1.0.6",
+		"react-table": "^7.7.0",
+		"reactn": "^2.2.7",
+		"reactn-devtools": "^1.1.0",
+		"redux": "^4.1.0",
+		"timeago-react": "^3.0.3"
+	},
+	"devDependencies": {
+		"@emotion/babel-plugin": "^11.3.0",
+		"@types/node": "^16.3.3",
+		"@types/react": "^17.0.14",
+		"@types/react-datepicker": "^4.1.4",
+		"@types/react-table": "^7.7.2",
+		"@typescript-eslint/eslint-plugin": "^4.28.4",
+		"@typescript-eslint/parser": "^4.22.0",
+		"babel-plugin-styled-components": "^1.12.0",
+		"eslint": "^7.31.0",
+		"eslint-config-next": "^11.0.1",
+		"eslint-config-prettier": "^8.3.0",
+		"eslint-plugin-react": "^7.24.0",
+		"lint-staged": "^11.0.1",
+		"prettier": "^2.3.2",
+		"typescript": "^4.3.5"
+	},
+	"browserslist": {
+		"production": [
+			">0.2%",
+			"not dead",
+			"not op_mini all"
+		],
+		"development": [
+			"last 1 chrome version",
+			"last 1 firefox version",
+			"last 1 safari version"
+		]
+	},
+	"engines": {
+		"node": "12 || 14 || 15",
+		"npm": ">=6"
+	}
 }

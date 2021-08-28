@@ -67,6 +67,17 @@ class DuelRepository extends ServiceEntityRepository
           ->getQuery()
           ->getOneOrNullResult();
     }
+    
+     /**
+     * @return Duel[] Returns an array of Duel objects
+     */
+    public function findEndedDuels(): array
+    {
+      return $this->createQueryBuilder('d')
+          ->andWhere('d.result IS NOT NULL')
+          ->getQuery()
+          ->getResult();
+    }
 
 
     public function getByDate(\Datetime $date)
