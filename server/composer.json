@@ -10,6 +10,7 @@
         "doctrine/doctrine-migrations-bundle": "^3.0",
         "doctrine/orm": "^2.7",
         "friendsofsymfony/rest-bundle": "^3.0",
+        "guzzlehttp/guzzle": "^7.3",
         "jms/serializer-bundle": "^3.7",
         "nelmio/cors-bundle": "^2.1",
         "symfony/console": "4.4.*",

@@ -13,4 +13,5 @@ export interface Game {
   length: number;
   moves: string;
   clocks: string;
+  url: string;
 }

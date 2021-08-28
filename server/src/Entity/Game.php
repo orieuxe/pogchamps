@@ -90,6 +90,11 @@ class Game implements \JsonSerializable
      */
     private $clocks;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $url;
+
     public function jsonSerialize()
     {
         return get_object_vars($this);
@@ -264,6 +269,18 @@ class Game implements \JsonSerializable
     public function setClocks(?string $clocks): self
     {
         $this->clocks = $clocks;
+
+        return $this;
+    }
+
+    public function getUrl(): ?string
+    {
+        return $this->url;
+    }
+
+    public function setUrl(?string $url): self
+    {
+        $this->url = $url;
 
         return $this;
     }
