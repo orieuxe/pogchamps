@@ -1,4 +1,4 @@
-import { Box, Flex, Icon, Table, Tbody, Td, Tfoot, Th, Thead, Tr, useBreakpointValue } from '@chakra-ui/react'
+import { Box, Flex, Icon, Table, Tbody, Td, Tfoot, Th, Thead, Tr, useBreakpointValue, useColorModeValue } from '@chakra-ui/react'
 import { Participant } from '@models/participant'
 import { getStats } from '@services/ChesscomService'
 import { getAllParticipants } from '@services/ParticipantService'
@@ -112,6 +112,7 @@ export default function Participants({ data }: Props): JSX.Element {
 		useSortBy
 	)
 	const isSm = useBreakpointValue({ base: true, sm: false })
+	const headerColor = useColorModeValue("black", getTournamentColor(tournament));
 
 	return (
 		<Box className="bg-color" marginTop="4">
@@ -126,7 +127,7 @@ export default function Participants({ data }: Props): JSX.Element {
 									key={i}
 									hidden={column.hiddeable && isSm}
 									width={column.width ? column.width : 'auto'}
-									color={getTournamentColor(tournament)}
+									color={headerColor}
 								>
 									<Flex direction="row" alignItems="center" justify={column.isNumeric && 'center'}>
 										{isSm ? <Icon as={column.icon} boxSize="4" /> : column.render('Header')}
@@ -184,7 +185,7 @@ export default function Participants({ data }: Props): JSX.Element {
 									key={i}
 									hidden={column.hiddeable && isSm}
 									width={column.width ? column.width : 'auto'}
-									color={getTournamentColor(tournament)}
+									color={headerColor}
 								>
 									<Flex direction="row" alignItems="center" justify={column.isNumeric && 'center'}>
 										{isSm ? <Icon as={column.icon} boxSize="4" /> : column.render('Header')}

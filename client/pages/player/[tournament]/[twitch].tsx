@@ -4,7 +4,6 @@ import {
 	AccordionItem,
 	AccordionPanel,
 	Box,
-	Button,
 	Flex,
 	Icon,
 	Spacer,
@@ -14,6 +13,7 @@ import {
 	useColorMode,
 } from '@chakra-ui/react'
 import GameList from '@components/GameList'
+import { GroupButton } from '@components/GroupButton'
 import { Match } from '@models/match'
 import { Participant } from '@models/participant'
 import { Stats } from '@models/stats'
@@ -22,29 +22,9 @@ import { getMatchsOf } from '@services/MatchService'
 import { getAllParticipants, getParticipant } from '@services/ParticipantService'
 import { getTournamentColor, getTournamentIds } from '@services/TournamentService'
 import Image from 'next/image'
-import Link from 'next/link'
 import React from 'react'
 import { FaBolt, FaBullseye, FaClock } from 'react-icons/fa'
 import { useGlobal } from 'reactn'
-
-interface PropsGB {
-	participant: Participant
-	selectedTournament: number
-	isHidden: boolean|undefined
-}
-const GroupButton = ({ participant, selectedTournament, isHidden }: PropsGB) => {
-	if (participant.groupe && !isHidden) {
-		return (
-			<Link href={`/group/${selectedTournament}/${participant.groupe}`}>
-				<Button colorScheme="purple" mt="3" ml="3">
-					Group {participant.groupe}
-				</Button>
-			</Link>
-		)
-	} else {
-		return null
-	}
-}
 interface Props {
 	participant: Participant
 	matchs: Match[]
@@ -119,7 +99,7 @@ export default function Player({ participant, matchs, stats }: Props) {
 							)}
 						</ul>
 						<Spacer />
-						<GroupButton selectedTournament={selectedTournament} participant={participant} isHidden={isHidden} />
+						<GroupButton selectedTournament={selectedTournament} group={participant.groupe} isHidden={isHidden} />
 					</Flex>
 				</Flex>
 				<Box
@@ -128,7 +108,7 @@ export default function Player({ participant, matchs, stats }: Props) {
 					minWidth={['100%', '288px']}
 					height={['64px', '256px']}
 				>
-					<GroupButton selectedTournament={selectedTournament} participant={participant} isHidden={!isHidden} />
+					<GroupButton selectedTournament={selectedTournament} group={participant.groupe} isHidden={!isHidden} />
 					<Box position="absolute" right="0" bottom="0" width={['128px', '288px']} height={['128px', '288px']}>
 						<Image src={`/players/${player.twitch}.png`} layout="fill" objectFit="cover"></Image>
 					</Box>

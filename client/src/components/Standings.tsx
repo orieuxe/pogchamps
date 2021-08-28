@@ -1,10 +1,11 @@
-import { Box, Button, Flex, Link, Table, Tbody, Td, Th, Thead, Tr, useBreakpointValue } from '@chakra-ui/react'
+import { Box, Flex, Table, Tbody, Td, Th, Thead, Tr, useBreakpointValue, useColorModeValue } from '@chakra-ui/react'
 import { Participant } from '@models/participant'
 import { getTournamentColor } from '@services/TournamentService'
 import { useRouter } from 'next/router'
 import React from 'react'
 import { Column, useTable } from 'react-table'
 import { useGlobal } from 'reactn'
+import { GroupButton } from './GroupButton'
 import MyImage from './MyImage'
 
 
@@ -33,13 +34,7 @@ function Standings({ participants }: Props) {
 	const columns: Column[] = React.useMemo(
 		() => [
 			{
-				Header: () => (
-					<Link href={`/group/${selectedTournament}/${currentGroup}`} style={{ textDecoration: 'none' }}>
-						<Button colorScheme="purple" variant="outline">
-							Group {currentGroup}
-						</Button>
-					</Link>
-				),
+				Header: () => <GroupButton group={currentGroup} selectedTournament={selectedTournament} />,
 				accessor: 'image',
 				isImage: true,
 				width: '48px',
@@ -73,6 +68,7 @@ function Standings({ participants }: Props) {
 	const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } = useTable({ columns, data: s })
 
 	const hideColumn = useBreakpointValue({ base: true, sm: false })
+	const headerColor = useColorModeValue("black", getTournamentColor(selectedTournament));
 
 	return (
 		<Box className="bg-color" boxShadow="dark-lg" rounded="lg">
@@ -88,7 +84,7 @@ function Standings({ participants }: Props) {
 									key={i}
 									width={column.width ? column.width : 'auto'}
 									hidden={column.hiddeable && hideColumn}
-									color={getTournamentColor(selectedTournament)}
+									color={headerColor}
 								>
 									<Flex direction="row" alignItems="center" justify={column.isNumeric ? 'end' : 'start'}>
 										{column.render('Header')}
