@@ -18,3 +18,4 @@ url=$(../get-url.sh $@)
 python3 ../sql-to-db.py $db $url
 cd ../../server/
 php bin/console app:update
+php bin/console app:update:link

@@ -56,7 +56,7 @@ class UpdateCommand extends Command
         /** @var DuelRepository $repository */
         $repository = $this->em->getRepository(Duel::class);
 
-        $duel = $repository->findOpenDuelByPlayers(3, $game->getWhite(), $game->getBlack());
+        $duel = $repository->findOpenDuelByPlayers($game->getWhite(), $game->getBlack());
         $duel->addGame($game);
       }
 

@@ -3,6 +3,7 @@
 namespace App\Command;
 
 use App\Entity\Duel;
+use App\Repository\DuelRepository;
 use App\Service\ChesscomService;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -32,10 +33,11 @@ class UpdateGamesWithLinkCommand extends Command
   protected function execute(InputInterface $input, OutputInterface $output)
   {
 
-    $duelRepository = $this->em->getRepository(Duel::class);
     /** @var DuelRepository $duelRepository */
-    $duels = $duelRepository->findEndedDuels();
+    $duelRepository = $this->em->getRepository(Duel::class);
     /** @var Duel[] $duels */
+    $duels = $duelRepository->findEndedDuels(1);
+
     $totalUpdates = 0;
     foreach ($duels as $duel) {
       $username1 = $duel->getParticipant1()->getPlayer()->getUsername();
@@ -64,10 +66,10 @@ class UpdateGamesWithLinkCommand extends Command
         $game->setUrl($chessGame['url']);
         $gameUpdates+=1;
       }
-      dump($gameUpdates." updates : ".$username1." ".$duel->getResult()." ".$username2);
+      dump($gameUpdates." updates for ".$username1." ".$duel->getResult()." ".$username2);
       $totalUpdates += $gameUpdates;
     }
-    dump($totalUpdates." total updates");
+    dump($totalUpdates." total url updates");
 
     $this->em->flush();
 
