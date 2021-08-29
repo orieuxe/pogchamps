@@ -37,7 +37,7 @@ round_label = {
 
 def str_to_utc_format(date_str):
     date = datetime.strptime(date_str, '%Y %A %B %d %I:%M %p')
-    ptTimeDelta = timedelta(hours=-8)
+    ptTimeDelta = timedelta(hours=-9)
     ptTZObject = timezone(ptTimeDelta, name="PT")
     return date.replace(tzinfo=ptTZObject).astimezone(tz=timezone.utc).strftime('%Y-%m-%d %H:%M:%S')
 
