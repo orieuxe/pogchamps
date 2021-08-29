@@ -33,7 +33,7 @@ class Duel
     private $participant2;
 
     /**
-     * @ORM\OneToMany(targetEntity=Game::class, mappedBy="duel")
+     * @ORM\OneToMany(targetEntity=Game::class, mappedBy="duel", cascade={"persist"})
      * @ORM\OrderBy({"id" = "ASC"})
      */
     private $games;

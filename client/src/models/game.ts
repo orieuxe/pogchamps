@@ -14,4 +14,5 @@ export interface Game {
   moves: string;
   clocks: string;
   url: string;
+  fen: string;
 }

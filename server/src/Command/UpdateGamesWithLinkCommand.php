@@ -32,20 +32,17 @@ class UpdateGamesWithLinkCommand extends Command
   protected function execute(InputInterface $input, OutputInterface $output)
   {
 
-    $duelRepository = $this->em->getRepository(Duel::class);
     /** @var DuelRepository $duelRepository */
-    $duels = $duelRepository->findEndedDuels();
+    $duelRepository = $this->em->getRepository(Duel::class);
     /** @var Duel[] $duels */
+    $duels = $duelRepository->findEndedDuels();
+    
     $totalUpdates = 0;
     foreach ($duels as $duel) {
       $username1 = $duel->getParticipant1()->getPlayer()->getUsername();
       $username2 = $duel->getParticipant2()->getPlayer()->getUsername();
 
-      $chessGames = $this->gameService->fetchDuelGames(
-       $duel->getDate(),
-       $username1,
-       $username2,
-      );
+      $chessGames = $this->gameService->fetchDuelGames($duel);
       $games = $duel->getGames();
       $gameUpdates = 0;
       if(count($chessGames) < count($games)){

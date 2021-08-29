@@ -1,9 +1,8 @@
 <?php
 
 namespace App\Service;
-
-use DateTimeInterface;
 use GuzzleHttp\Client;
+use App\Entity\Duel;
 
 class ChesscomService
 {
@@ -14,15 +13,16 @@ class ChesscomService
   }
 
   public static function parsePgn($pgn, $tag){
-    preg_match('/\['.$tag.' "([^"]*)"]/', $pgn, $matches);
+    preg_match('/\['.$tag.' "([^"]*)"]/i', $pgn, $matches);
     if(array_key_exists(1, $matches)) return $matches[1];
     return null;
   }
 
-  public function fetchDuelGames(DateTimeInterface $date, string $username1, string $username2): array
+  public function fetchDuelGames(Duel $duel): array
   {
-    $username1 = strtolower($username1);
-    $username2 = strtolower($username2);
+    $username1 = strtolower($duel->getParticipant1()->getPlayer()->getUsername());
+    $username2 = strtolower($duel->getParticipant2()->getPlayer()->getUsername());
+    $date = $duel->getDate();
 
     $games = $this->fetchGames($username1, $date);
     $gamesToSend = [];

@@ -49,24 +49,6 @@ class DuelRepository extends ServiceEntityRepository
           ->getQuery()
           ->getResult();
     }
-
-    
-    public function findOpenDuelByPlayers($tournamentId, $username1, $username2, $stage='group'): Duel
-    {
-      return $this->createQueryBuilder('d')
-          ->join('d.participant1', 'pa1')
-          ->join('d.participant2', 'pa2')
-          ->join('pa1.player', 'p1')
-          ->join('pa2.player', 'p2')
-          ->where('p1.username = :u1 AND p2.username = :u2 OR p2.username = :u1 AND p1.username = :u2')
-          ->andWhere('d.tournament = :tournamentId')
-          ->andWhere('d.result IS NULL')
-          ->setParameter('u1', $username1)
-          ->setParameter('u2', $username2)
-          ->setParameter('tournamentId', $tournamentId)
-          ->getQuery()
-          ->getOneOrNullResult();
-    }
     
      /**
      * @return Duel[] Returns an array of Duel objects
@@ -75,6 +57,19 @@ class DuelRepository extends ServiceEntityRepository
     {
       return $this->createQueryBuilder('d')
           ->andWhere('d.result IS NOT NULL')
+          ->getQuery()
+          ->getResult();
+    }
+    
+     /**
+     * @return Duel[] Returns an array of Duel objects
+     */
+    public function findOpenDuels($limit = null): array
+    {
+      return $this->createQueryBuilder('d')
+          ->andWhere('d.result IS NULL')
+          ->orderBy('d.date')
+          ->setMaxResults($limit)
           ->getQuery()
           ->getResult();
     }

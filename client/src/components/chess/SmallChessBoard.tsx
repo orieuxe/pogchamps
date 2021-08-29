@@ -9,15 +9,23 @@ interface Props {
 }
 
 function SmallChessBoard({ game, size }: Props) {
-	const chess = new Chess()
 	const Chessboard = dynamic(() => import('chessboardjsx'), {
 		ssr: false, // <- this do the magic ;)
 	})
-	chess.load_pgn(game.moves)
+
+	let fen: string;
+	if(game.moves){
+		const chess = new Chess()
+		chess.load_pgn(game.moves)
+		fen = chess.fen();
+	}else{
+		fen = game.fen;
+	}
+
 	return (
 		<Chessboard
       width={size}
-			position={chess.fen()}
+			position={fen}
 			draggable={false}
 			orientation="white"
 			showNotation={false}
