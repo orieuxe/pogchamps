@@ -6,6 +6,7 @@ import {
 	Flex,
 	Icon,
 	IconButton,
+	Link,
 	Menu,
 	MenuButton,
 	MenuItem,
@@ -110,8 +111,12 @@ export default function PageWrapper(props: props): JSX.Element {
 							icon={<Icon as={colorMode === 'light' ? FaMoon : FaSun} />}
 							onClick={toggleColorMode}
 						/>
-						<IconButton aria-label="Github" variant="link" icon={<Icon as={FaGithub} />} color="white" />
-						<IconButton aria-label="Twitter" variant="link" icon={<Icon as={FaTwitter} />} color="white" />
+						<Link href="https://github.com/orieuxe/pogchamps" target="_blank" rel="noreferrer">
+							<IconButton href aria-label="Github" variant="link" icon={<Icon as={FaGithub} />} color="white" />
+						</Link>
+						<Link href="https://twitter.com/chesscom" target="_blank" rel="noreferrer">
+							<IconButton aria-label="Twitter" variant="link" icon={<Icon as={FaTwitter} />} color="white" />
+						</Link>
 					</ButtonGroup>
 				</Flex>
 				<Flex
