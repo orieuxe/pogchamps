@@ -25,7 +25,7 @@ class Game implements \JsonSerializable
     private $site;
 
     /**
-     * @ORM\Column(type="date")
+     * @ORM\Column(type="datetime")
      */
     private $date;
 

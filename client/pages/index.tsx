@@ -28,7 +28,8 @@ export default function Index() {
 			setSelectedTournament(tournament)
 			const startDate = new Date(tournament.start_date)
 			const endDate = new Date(tournament.end_date)
-			if (endDate < today || today < startDate) updateSchedule(startDate)
+			const date = (endDate < today || today < startDate) ? startDate : today
+			updateSchedule(date);
 		})
 	}, [tournamentId])
 
@@ -48,7 +49,7 @@ export default function Index() {
 	}
 
 	if (!selectedTournament) return <Loading />
-
+	
 	return (
 		<Stack spacing={3}>
 			<DatePicker

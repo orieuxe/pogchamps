@@ -68,10 +68,12 @@ class DuelRepository extends ServiceEntityRepository
      /**
      * @return Duel[] Returns an array of Duel objects
      */
-    public function findEndedDuels(): array
+    public function findEndedDuels($limit = null): array
     {
       return $this->createQueryBuilder('d')
           ->andWhere('d.result IS NOT NULL')
+          ->orderBy('d.date', 'DESC')
+          ->setMaxResults($limit)
           ->getQuery()
           ->getResult();
     }

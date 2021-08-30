@@ -9,10 +9,10 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Doctrine\ORM\EntityManagerInterface;
 
-class UpdateGamesWithLinkCommand extends Command
+class UpdateEndedGamesCommand extends Command
 {
   // the name of the command (the part after "bin/console")
-  protected static $defaultName = 'app:update:link';
+  protected static $defaultName = 'app:update';
 
   private $em;
   private $gameService;
@@ -26,7 +26,7 @@ class UpdateGamesWithLinkCommand extends Command
 
   protected function configure(): void
   {
-    $this->setDescription('Update all games with their chess.com links');
+    $this->setDescription('Update all ended games with links, datetime & fen');
   }
 
   protected function execute(InputInterface $input, OutputInterface $output)
@@ -59,6 +59,10 @@ class UpdateGamesWithLinkCommand extends Command
           continue;
         };
         $game->setUrl($chessGame['url']);
+        $game->setDate(\DateTime::createFromFormat(
+          'Y.m.d H:i:s',
+          (ChesscomService::parsePgn($pgn, 'UTCDate')." ".ChesscomService::parsePgn($pgn, 'UTCTime'))));
+        $game->setFen(ChesscomService::parsePgn($pgn, 'CurrentPosition'));
         $gameUpdates+=1;
       }
       dump($gameUpdates." updates : ".$username1." ".$duel->getResult()." ".$username2);

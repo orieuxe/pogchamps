@@ -13,13 +13,13 @@ function SmallChessBoard({ game, size }: Props) {
 		ssr: false, // <- this do the magic ;)
 	})
 
-	let fen = 'start';
-	if(game.moves){
+	let fen = '8/8/8/8/8/8/8/8';
+	if(game.fen){
+		fen = game.fen.split(' ')[0];
+	}else if(game.moves) {
 		const chess = new Chess()
 		chess.load_pgn(game.moves)
 		fen = chess.fen();
-	}else{
-		fen = game.fen.split(' ')[0];
 	}
 
 	return (
