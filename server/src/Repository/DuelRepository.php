@@ -49,7 +49,6 @@ class DuelRepository extends ServiceEntityRepository
           ->getQuery()
           ->getResult();
     }
-
     
     public function findOpenDuelByPlayers($username1, $username2): Duel
     {
@@ -63,7 +62,7 @@ class DuelRepository extends ServiceEntityRepository
           ->setParameter('u1', $username1)
           ->setParameter('u2', $username2)
           ->getQuery()
-          ->getOneOrNullResult();
+          ->getResult();
     }
     
      /**
@@ -74,6 +73,19 @@ class DuelRepository extends ServiceEntityRepository
       return $this->createQueryBuilder('d')
           ->andWhere('d.result IS NOT NULL')
           ->orderBy('d.date', 'DESC')
+          ->setMaxResults($limit)
+          ->getQuery()
+          ->getResult();
+    }
+    
+     /**
+     * @return Duel[] Returns an array of Duel objects
+     */
+    public function findOpenDuels($limit): array
+    {
+      return $this->createQueryBuilder('d')
+          ->andWhere('d.result IS NULL')
+          ->orderBy('d.date')
           ->setMaxResults($limit)
           ->getQuery()
           ->getResult();

@@ -25,7 +25,7 @@ class Game implements \JsonSerializable
     private $site;
 
     /**
-     * @ORM\Column(type="date")
+     * @ORM\Column(type="datetime")
      */
     private $date;
 
@@ -70,12 +70,12 @@ class Game implements \JsonSerializable
     private $termination;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $length;
 
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="text", nullable=true)
      */
     private $moves;
 
@@ -94,6 +94,11 @@ class Game implements \JsonSerializable
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $url;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $fen;
 
     public function jsonSerialize()
     {
@@ -281,6 +286,18 @@ class Game implements \JsonSerializable
     public function setUrl(?string $url): self
     {
         $this->url = $url;
+
+        return $this;
+    }
+
+    public function getFen(): ?string
+    {
+        return $this->fen;
+    }
+
+    public function setFen(?string $fen): self
+    {
+        $this->fen = $fen;
 
         return $this;
     }
