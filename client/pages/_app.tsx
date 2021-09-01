@@ -1,7 +1,7 @@
 import 'focus-visible/dist/focus-visible'
 import '@fontsource/inter/400.css'
 import '@fontsource/inter/900.css'
-import '@components/datepicker/date-picker.css';
+import '@components/datepicker/date-picker.css'
 
 import React, { setGlobal, useGlobal } from 'reactn'
 
@@ -11,7 +11,7 @@ import PageWrapper from '@components/PageWrapper'
 import addReactNDevTools from 'reactn-devtools'
 import { getTournamentIds } from '@services/TournamentService'
 import theme from 'src/theme/Theme'
-import Head from 'next/head';
+import Head from 'next/head'
 
 addReactNDevTools()
 
@@ -22,12 +22,15 @@ setGlobal({
 })
 
 function App({ Component, pageProps }: AppProps): JSX.Element {
-	const [selectedTournament] = useGlobal('selectedTournament');
-	
+	const [selectedTournament] = useGlobal('selectedTournament')
+
 	return (
 		<ChakraProvider resetCSS theme={theme}>
 			<Head>
-				<title>Pogchamps {selectedTournament}</title>
+				<title>
+					Pogchamps {selectedTournament}
+					{process.env.NEXT_PUBLIC_API?.includes('localhost') ? ' - localhost' : ''}
+				</title>
 				<link rel="icon" type="image/png" href="/icons/chess.svg" />
 			</Head>
 			<PageWrapper>
