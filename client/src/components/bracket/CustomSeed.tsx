@@ -30,7 +30,7 @@ export const CustomSeed = ({ seed, breakpoint }: RenderSeedProps) => {
 	}
 
 	return (
-		<Seed mobileBreakpoint={breakpoint} style={{ fontSize: 16, color: 'white'}}>
+		<Seed mobileBreakpoint={breakpoint} style={{ fontSize: 16, color: 'white' }}>
 			{m?.date && (
 				<Tooltip label={new Date(m?.date).toLocaleString()} placement="top" hasArrow>
 					<span>
@@ -54,8 +54,8 @@ const CustomSeedTeam = ({ player, score, winner }: Props) => {
 	const winnerColor = useColorModeValue('brand', getTournamentColor(tournament))
 
 	return (
-		<SeedTeam style={{ color: winnerColor }}>
-			<MyImage src={`/players/${player?.twitch}.png`} width={32} />
+		<SeedTeam>
+			{player ? <MyImage src={`/players/${player.twitch}.png`} width={32} /> : <Box h="32px" />}
 			<Text className={!winner ? 'text-color' : ''} color={winner ? winnerColor : 'default'}>
 				{player?.twitch}
 			</Text>

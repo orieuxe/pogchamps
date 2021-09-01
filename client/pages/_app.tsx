@@ -11,6 +11,7 @@ import PageWrapper from '@components/PageWrapper'
 import addReactNDevTools from 'reactn-devtools'
 import { getTournamentIds } from '@services/TournamentService'
 import theme from 'src/theme/Theme'
+import Head from 'next/head';
 
 addReactNDevTools()
 
@@ -23,6 +24,9 @@ setGlobal({
 function App({ Component, pageProps }: AppProps): JSX.Element {
 	return (
 		<ChakraProvider resetCSS theme={theme}>
+			<Head>
+				<link rel="icon" type="image/png" href="/icons/chess.svg" />
+			</Head>
 			<PageWrapper>
 				<Component {...pageProps} />
 			</PageWrapper>

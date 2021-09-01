@@ -38,7 +38,7 @@ function MatchList({ matchs, onMatchClick }: Props) {
 						}}
 						className="clickable bg-color"
 						boxShadow="lg"
-						rounded="sm"
+						rounded="md"
 						sx={{
 							outlineWidth: 2,
 							outlineColor: tournamentColor,

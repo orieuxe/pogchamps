@@ -15,7 +15,7 @@ function MyImage({ src, width }: Props) {
         height: width,
       }}
     >
-      <Image src={src} layout="fill" objectFit="contain" objectPosition="bottom"></Image>
+      <Image alt="" src={src} layout="fill" objectFit="contain" objectPosition="bottom"></Image>
     </div>
   );
 }
