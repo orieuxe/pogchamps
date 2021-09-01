@@ -35,11 +35,11 @@ export default function GameList({ games }: Props) {
 
 							<Stack spacing={3} textAlign="center" marginLeft="1">
 								<Box style={{ display: 'flex', alignItems: 'center', flexDirection: isSm ? 'column' : 'row' }}>
-									<Text adjustsFontSizeToFit color={scores[0] > 0.5 ? winnerColor : 'default'}>
+									<Text color={scores[0] > 0.5 ? winnerColor : 'default'}>
 										{game.white} ({game.whiteelo})
 									</Text>
 									<Icon as={RiSwordFill} marginInline={1} />
-									<Text adjustsFontSizeToFit color={scores[1] > 0.5 ? winnerColor : 'default'}>
+									<Text color={scores[1] > 0.5 ? winnerColor : 'default'}>
 										{game.black} ({game.blackelo})
 									</Text>
 								</Box>

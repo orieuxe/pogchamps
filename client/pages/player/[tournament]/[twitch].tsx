@@ -1,19 +1,15 @@
 import {
-	Accordion,
-	AccordionButton,
-	AccordionItem,
-	AccordionPanel,
 	Box,
-	Flex,
-	Icon,
+	Flex, Icon,
 	Spacer,
 	Text,
 	Tooltip,
 	useBreakpointValue,
-	useColorMode,
+	useColorMode
 } from '@chakra-ui/react'
 import GameList from '@components/GameList'
 import { GroupButton } from '@components/GroupButton'
+import MatchList from '@components/MatchList'
 import { Match } from '@models/match'
 import { Participant } from '@models/participant'
 import { Stats } from '@models/stats'
@@ -22,7 +18,7 @@ import { getMatchsOf } from '@services/MatchService'
 import { getAllParticipants, getParticipant } from '@services/ParticipantService'
 import { getTournamentColor, getTournamentIds } from '@services/TournamentService'
 import Image from 'next/image'
-import React from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { FaBolt, FaBullseye, FaClock } from 'react-icons/fa'
 import { useGlobal } from 'reactn'
 interface Props {
@@ -36,9 +32,22 @@ export default function Player({ participant, matchs, stats }: Props) {
 	const isHidden = useBreakpointValue([true, false])
 	const { colorMode } = useColorMode()
 
+	const [shownMatchIndex, setShownMatchIndex] = useState(0)
+	const bottomRef = useRef<HTMLDivElement>(null);
+
+	const isLg = useBreakpointValue({ base: true, lg: false });
+
+	useEffect(() => setShownMatchIndex(shownMatchIndex), [matchs])
+
+	useEffect(() => {
+		const ref = bottomRef.current;
+		if(!ref) return;
+		ref.scrollIntoView({ behavior: 'smooth' })
+	}, [shownMatchIndex])
+
 	return (
 		<>
-			<Flex className="bg-color" marginTop="8" flexWrap="wrap">
+			<Flex className="bg-color" marginTop="8" flexWrap="wrap" rounded="md">
 				<Flex direction="column" flex="1" height="256px" p="4" minWidth="300px">
 					<Text fontSize="3xl" fontWeight="semibold" color={colorMode == 'light' ? 'purple' : 'white'}>
 						{player.username}
@@ -107,6 +116,7 @@ export default function Player({ participant, matchs, stats }: Props) {
 					backgroundColor={getTournamentColor(selectedTournament)}
 					minWidth={['100%', '288px']}
 					height={['64px', '256px']}
+					borderTopRightRadius={'md'}
 				>
 					<GroupButton selectedTournament={selectedTournament} group={participant.groupe} isHidden={!isHidden} />
 					<Box position="absolute" right="0" bottom="0" width={['128px', '288px']} height={['128px', '288px']}>
@@ -115,24 +125,14 @@ export default function Player({ participant, matchs, stats }: Props) {
 				</Box>
 			</Flex>
 
-			<Box className="bg-color" marginTop="8" flexWrap="wrap">
-				<Accordion allowToggle allowMultiple>
-					{matchs.map((match, i) => (
-						<AccordionItem key={i}>
-							<h2>
-								<AccordionButton>
-									<Box flex="1" textAlign="left">
-										{match.participant1.player.twitch} vs {match.participant2.player.twitch}
-									</Box>
-								</AccordionButton>
-							</h2>
-							<AccordionPanel pb={4}>
-								<GameList games={match.games}></GameList>
-							</AccordionPanel>
-						</AccordionItem>
-					))}
-				</Accordion>
-			</Box>
+			<Flex marginTop="8" wrap="wrap">
+				<MatchList matchs={matchs} onMatchClick={(idx) => setShownMatchIndex(idx)}></MatchList>
+				<Spacer/>
+				<Box marginTop={isLg ? 4 : 0}>
+					{matchs[shownMatchIndex] && <GameList games={matchs[shownMatchIndex].games}></GameList>}
+					<div ref={bottomRef} />
+				</Box>
+			</Flex>
 		</>
 	)
 }
