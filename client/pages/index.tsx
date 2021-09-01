@@ -49,10 +49,10 @@ export default function Index() {
 	}
 
 	if (!selectedTournament) return <Loading />
-	
 	return (
 		<Stack spacing={3}>
 			<DatePicker
+				onChangeRaw={(e) => e.preventDefault()}
 				minDate={new Date(selectedTournament.start_date)}
 				maxDate={new Date(selectedTournament.end_date)}
 				selected={date}

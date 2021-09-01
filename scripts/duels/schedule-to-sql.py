@@ -5,7 +5,7 @@ from datetime import datetime,timedelta,timezone
 #usage : python3 duel/import.py
 
 twitch_id = {
-    "connoreatspants":55,
+    "NickEh30":55,
     "qtcinderella":66,
     "boxbox":68,
     "ludwig":51,
