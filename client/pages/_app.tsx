@@ -3,7 +3,7 @@ import '@fontsource/inter/400.css'
 import '@fontsource/inter/900.css'
 import '@components/datepicker/date-picker.css';
 
-import React, { setGlobal } from 'reactn'
+import React, { setGlobal, useGlobal } from 'reactn'
 
 import { AppProps } from 'next/app'
 import { ChakraProvider } from '@chakra-ui/react'
@@ -22,9 +22,12 @@ setGlobal({
 })
 
 function App({ Component, pageProps }: AppProps): JSX.Element {
+	const [selectedTournament] = useGlobal('selectedTournament');
+	
 	return (
 		<ChakraProvider resetCSS theme={theme}>
 			<Head>
+				<title>Pogchamps {selectedTournament}</title>
 				<link rel="icon" type="image/png" href="/icons/chess.svg" />
 			</Head>
 			<PageWrapper>
