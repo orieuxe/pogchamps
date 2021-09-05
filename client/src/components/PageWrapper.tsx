@@ -31,6 +31,7 @@ import NavLink from './NavLink'
 import { getTournamentIds } from '@services/TournamentService'
 import { useGlobal } from 'reactn'
 import { useRouter } from 'next/router'
+import useStorage from 'src/hooks/useStorage'
 
 type props = {
 	children: ReactChild | ReactChildren
@@ -48,7 +49,10 @@ export default function PageWrapper(props: props): JSX.Element {
 			setSelectedTournament(Number(res[2]))
 		}
 	}, [])
-
+	
+	const hasClickedOnTournamentList = 'hasClickedOnTournamentList'
+	const { setItem, getItem } = useStorage()
+	
 	return (
 		<Box
 			background={`url(/backgrounds/Background${selectedTournament}.svg)`}
@@ -78,8 +82,12 @@ export default function PageWrapper(props: props): JSX.Element {
 							</Box>
 							<Box position="absolute" right="1%" bottom="25%" zIndex="2">
 								<Menu isLazy id="1">
-									<MenuButton>
-										<Icon as={FaCaretDown} color="white" />
+									<MenuButton onClick={() => setItem(hasClickedOnTournamentList, 'true')}>
+										<Icon
+											as={FaCaretDown}
+											color="white"
+											className={getItem(hasClickedOnTournamentList) == 'true' ? '' : 'up-down'}
+										/>
 									</MenuButton>
 									<MenuList>
 										{tournamentIds.map((e, i) => {

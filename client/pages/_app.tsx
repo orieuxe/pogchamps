@@ -2,6 +2,7 @@ import 'focus-visible/dist/focus-visible'
 import '@fontsource/inter/400.css'
 import '@fontsource/inter/900.css'
 import '@components/datepicker/date-picker.css'
+import '@theme/styles.css'
 
 import React, { setGlobal, useGlobal } from 'reactn'
 
