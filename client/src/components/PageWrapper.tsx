@@ -24,7 +24,7 @@ import {
 	FaTwitter,
 	FaUsers,
 } from 'react-icons/fa'
-import React, { ReactChild, ReactChildren, useEffect } from 'react'
+import React, { ReactChild, ReactChildren, useEffect, useState } from 'react'
 
 import Image from 'next/image'
 import NavLink from './NavLink'
@@ -42,17 +42,19 @@ export default function PageWrapper(props: props): JSX.Element {
 	const [selectedTournament, setSelectedTournament] = useGlobal('selectedTournament')
 	const { colorMode, toggleColorMode } = useColorMode()
 
+	const { setItem, getItem } = useStorage()
+	const [hasClickedOnTournamentList, setHasClickedOnTournamentList] = useState<boolean>(true)
+	const hasClickedKey = 'hasClickedKey'
+
 	useEffect(() => {
 		const path = router.asPath
 		const res = path.split('/')
 		if (res.length > 2) {
 			setSelectedTournament(Number(res[2]))
 		}
+		setHasClickedOnTournamentList(getItem(hasClickedKey) == 'true')
 	}, [])
-	
-	const hasClickedOnTournamentList = 'hasClickedOnTournamentList'
-	const { setItem, getItem } = useStorage()
-	
+
 	return (
 		<Box
 			background={`url(/backgrounds/Background${selectedTournament}.svg)`}
@@ -82,11 +84,16 @@ export default function PageWrapper(props: props): JSX.Element {
 							</Box>
 							<Box position="absolute" right="1%" bottom="25%" zIndex="2">
 								<Menu isLazy id="1">
-									<MenuButton onClick={() => setItem(hasClickedOnTournamentList, 'true')}>
+									<MenuButton
+										onClick={() => {
+											setItem(hasClickedKey, 'true')
+											setHasClickedOnTournamentList(true)
+										}}
+									>
 										<Icon
 											as={FaCaretDown}
 											color="white"
-											className={getItem(hasClickedOnTournamentList) == 'true' ? '' : 'up-down'}
+											className={hasClickedOnTournamentList ? '' : 'up-down'}
 										/>
 									</MenuButton>
 									<MenuList>
