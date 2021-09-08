@@ -47,16 +47,16 @@ function MatchList({ matchs, onMatchClick }: Props) {
 					>
 						<Flex alignSelf="center">
 							<Text color={winners[0] ? winnerColor : 'default'}>
-								{m.participant1.player.twitch}
+								{m.participant1?.player.twitch}
 							</Text>
 							<Icon as={RiSwordFill} marginInline={2} />
 							<Text color={winners[1] ? winnerColor : 'default'}>
-								{m.participant2.player.twitch}
+								{m.participant2?.player.twitch}
 							</Text>
 						</Flex>
 						<Flex wrap="nowrap" justify="space-between" align="center">
-							<MyImage src={`/players/${m.participant1.player.twitch}.png`} width={90} />
-							<Stack spacing={3} textAlign="center">
+							<MyImage src={`/players/${m.participant1?.player.twitch}.png`} width={90} />
+							<Stack spacing={3} textAlign="center" alignSelf="center">
 								<Text>
 									{m?.date && (
 										<Tooltip label={new Date(m?.date).toLocaleString()} placement="top" hasArrow>
@@ -68,7 +68,7 @@ function MatchList({ matchs, onMatchClick }: Props) {
 								</Text>
 								<Text>{m.result}</Text>
 							</Stack>
-							<MyImage src={`/players/${m.participant2.player.twitch}.png`} width={90} />
+							<MyImage src={`/players/${m.participant2?.player.twitch}.png`} width={90} />
 						</Flex>
 					</Flex>
 				)
