@@ -1,4 +1,4 @@
-import { Box, Flex, Stack, useBreakpointValue } from '@chakra-ui/react'
+import { Text, Box, Flex, Stack, useBreakpointValue, Icon } from '@chakra-ui/react'
 import { DatePicker } from '@components/datepicker/DatePicker'
 import GameList from '@components/GameList'
 import Loading from '@components/Loading'
@@ -9,6 +9,7 @@ import { getScheduledMatchs } from '@services/MatchService'
 import { getTournament } from '@services/TournamentService'
 import React, { useEffect, useRef, useState } from 'react'
 import { useGlobal } from 'reactn'
+import { BiSad } from 'react-icons/bi'
 
 export default function Index() {
 	const [tournamentId] = useGlobal('selectedTournament')
@@ -28,8 +29,8 @@ export default function Index() {
 			setSelectedTournament(tournament)
 			const startDate = new Date(tournament.start_date)
 			const endDate = new Date(tournament.end_date)
-			const date = (endDate < today || today < startDate) ? startDate : today
-			updateSchedule(date);
+			const date = endDate < today || today < startDate ? startDate : today
+			updateSchedule(date)
 		})
 	}, [tournamentId])
 
@@ -59,7 +60,18 @@ export default function Index() {
 				onChange={updateSchedule}
 			/>
 			<Flex wrap="wrap">
-				{matchs && <MatchList matchs={matchs} onMatchClick={(idx) => setCurrentMatch(matchs[idx])} />}
+				{matchs && matchs.length > 0 ? (
+					<MatchList matchs={matchs} onMatchClick={(idx) => setCurrentMatch(matchs[idx])} />
+				) : (
+					<Text color="white">
+						<Icon height={10} as={BiSad} /> No matchs{' '}
+						{date.toDateString() == today.toDateString()
+							? 'today.'
+							: date < today
+							? 'played.'
+							: 'announced yet !'}
+					</Text>
+				)}
 				<Box marginLeft={!isLg ? 4 : 0} marginTop={isLg ? 4 : 0}>
 					{currentMatch && <GameList games={currentMatch.games} />}
 				</Box>
