@@ -17,6 +17,7 @@ export default function Index() {
 	const bottomRef = useRef<HTMLDivElement>(null)
 
 	const today = new Date()
+	today.setHours(0,0,0,0);
 	const [date, setDate] = useState<Date>(today)
 
 	const [matchs, setMatchs] = useState<Match[]>()
